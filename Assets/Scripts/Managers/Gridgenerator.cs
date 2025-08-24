@@ -19,43 +19,56 @@ public class GridRoomGenerator : MonoBehaviour
     public GameObject wallPrefab;
     private int[,] roomMap;
 
-    private List<RectInt> rooms = new List<RectInt>();
     public GameObject[] Rooms;
     public GameObject Parent;
     public int roomCount = 5;
     public int gridSize = 10;
     public int Difficulty = 1;
 
+    private List<RoomInstance> rooms = new List<RoomInstance>();
+
     void Awake()
     {
         Rooms = Resources.LoadAll<GameObject>("Chamber");
     }
+
     void Start()
     {
     }
+
     public void GenerateRooms()
     {
+        ClearExisting();
         GenerateRoomsTouching();
         FillRoomMap();
         InstantiateFloors();
         InstantiateWallsWithDoors();
     }
+    void ClearExisting()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+        rooms.Clear();
+    }
     void GenerateRoomsTouching()
     {
-        rooms.Clear();
         int attempts = 0;
-        RectInt first = CreateRandomRoomPosition();
+        RoomInstance first = CreateRandomRoomInstance();
         rooms.Add(first);
 
         while (rooms.Count < maxRooms && attempts < placeAttempts)
         {
             attempts++;
 
-            RectInt newRoom = CreateRandomRoom();
+            RoomInstance newRoomInstance = CreateRandomRoomInstance();
+            RectInt newRoom = newRoomInstance.rect;
             bool placed = false;
             for (int tryAttach = 0; tryAttach < 30 && !placed; tryAttach++)
             {
-                RectInt existing = rooms[Random.Range(0, rooms.Count)];
+                RoomInstance existingInstance = rooms[Random.Range(0, rooms.Count)];
+                RectInt existing = existingInstance.rect;
                 int side = Random.Range(0, 4);
 
                 RectInt candidate = SetRoomTouching(existing, newRoom, side);
@@ -64,23 +77,23 @@ public class GridRoomGenerator : MonoBehaviour
 
                 if (!OverlapsAny(candidate))
                 {
-                    rooms.Add(candidate);
+                    rooms.Add(new RoomInstance(candidate, newRoomInstance.prefab));
                     placed = true;
                 }
             }
 
             if (!placed)
             {
-                RectInt fallback = CreateRandomRoomPosition();
-                if (!OverlapsAny(fallback))
+                RectInt fallbackRect = CreateRandomRoomPosition();
+                if (!OverlapsAny(fallbackRect))
                 {
-                    rooms.Add(fallback);
+                    rooms.Add(new RoomInstance(fallbackRect, newRoomInstance.prefab));
                 }
             }
         }
     }
 
-    RectInt CreateRandomRoom()
+    RoomInstance CreateRandomRoomInstance()
     {
         List<GameObject> possibleRooms = new List<GameObject>();
         foreach (GameObject room in Rooms)
@@ -91,20 +104,17 @@ public class GridRoomGenerator : MonoBehaviour
                 possibleRooms.Add(room);
             }
         }
-    
+
         GameObject chosenRoom = possibleRooms[Random.Range(0, possibleRooms.Count)];
         var size = chosenRoom.GetComponent<RoomHold>().size;
 
-        int w = size.x;
-        int h = size.y;
-
-        return new RectInt(0, 0, w, h);
+        RectInt r = new RectInt(0, 0, size.x, size.y);
+        return new RoomInstance(r, chosenRoom);
     }
-
 
     RectInt CreateRandomRoomPosition()
     {
-        RectInt r = CreateRandomRoom();
+        RectInt r = CreateRandomRoomInstance().rect;
         int x = Random.Range(0, Mathf.Max(1, gridWidth - r.width + 1));
         int y = Random.Range(0, Mathf.Max(1, gridHeight - r.height + 1));
         return new RectInt(x, y, r.width, r.height);
@@ -140,9 +150,9 @@ public class GridRoomGenerator : MonoBehaviour
 
     bool OverlapsAny(RectInt candidate)
     {
-        foreach (RectInt r in rooms)
+        foreach (RoomInstance r in rooms)
         {
-            if (candidate.Overlaps(r))
+            if (candidate.Overlaps(r.rect))
                 return true;
         }
         return false;
@@ -153,7 +163,7 @@ public class GridRoomGenerator : MonoBehaviour
         roomMap = new int[gridWidth, gridHeight];
         for (int i = 0; i < rooms.Count; i++)
         {
-            RectInt r = rooms[i];
+            RectInt r = rooms[i].rect;
             int id = i + 1;
             for (int x = r.xMin; x < r.xMax; x++)
             {
@@ -167,22 +177,23 @@ public class GridRoomGenerator : MonoBehaviour
 
     void InstantiateFloors()
     {
-        Transform parent = new GameObject("Floors").transform;
+        Transform parent = new GameObject("Rooms").transform;
         parent.parent = transform;
 
-        for (int i = 0; i < rooms.Count; i++)
+        foreach (RoomInstance rInstance in rooms)
         {
-            RectInt r = rooms[i];
+            RectInt r = rInstance.rect;
+            Vector3 pos = new Vector3((r.xMin + r.width / 2f) * cellSize, (r.yMin + r.height / 2f) * cellSize, 0f);
 
-            float centerX = (r.xMin + r.width / 2f) * cellSize;
-            float centerY = (r.yMin + r.height / 2f) * cellSize;
-            Vector3 pos = new Vector3(centerX, centerY, 0f);
+            GameObject roomObj = Instantiate(rInstance.prefab, pos, Quaternion.identity, parent);
 
-            GameObject floor = Instantiate(floorPrefab, pos, Quaternion.identity, parent);
-            floor.transform.localScale = new Vector3(r.width * cellSize, r.height * cellSize, 1f);
+            RoomHold data = roomObj.GetComponent<RoomHold>();
+            if (data != null)
+            {
+                roomObj.transform.localScale = new Vector3(r.width * cellSize, r.height * cellSize, 1f);
+            }
         }
     }
-
 
     void InstantiateWallsWithDoors()
     {
@@ -200,42 +211,27 @@ public class GridRoomGenerator : MonoBehaviour
                 if (x + 1 < gridWidth)
                 {
                     int other = roomMap[x + 1, y];
-                    if (other == 0)
-                    {
-                        //will place vertical wall at (x + 0.5, y)
-                    }
-                    else if (other != id)
+                    if (other != 0 && other != id)
                     {
                         var key = MakePairKey(id, other);
                         if (!sharedBorders.ContainsKey(key)) sharedBorders[key] = new List<(int, int, int)>();
                         sharedBorders[key].Add((x, y, 0));
                     }
                 }
-                else
-                {
-                    // grid edge
-                }
 
                 if (y + 1 < gridHeight)
                 {
                     int other = roomMap[x, y + 1];
-                    if (other == 0)
-                    {
-                        //will place horizontal wall at (x, y + 0.5)
-                    }
-                    else if (other != id)
+                    if (other != 0 && other != id)
                     {
                         var key = MakePairKey(id, other);
                         if (!sharedBorders.ContainsKey(key)) sharedBorders[key] = new List<(int, int, int)>();
                         sharedBorders[key].Add((x, y, 1));
                     }
                 }
-                else
-                {
-                    // grid edge
-                }
             }
         }
+
         var doorSet = new HashSet<(int x, int y, int dir)>();
 
         foreach (var kv in sharedBorders)
@@ -326,6 +322,8 @@ public class GridRoomGenerator : MonoBehaviour
                 wall.transform.localScale = new Vector3(0.1f * cellSize, 1f * cellSize, 1f);
             }
         }
+        //hardcode fix:
+        parent.transform.position += new Vector3(0.5f, 0.5f, -1f);
     }
 
     (int a, int b) MakePairKey(int a, int b)
@@ -333,10 +331,21 @@ public class GridRoomGenerator : MonoBehaviour
         if (a < b) return (a, b);
         return (b, a);
     }
-
     class PairComparer : IEqualityComparer<(int a, int b)>
     {
         public bool Equals((int a, int b) x, (int a, int b) y) => x.a == y.a && x.b == y.b;
         public int GetHashCode((int a, int b) obj) => obj.a * 73856093 ^ obj.b * 19349663;
+    }
+
+    public class RoomInstance
+    {
+        public RectInt rect;
+        public GameObject prefab;
+
+        public RoomInstance(RectInt r, GameObject p)
+        {
+            rect = r;
+            prefab = p;
+        }
     }
 }
