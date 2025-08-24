@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2327959212713224868}
   - component: {fileID: 8604119899887737091}
+  - component: {fileID: -2892117757267250590}
   m_Layer: 0
   m_Name: Lounge
   m_TagString: Untagged
@@ -90,3 +91,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-2892117757267250590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5641757014583682695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a218c9cc5d8e1d942beecd5909fd5164, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomHold
+  Difficultymin: 0
+  Difficultymax: 0
+  size: {x: 5, y: 5}
