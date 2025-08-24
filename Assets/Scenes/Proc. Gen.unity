@@ -482,6 +482,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chamber
       objectReference: {fileID: 0}
+    - target: {fileID: 6200755214969690, guid: fca9b91e76c8f6f468fa26313c02e090, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 106828065369552692, guid: fca9b91e76c8f6f468fa26313c02e090, type: 3}
       propertyPath: position
       value: 0
@@ -689,6 +693,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chamber (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6200755214969690, guid: fca9b91e76c8f6f468fa26313c02e090, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 106828065369552692, guid: fca9b91e76c8f6f468fa26313c02e090, type: 3}
       propertyPath: positionIndex
       value: 1
@@ -823,7 +831,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2024129853}
         m_TargetAssemblyTypeName: RoomSpawner, Assembly-CSharp
-        m_MethodName: SpawnRoom
+        m_MethodName: SpawnRooms
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -882,6 +890,10 @@ PrefabInstance:
     - target: {fileID: 6200755214969690, guid: fca9b91e76c8f6f468fa26313c02e090, type: 3}
       propertyPath: m_Name
       value: Chamber (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6200755214969690, guid: fca9b91e76c8f6f468fa26313c02e090, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 106828065369552692, guid: fca9b91e76c8f6f468fa26313c02e090, type: 3}
       propertyPath: positionIndex
@@ -988,6 +1000,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoomSpawner
   Rooms: []
   Parent: {fileID: 610973878}
+  roomCount: 5
+  gridSize: 10
 --- !u!1 &2069829638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1101,6 +1115,10 @@ PrefabInstance:
     - target: {fileID: 6200755214969690, guid: fca9b91e76c8f6f468fa26313c02e090, type: 3}
       propertyPath: m_Name
       value: Chamber (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6200755214969690, guid: fca9b91e76c8f6f468fa26313c02e090, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 106828065369552692, guid: fca9b91e76c8f6f468fa26313c02e090, type: 3}
       propertyPath: positionIndex
