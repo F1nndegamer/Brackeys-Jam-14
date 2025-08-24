@@ -4,7 +4,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float runSpeed = 8f;
-    [SerializeField] private float crouchSpeed = 2.5f; // slower than walking
+    [SerializeField] private float crouchSpeed = 2.5f;
 
     private Rigidbody2D rb;
 
