@@ -4,38 +4,21 @@ using UnityEngine.UIElements;
 public class RoomSpawner : MonoBehaviour
 {
     [Header("Room Prefabs")]
-    public GameObject[] topRooms;
-    public GameObject[] middleRooms;
-    public GameObject[] bottomRooms;
-    public GameObject TopParent;
-    public GameObject MiddleParent;
-    public GameObject BottomParent;
+    public GameObject[] Rooms;
+    public GameObject Parent;
     void Awake()
     {
-        topRooms = Resources.LoadAll<GameObject>("Chamber/Attic");
-        middleRooms = Resources.LoadAll<GameObject>("Chamber/Loft");
-        bottomRooms = Resources.LoadAll<GameObject>("Chamber/Upper");
-
-        Debug.Log("Top rooms loaded: " + topRooms.Length);
-        Debug.Log("Middle rooms loaded: " + middleRooms.Length);
-        Debug.Log("Bottom rooms loaded: " + bottomRooms.Length);
-
+        Rooms = Resources.LoadAll<GameObject>("Chamber");
+        Debug.Log("Rooms loaded: " + Rooms.Length);
     }
 
     public void SpawnRoom()
     {
-        foreach(Transform child in TopParent.transform)
+        foreach(Transform child in Parent.transform)
         {
             Destroy(child.gameObject);
         }
-        foreach(Transform child in MiddleParent.transform)
-        {
-            Destroy(child.gameObject);
-        }
-        foreach(Transform child in BottomParent.transform)
-        {
-            Destroy(child.gameObject);
-        }
+
         PosMid[] posMids = FindObjectsByType<PosMid>(FindObjectsSortMode.InstanceID);
         for (int i = 0; i < posMids.Length; i++)
         {
@@ -45,24 +28,9 @@ public class RoomSpawner : MonoBehaviour
                 return;
             }
 
-            GameObject[] possibleRooms = null;
-            GameObject parent = null;
-            switch (posMids[i].positionIndex)
-            {
-                case PosMid.Positionindex.Top:
-                    possibleRooms = topRooms;
-                    parent = TopParent;
-                    break;
-                case PosMid.Positionindex.Middle:
-                    possibleRooms = middleRooms;
-                    parent = MiddleParent;
-                    break;
-                case PosMid.Positionindex.Bottom:
-                    possibleRooms = bottomRooms;
-                    parent = BottomParent;
-                    break;
-            }
-
+            GameObject[] possibleRooms = Rooms;
+            GameObject parent = Parent;
+            
             if (possibleRooms == null || possibleRooms.Length == 0)
             {
                 Debug.LogWarning("No prefabs assigned for this position.");
