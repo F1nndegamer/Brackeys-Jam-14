@@ -266,7 +266,6 @@ public class GridRoomGenerator : MonoBehaviour
             int otherId = neighborInBounds ? roomMap[nx, ny] : 0;
 
             bool isBorder = (!neighborInBounds) || (otherId == 0) || (otherId != myId);
-
             if (!isBorder) return;
 
             Vector3 wallPos = Vector3.zero;
@@ -305,7 +304,11 @@ public class GridRoomGenerator : MonoBehaviour
             if (neighborInBounds && otherId != 0 && otherId != myId)
             {
                 if (doorSet.Contains(borderKey))
+                {
+                    // Clear furniture in the door area
+                    ClearFurnitureAtDoor(wallPos, horizontal);
                     return;
+                }
             }
 
             string key = $"{wallPos.x:F3}_{wallPos.y:F3}_{(horizontal ? "H" : "V")}";
@@ -314,14 +317,28 @@ public class GridRoomGenerator : MonoBehaviour
 
             GameObject wall = Instantiate(wallPrefab, wallPos, Quaternion.identity, parentTransform);
             if (horizontal)
-            {
                 wall.transform.localScale = new Vector3(1f * cellSize, 0.1f * cellSize, 1f);
-            }
             else
-            {
                 wall.transform.localScale = new Vector3(0.1f * cellSize, 1f * cellSize, 1f);
+        }
+
+        // New helper function
+        void ClearFurnitureAtDoor(Vector3 doorPos, bool horizontal)
+        {
+            float width = horizontal ? cellSize : 0.5f * cellSize;
+            float height = horizontal ? 0.5f * cellSize : cellSize;
+
+            Collider2D[] hits = Physics2D.OverlapBoxAll(doorPos, new Vector2(width, height), 0f);
+            foreach (Collider2D c in hits)
+            {
+                Debug.Log(c.gameObject.name);
+                if (c.CompareTag("Furniture"))
+                {
+                    Destroy(c.gameObject);
+                }
             }
         }
+
         //hardcode fix:
         parent.transform.position += new Vector3(0.5f, 0.5f, -1f);
     }
