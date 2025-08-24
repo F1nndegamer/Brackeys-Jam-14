@@ -15,12 +15,9 @@ public class GridRoomGenerator : MonoBehaviour
     public int placeAttempts = 200;
 
     [Header("Prefabs")]
-    public GameObject floorPrefab;
     public GameObject wallPrefab;
     private int[,] roomMap;
-
     public GameObject[] Rooms;
-    public GameObject Parent;
     public int roomCount = 5;
     public int gridSize = 10;
     public int Difficulty = 1;
@@ -34,6 +31,7 @@ public class GridRoomGenerator : MonoBehaviour
 
     void Start()
     {
+        GenerateRooms();
     }
 
     public void GenerateRooms()
@@ -316,10 +314,10 @@ public class GridRoomGenerator : MonoBehaviour
             placed.Add(key);
 
             GameObject wall = Instantiate(wallPrefab, wallPos, Quaternion.identity, parentTransform);
-            if (horizontal)
-                wall.transform.localScale = new Vector3(1f * cellSize, 0.1f * cellSize, 1f);
+            if (!horizontal)
+                wall.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
             else
-                wall.transform.localScale = new Vector3(0.1f * cellSize, 1f * cellSize, 1f);
+                wall.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
 
         // New helper function
