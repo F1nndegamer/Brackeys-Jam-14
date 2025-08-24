@@ -24,6 +24,18 @@ public class RoomSpawner : MonoBehaviour
 
     public void SpawnRoom()
     {
+        foreach(Transform child in TopParent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach(Transform child in MiddleParent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach(Transform child in BottomParent.transform)
+        {
+            Destroy(child.gameObject);
+        }
         PosMid[] posMids = FindObjectsByType<PosMid>(FindObjectsSortMode.InstanceID);
         for (int i = 0; i < posMids.Length; i++)
         {
