@@ -50,7 +50,11 @@ public class SecurityGuard : MonoBehaviour, IDetector
         if (dir.sqrMagnitude > 0.001f) transform.right = dir.normalized;
         if (Vector2.Distance(transform.position, target) < 0.1f) onReach?.Invoke();
     }
-
+    public void OnSuspiciousNoise(Vector2 where)
+    {
+        _lastKnown = where;
+        if (_state == State.Patrol) _state = State.Investigate;
+    }
     public bool CanSee(IDetectable t) => WithinSight(t);
     public void RaiseAlarm(IDetectable tgt) => ObstaclesManagers.Instance.OnDetection(this, tgt, 1f);
 }
