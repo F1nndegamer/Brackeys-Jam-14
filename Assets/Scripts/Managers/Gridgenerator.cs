@@ -32,7 +32,6 @@ public class GridRoomGenerator : MonoBehaviour
     }
     void Start()
     {
-        GenerateRooms();
     }
     public void GenerateRooms()
     {
@@ -83,22 +82,25 @@ public class GridRoomGenerator : MonoBehaviour
 
     RectInt CreateRandomRoom()
     {
-        List<GameObject> possibleRooms = new List<GameObject>(Rooms);
-        foreach (GameObject room in possibleRooms)
+        List<GameObject> possibleRooms = new List<GameObject>();
+        foreach (GameObject room in Rooms)
         {
-            if (room.GetComponent<RoomHold>().Difficultymin < Difficulty || room.GetComponent<RoomHold>().Difficultymax > Difficulty)
+            var data = room.GetComponent<RoomHold>();
+            if (data.Difficultymin <= Difficulty && data.Difficultymax >= Difficulty)
             {
-                possibleRooms.Remove(room);
-            }
-            else
-            {
-                Debug.LogError("Room size exceeds grid size!");
+                possibleRooms.Add(room);
             }
         }
-        int i = Random.Range(0, possibleRooms.Count);
-        GameObject chosenRoom = possibleRooms[i];
-        return new RectInt(0, 0, chosenRoom.GetComponent<RoomHold>().size.x, chosenRoom.GetComponent<RoomHold>().size.y);
+    
+        GameObject chosenRoom = possibleRooms[Random.Range(0, possibleRooms.Count)];
+        var size = chosenRoom.GetComponent<RoomHold>().size;
+
+        int w = size.x;
+        int h = size.y;
+
+        return new RectInt(0, 0, w, h);
     }
+
 
     RectInt CreateRandomRoomPosition()
     {
@@ -168,18 +170,19 @@ public class GridRoomGenerator : MonoBehaviour
         Transform parent = new GameObject("Floors").transform;
         parent.parent = transform;
 
-        for (int x = 0; x < gridWidth; x++)
+        for (int i = 0; i < rooms.Count; i++)
         {
-            for (int y = 0; y < gridHeight; y++)
-            {
-                if (roomMap[x, y] > 0)
-                {
-                    Vector3 pos = new Vector3(x * cellSize, y * cellSize, 0f);
-                    Instantiate(floorPrefab, pos, Quaternion.identity, parent);
-                }
-            }
+            RectInt r = rooms[i];
+
+            float centerX = (r.xMin + r.width / 2f) * cellSize;
+            float centerY = (r.yMin + r.height / 2f) * cellSize;
+            Vector3 pos = new Vector3(centerX, centerY, 0f);
+
+            GameObject floor = Instantiate(floorPrefab, pos, Quaternion.identity, parent);
+            floor.transform.localScale = new Vector3(r.width * cellSize, r.height * cellSize, 1f);
         }
     }
+
 
     void InstantiateWallsWithDoors()
     {
@@ -199,18 +202,18 @@ public class GridRoomGenerator : MonoBehaviour
                     int other = roomMap[x + 1, y];
                     if (other == 0)
                     {
-                        // border with empty space -> will place vertical wall at (x + 0.5, y)
+                        //will place vertical wall at (x + 0.5, y)
                     }
                     else if (other != id)
                     {
                         var key = MakePairKey(id, other);
                         if (!sharedBorders.ContainsKey(key)) sharedBorders[key] = new List<(int, int, int)>();
-                        sharedBorders[key].Add((x, y, 0)); // dir 0 vertical
+                        sharedBorders[key].Add((x, y, 0));
                     }
                 }
                 else
                 {
-                    // grid edge (treat as border)
+                    // grid edge
                 }
 
                 if (y + 1 < gridHeight)
@@ -218,13 +221,13 @@ public class GridRoomGenerator : MonoBehaviour
                     int other = roomMap[x, y + 1];
                     if (other == 0)
                     {
-                        // border with empty space -> will place horizontal wall at (x, y + 0.5)
+                        //will place horizontal wall at (x, y + 0.5)
                     }
                     else if (other != id)
                     {
                         var key = MakePairKey(id, other);
                         if (!sharedBorders.ContainsKey(key)) sharedBorders[key] = new List<(int, int, int)>();
-                        sharedBorders[key].Add((x, y, 1)); // dir 1 horizontal
+                        sharedBorders[key].Add((x, y, 1));
                     }
                 }
                 else
