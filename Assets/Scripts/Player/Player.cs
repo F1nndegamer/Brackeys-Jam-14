@@ -22,6 +22,8 @@ public class Player : Singleton<Player>
     private SpriteRenderer sprite;
     private Dictionary<CollectibleSO, int> collectibleCounts = new();
     private Animator anim;
+    private float footstepTimer = 0;
+    private float footstepTimerMax = 0.25f;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -43,6 +45,32 @@ public class Player : Singleton<Player>
     }
     private void Update()
     {
+        footstepTimer += Time.deltaTime;
+        if (footstepTimer >= footstepTimerMax)
+        {
+            footstepTimer = 0;
+
+            if (GameInput.Instance.GetMovementVector().sqrMagnitude > 0.1f)
+            {
+                float volume = 1f;
+                if (GameInput.Instance.GetCrouchHeld())
+                {
+                    footstepTimerMax = 0.35f;
+                    SoundManager.Instance.PlayFootstepCrouchSound(transform.position, volume);
+                }
+                else if (GameInput.Instance.GetRunHeld())
+                {
+                    footstepTimerMax = 0.15f;
+                    SoundManager.Instance.PlayFootstepWalkSound(transform.position, volume);
+                }
+                else 
+                {
+                    footstepTimerMax = 0.25f;
+                    SoundManager.Instance.PlayFootstepWalkSound(transform.position, volume);
+                }
+            }
+        }
+
         if (Physics2D.OverlapCircle(transform.position, interactRadius, collectibleLayer))
         {
             UIManager.Instance.GetCanvas<CanvasGameplay>().ShowInteractPrompt();
