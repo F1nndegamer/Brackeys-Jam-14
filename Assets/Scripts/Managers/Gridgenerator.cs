@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.GameCenter;
 
 public class GridRoomGenerator : MonoBehaviour
 {
@@ -303,7 +304,6 @@ public class GridRoomGenerator : MonoBehaviour
             {
                 if (doorSet.Contains(borderKey))
                 {
-                    // Clear furniture in the door area
                     ClearFurnitureAtDoor(wallPos, horizontal);
                     return;
                 }
@@ -319,13 +319,13 @@ public class GridRoomGenerator : MonoBehaviour
             else
                 wall.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
-
-        // New helper function
         void ClearFurnitureAtDoor(Vector3 doorPos, bool horizontal)
         {
-            float width = horizontal ? cellSize : 0.5f * cellSize;
-            float height = horizontal ? 0.5f * cellSize : cellSize;
-
+            doorPos += new Vector3(0.5f, 0.5f, -1f);
+            float width = horizontal ? cellSize : 2f * cellSize;
+            float height = horizontal ? 2f * cellSize : cellSize;
+            Vector2 size = new Vector2(width, height);
+            DrawDebugBox(doorPos, size, Color.red, 1f);
             Collider2D[] hits = Physics2D.OverlapBoxAll(doorPos, new Vector2(width, height), 0f);
             foreach (Collider2D c in hits)
             {
@@ -340,7 +340,20 @@ public class GridRoomGenerator : MonoBehaviour
         //hardcode fix:
         parent.transform.position += new Vector3(0.5f, 0.5f, -1f);
     }
+    void DrawDebugBox(Vector3 center, Vector2 size, Color color, float duration = 0f)
+    {
+        Vector3 halfSize = (Vector3)size * 0.5f;
 
+        Vector3 topLeft = center + new Vector3(-halfSize.x, halfSize.y);
+        Vector3 topRight = center + new Vector3(halfSize.x, halfSize.y);
+        Vector3 bottomLeft = center + new Vector3(-halfSize.x, -halfSize.y);
+        Vector3 bottomRight = center + new Vector3(halfSize.x, -halfSize.y);
+
+        Debug.DrawLine(topLeft, topRight, color, duration);
+        Debug.DrawLine(topRight, bottomRight, color, duration);
+        Debug.DrawLine(bottomRight, bottomLeft, color, duration);
+        Debug.DrawLine(bottomLeft, topLeft, color, duration);
+    }
     (int a, int b) MakePairKey(int a, int b)
     {
         if (a < b) return (a, b);
