@@ -4241,6 +4241,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   Strikes: 5
+  smokeBombFX: {fileID: 5166497897799385086, guid: f6fb3bf6109f9c742a28760465a6ceaa, type: 3}
   MultiplierChangeRate: 0.2
 --- !u!50 &1892188809
 Rigidbody2D:
