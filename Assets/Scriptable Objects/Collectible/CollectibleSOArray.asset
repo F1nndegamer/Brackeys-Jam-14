@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CollectibleSOArray
   collectibleSOArray:
   - {fileID: 11400000, guid: 758ab29ebd88e8040b9396d79140aaf6, type: 2}
+  - {fileID: 11400000, guid: a130fe1dd0bfec945a79ffc4aaaf964e, type: 2}

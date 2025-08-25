@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9097266153152528770}
   - component: {fileID: 4297821703876834713}
   m_Layer: 10
-  m_Name: Piggy Bank
+  m_Name: Toilet Paper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Collectibles
   collectAnimDuration: 0.5
-  collectibleSO: {fileID: 11400000, guid: 758ab29ebd88e8040b9396d79140aaf6, type: 2}
+  collectibleSO: {fileID: 11400000, guid: a130fe1dd0bfec945a79ffc4aaaf964e, type: 2}
 --- !u!1 &2192707827357878584
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,7 +112,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3574986459489879658}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -163,7 +163,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c1b1821b16af1124aad75f847b41985b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3dc045b4267ce89448b6da22349b2ddb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
