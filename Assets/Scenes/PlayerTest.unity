@@ -5253,13 +5253,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4edb40b05899563438d7498b250ffdfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  walkSpeed: 5
-  runSpeed: 8
-  crouchSpeed: 2.5
+  walkSpeed: 2
+  runSpeed: 3
+  crouchSpeed: 1
+  RangeMultiplier: 1
   playerSprites:
   - {fileID: 21300000, guid: 9ea37d1f981827342bba47fe82cb6fc5, type: 3}
   - {fileID: 21300000, guid: 9c7c17684fa5eb1418bd11217841dcb2, type: 3}
   - {fileID: 21300000, guid: 74828d0890e350d41ad3f8f5e47c81ec, type: 3}
+  MultiplierChangeRate: 0.2
 --- !u!50 &392680763
 Rigidbody2D:
   serializedVersion: 5
@@ -5362,6 +5364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NoiseEmitter
   Radius: 2
+  StartRadius: 5
   isRunning: 0
 --- !u!1 &403403492
 GameObject:

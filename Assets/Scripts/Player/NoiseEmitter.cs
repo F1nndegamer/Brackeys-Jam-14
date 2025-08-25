@@ -3,8 +3,12 @@ using UnityEngine;
 public class NoiseEmitter : MonoBehaviour
 {
     public float Radius = 5f;
-
+    public float StartRadius = 5f;
     public bool isRunning;
+    void Update()
+    {
+        Radius = StartRadius * Player.Instance.RangeMultiplier;
+    }
     public void Emit(bool running)
     {
         float r = running ? Radius : Radius * 0.6f;

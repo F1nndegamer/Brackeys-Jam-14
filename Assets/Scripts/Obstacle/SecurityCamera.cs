@@ -3,6 +3,7 @@ using UnityEngine;
 public class SecurityCamera : MonoBehaviour, IDetector
 {
     public float DetectionRange = 8f;
+    public float StartDetectionRange = 8f;
     public float RotationSpeed = 45f;
     public float FOV = 60f;
     public LayerMask Occluders;
@@ -12,6 +13,7 @@ public class SecurityCamera : MonoBehaviour, IDetector
 
     void Update()
     {
+        DetectionRange = StartDetectionRange * Player.Instance.RangeMultiplier;
         pivot.Rotate(0, 0, RotationSpeed * Time.deltaTime);
         var player = FindFirstObjectByType<PlayerDetectable>();
         if (player == null || player.IsHidden)

@@ -3,6 +3,7 @@ using UnityEngine;
 public class SecurityGuard : MonoBehaviour, IDetector
 {
     public float DetectionRange = 7f;
+    public float StartDetectionRange = 7f;
     public float FOV = 70f;
     public float Speed = 2.0f;
     public Transform[] Waypoints;
@@ -17,6 +18,7 @@ public class SecurityGuard : MonoBehaviour, IDetector
 
     void Update()
     {
+        DetectionRange = StartDetectionRange * Player.Instance.RangeMultiplier;
         var player = FindFirstObjectByType<PlayerDetectable>();
         if (player != null && !player.IsHidden)
         {
