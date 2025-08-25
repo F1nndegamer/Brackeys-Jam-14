@@ -7,7 +7,7 @@ public class SecurityCamera : MonoBehaviour, IDetector
     public float RotationSpeed = 45f;
     public float FOV = 60f;
     public LayerMask Occluders;
-    public Transform pivot; 
+    public Transform pivot;
 
     float IDetector.DetectionRange => DetectionRange;
 

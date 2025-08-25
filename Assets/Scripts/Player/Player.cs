@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float walkSpeed = 5f;
@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] List<Sprite> playerSprites;
     [SerializeField] private float interactRadius = 1.5f;
     [SerializeField] private LayerMask collectibleLayer; // assign in inspector
-
+    [SerializeField] private int Strikes = 5;
     public float MultiplierChangeRate = 0.2f;
     private Rigidbody2D rb;
     private bool isRunning;
@@ -26,7 +26,17 @@ public class Player : MonoBehaviour
         isRunning = false;
         GameInput.Instance.OnInteract += TryCollect;
     }
-
+    public void OnDetected()
+    {
+        Strikes--;
+        // something like this UIManager.Instance.GetCanvas<CanvasGameplay>().UpdateStrikes(Strikes);
+        //Debug for now
+        Debug.Log($"Player detected! Strikes left: {Strikes}");
+        if (Strikes <= 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
     private void Update()
     {
         if (Physics2D.OverlapCircle(transform.position, interactRadius, collectibleLayer))
