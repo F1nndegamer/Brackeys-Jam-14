@@ -35,7 +35,11 @@ public class Player : MonoBehaviour
         }
 
         rb.MovePosition(rb.position + inputVector * currentSpeed * Time.fixedDeltaTime);
-        GetComponent<NoiseEmitter>().Emit(isRunning);
+        NoiseEmitter noiseEmitter = GetComponent<NoiseEmitter>();
+        if (noiseEmitter != null)
+        {
+            noiseEmitter.Emit(isRunning);
+        }
 
         if (inputVector != Vector2.zero)
         {
