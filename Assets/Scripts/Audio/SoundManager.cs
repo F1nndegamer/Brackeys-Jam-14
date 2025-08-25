@@ -55,6 +55,4 @@ public class SoundManager : Singleton<SoundManager>
     {
         return volume;
     }
-
-
 }
