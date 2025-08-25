@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: AudioClipRefsSO
   m_EditorClassIdentifier: Assembly-CSharp::AudioClipRefsSO
   footstepWalk:
-  - {fileID: 8300000, guid: 355d97f3d41acb340b57f1799b48d5aa, type: 3}
-  - {fileID: 8300000, guid: c85c59dc2174ee648b5e319175b399d0, type: 3}
-  - {fileID: 8300000, guid: 792cd2ce54bfc834da9aad2328f2d338, type: 3}
-  - {fileID: 8300000, guid: c60d661e8cf0dc9489e7d3b4aade07f0, type: 3}
-  - {fileID: 8300000, guid: f1a74e213351bd941ae1ad6801b10ab3, type: 3}
+  - {fileID: 8300000, guid: 5ae3872ccdef7294ab98661549ad55b8, type: 3}
+  - {fileID: 8300000, guid: f4c63b2c061e1d04d9c41d05dcb2215c, type: 3}
+  - {fileID: 8300000, guid: d8001ff5f847d204c83aec255f84d6d0, type: 3}
+  - {fileID: 8300000, guid: 80f86607c524d9045addd41ec49fc7be, type: 3}
+  - {fileID: 8300000, guid: 6ee783363d6ffcb449912c58f394bce2, type: 3}
   footstepCrouch:
-  - {fileID: 8300000, guid: 5d73be0930f26cb49a79e3173fec1da0, type: 3}
-  - {fileID: 8300000, guid: b26f32632dec5d04495347aa9e9ca1e0, type: 3}
-  - {fileID: 8300000, guid: 8f785d5afe213b94eb1dae9c78ec5d15, type: 3}
-  - {fileID: 8300000, guid: 9e843b4ca3d06534ca62a807de2c19b9, type: 3}
-  - {fileID: 8300000, guid: 7b30cb55784893049b5673bd49ceaa5d, type: 3}
+  - {fileID: 8300000, guid: e7513da0833cc4144ae852dedf3c15e9, type: 3}
+  - {fileID: 8300000, guid: fcf5db8e742d99a49bbfb483ce6245f0, type: 3}
+  - {fileID: 8300000, guid: 890c137b4365eb34eb53698e925485c2, type: 3}
+  - {fileID: 8300000, guid: 4b94f2cfc6d83da4fb52cb40de308186, type: 3}
+  - {fileID: 8300000, guid: 6845ac9ef04c1e246833d3aedb5f27ef, type: 3}
