@@ -34,7 +34,13 @@ public class GridRoomGenerator : MonoBehaviour
     {
         GenerateRooms();
     }
-
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            GenerateRooms();
+        }
+    }
     public void GenerateRooms()
     {
         ClearExisting();
