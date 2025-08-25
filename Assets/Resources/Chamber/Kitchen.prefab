@@ -155,22 +155,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -140.024
       objectReference: {fileID: 0}
-    - target: {fileID: 4371327974056588047, guid: 97eff3adf33359e479b372d889ac6a0b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4371327974056588047, guid: 97eff3adf33359e479b372d889ac6a0b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4371327974056588047, guid: 97eff3adf33359e479b372d889ac6a0b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4371327974056588047, guid: 97eff3adf33359e479b372d889ac6a0b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5938275421002709811, guid: 97eff3adf33359e479b372d889ac6a0b, type: 3}
       propertyPath: m_Name
       value: SecCamera
