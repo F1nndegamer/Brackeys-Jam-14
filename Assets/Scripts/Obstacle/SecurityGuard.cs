@@ -13,7 +13,14 @@ public class SecurityGuard : MonoBehaviour, IDetector
     State _state;
     int _wp;
     Vector2 _lastKnown;
+    PathMover2D _mover;
 
+    void Awake()
+    {
+        _mover = GetComponent<PathMover2D>();
+        if (_mover == null) _mover = gameObject.AddComponent<PathMover2D>();
+        _mover.Occluders = Occluders; // mevcut LayerMask'ý kullan
+    }
     float IDetector.DetectionRange => DetectionRange;
 
     void Update()
@@ -47,10 +54,8 @@ public class SecurityGuard : MonoBehaviour, IDetector
 
     void MoveTo(Vector2 target, System.Action onReach)
     {
-        transform.position = Vector2.MoveTowards(transform.position, target, Speed * Time.deltaTime);
-        Vector2 dir = (target - (Vector2)transform.position);
-        if (dir.sqrMagnitude > 0.001f) transform.right = dir.normalized;
-        if (Vector2.Distance(transform.position, target) < 0.1f) onReach?.Invoke();
+        _mover.MoveTo(target, Speed);
+        if (_mover.Reached(target)) onReach?.Invoke();
     }
     public void OnSuspiciousNoise(Vector2 where)
     {
