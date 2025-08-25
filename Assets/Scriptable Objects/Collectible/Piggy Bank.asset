@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Piggy Bank
   m_EditorClassIdentifier: Assembly-CSharp::CollectibleSO
   collectibleName: Piggy Bank
-  sprite: {fileID: 21300000, guid: 3689440248f954745b8cb25463efae83, type: 3}
+  sprite: {fileID: 21300000, guid: c1b1821b16af1124aad75f847b41985b, type: 3}
