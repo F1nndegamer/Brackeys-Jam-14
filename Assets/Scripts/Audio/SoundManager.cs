@@ -46,7 +46,11 @@ public class SoundManager : Singleton<SoundManager>
         PlayerPrefs.SetFloat(PLAYER_PREFS_SOUND_EFFECTS_VOLUME, volume);
         PlayerPrefs.Save();
     }
-
+    public void SetVolume(float volume)
+    {
+        PlayerPrefs.SetFloat(PLAYER_PREFS_SOUND_EFFECTS_VOLUME, volume);
+        PlayerPrefs.Save();
+    }
     public float GetVolume()
     {
         return volume;
