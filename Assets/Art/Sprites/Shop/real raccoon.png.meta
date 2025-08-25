@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7db37cf591f6ad84d80c018fcf2b80fb
+guid: 9501173459c975d4693054547dc3a9d6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2122107185238573207
-    second: bed_0
+      213: -6117749963727941014
+    second: real raccoon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bed_0
+      name: real raccoon_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 32
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7900377dd3d337d10800000000000000
-      internalID: 2122107185238573207
+      spriteID: a62565b32d2691ba0800000000000000
+      internalID: -6117749963727941014
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bed_0: 2122107185238573207
+      real raccoon_0: -6117749963727941014
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

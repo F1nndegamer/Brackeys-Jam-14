@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7db37cf591f6ad84d80c018fcf2b80fb
+guid: 704e452ef90c4f84cb34962f73dc0c26
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2122107185238573207
-    second: bed_0
+      213: 5541253663642590004
+    second: cookie_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -13,7 +13,6 @@ TextureImporter:
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
-    borderMipMap: 0
     mipMapsPreserveCoverage: 0
     alphaTestReferenceValue: 0.5
     mipMapFadeDistanceStart: 1
@@ -113,13 +112,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bed_0
+      name: cookie_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 64
-        height: 32
+        x: 4
+        y: 4
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +127,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7900377dd3d337d10800000000000000
-      internalID: 2122107185238573207
+      spriteID: 43b9fb729dc76ec40800000000000000
+      internalID: 5541253663642590004
       vertices: []
       indices: 
       edges: []
@@ -148,7 +147,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bed_0: 2122107185238573207
+      cookie_0: 5541253663642590004
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
