@@ -23,7 +23,7 @@ public class FOVMesh2D : MonoBehaviour
         _mesh = new Mesh { name = "FOV Mesh" };
         GetComponent<MeshFilter>().sharedMesh = _mesh;
         if (pivot == null) pivot = transform.parent != null ? transform.parent : transform;
-        transform.localPosition = Vector3.zero;
+        transform.localPosition = new Vector3(0,0,-1);
         transform.localRotation = Quaternion.identity;
     }
 
