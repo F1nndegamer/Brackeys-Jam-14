@@ -3347,9 +3347,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4edb40b05899563438d7498b250ffdfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  walkSpeed: 5
-  runSpeed: 8
-  crouchSpeed: 2.5
+  walkSpeed: 2
+  runSpeed: 4
+  crouchSpeed: 1
   playerSprites:
   - {fileID: 21300000, guid: 9ea37d1f981827342bba47fe82cb6fc5, type: 3}
   - {fileID: 21300000, guid: 9c7c17684fa5eb1418bd11217841dcb2, type: 3}
