@@ -21,11 +21,13 @@ public class Player : Singleton<Player>
     private bool isRunning;
     private SpriteRenderer sprite;
     private Dictionary<CollectibleSO, int> collectibleCounts = new();
+    private Animator anim;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         sprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
         isRunning = false;
+        anim = GetComponent<Animator>();
         GameInput.Instance.OnInteract += TryCollect;
     }
     public void OnDetected()
@@ -66,13 +68,33 @@ public class Player : Singleton<Player>
             if (playerSprites.Count > 2) sprite.sprite = playerSprites[2];
             multipier -= MultiplierChangeRate;
             isRunning = false;
+            if (anim != null)
+            {
+                anim.SetBool("Walking", false);
+                anim.SetBool("Running", false);
+            }
         }
+
         else if (GameInput.Instance.GetRunHeld())
         {
             currentSpeed = runSpeed;
             if (playerSprites.Count > 1) sprite.sprite = playerSprites[1];
             multipier += MultiplierChangeRate;
             isRunning = true;
+            if (anim != null)
+            {
+                anim.SetBool("Walking", false);
+                anim.SetBool("Running", true);
+            }
+        }
+        else
+        {
+            if (anim != null)
+            {
+                anim.SetBool("Walking", true);
+                anim.SetBool("Running", false);
+                isRunning = false;
+            }
         }
         RangeMultiplier = multipier;
         rb.MovePosition(rb.position + inputVector * currentSpeed * Time.fixedDeltaTime);

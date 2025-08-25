@@ -214,6 +214,8 @@ MonoBehaviour:
   itemNameText: {fileID: 114672093}
   itemDescriptionText: {fileID: 567652894}
   itemImage: {fileID: 1139754224}
+  collectibleCostPrefab: {fileID: 0}
+  collectibleCostParent: {fileID: 0}
   fadeDuration: 0.5
   moveDuration: 0.5
   moveOffset: 100
@@ -3399,7 +3401,7 @@ MonoBehaviour:
   RangeMultiplier: 1
   playerSprites:
   - {fileID: 21300000, guid: 9ea37d1f981827342bba47fe82cb6fc5, type: 3}
-  - {fileID: 21300000, guid: 9c7c17684fa5eb1418bd11217841dcb2, type: 3}
+  - {fileID: 21300000, guid: e8e9b8f4b161a674fb6654a42383d534, type: 3}
   - {fileID: 21300000, guid: 74828d0890e350d41ad3f8f5e47c81ec, type: 3}
   interactRadius: 1.5
   collectibleLayer:
