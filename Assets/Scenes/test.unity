@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7c2642d54d9784a975f1d267c6def6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Dog
-  DetectionRange: 6
+  DetectionRange: 2
   Speed: 2.2
   Waypoints:
   - {fileID: 1676875814}
@@ -1330,6 +1330,7 @@ GameObject:
   - component: {fileID: 1414139969}
   - component: {fileID: 1414139968}
   - component: {fileID: 1414139973}
+  - component: {fileID: 1414139974}
   m_Layer: 3
   m_Name: Triangle
   m_TagString: Untagged
@@ -1493,7 +1494,7 @@ Transform:
   m_GameObject: {fileID: 1414139967}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1512,9 +1513,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eac87f33c66cc94ca66e763cd6dab35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NoiseEmitter
-  WalkDb: 0.5
-  RunDb: 1
   Radius: 5
+  isRunning: 0
+--- !u!114 &1414139974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414139967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35aeabdd8f52e924285096ecdbc84b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GizmoNoise
+  Radius: 5
+  isRunning: 0
 --- !u!1 &1440357797
 GameObject:
   m_ObjectHideFlags: 0
@@ -1563,7 +1577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FOVMesh2D
   pivot: {fileID: 177755863}
   FOV: 360
-  ViewRadius: 6
+  ViewRadius: 2
   RayCount: 180
   Occluders:
     serializedVersion: 2
