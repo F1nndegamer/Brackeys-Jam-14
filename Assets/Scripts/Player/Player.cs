@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-public class Player : MonoBehaviour
+using static UnityEditor.Progress;
+
+public class Player : Singleton<Player>
 {
+    public event Action<CollectibleSO, int> OnCollectibleAmountChanged;
+
     [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float runSpeed = 8f;
     [SerializeField] private float crouchSpeed = 2.5f;
@@ -16,13 +19,11 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private bool isRunning;
     private SpriteRenderer sprite;
-    public static Player Instance;
     private Dictionary<CollectibleSO, int> collectibleCounts = new();
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         sprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        Instance = this;
         isRunning = false;
         GameInput.Instance.OnInteract += TryCollect;
     }
@@ -86,6 +87,31 @@ public class Player : MonoBehaviour
             rb.rotation = angle;
         }
     }
+    public bool CanAfford(ShopItemSO shopItemSO)
+    {
+        foreach (var requirement in shopItemSO.cost)
+        {
+            if (!collectibleCounts.ContainsKey(requirement.collectible) ||
+                collectibleCounts[requirement.collectible] < requirement.amount)
+            {
+                Debug.Log($"Cannot Afford {shopItemSO.itemName}");
+                return false;
+            }
+        }
+        return true;
+    }
+    public void Purchase(ShopItemSO shopItemSO)
+    {
+        if (!CanAfford(shopItemSO)) return;
+
+        foreach (var requirement in shopItemSO.cost)
+        {
+            collectibleCounts[requirement.collectible] -= requirement.amount;
+            OnCollectibleAmountChanged?.Invoke(requirement.collectible, collectibleCounts[requirement.collectible]);
+        }
+
+        Debug.Log($"Bought {shopItemSO.itemName}!");
+    }
     private void TryCollect()
     {
         // Cast a circle around player
@@ -107,8 +133,7 @@ public class Player : MonoBehaviour
             collectibleCounts[collectibleSO] = 0;
 
         collectibleCounts[collectibleSO]++;
-        UIManager.Instance.GetCanvas<CanvasGameplay>().HandleCollectibleCollected(collectibleSO, collectibleCounts[collectibleSO]);
-
+        OnCollectibleAmountChanged?.Invoke(collectibleSO, collectibleCounts[collectibleSO]);
         Debug.Log($"Player now has {collectibleCounts[collectibleSO]} of {collectibleSO}");
     }
     public int GetCollectibleCount(CollectibleSO collectibleSO)

@@ -7,7 +7,12 @@ public class CanvasGameplay : UICanvas
     [SerializeField] private TextMeshProUGUI[] collectibleTextArray;
     [SerializeField] private CollectibleSOArray collectibleSOArray;
     [SerializeField] private GameObject interactPrompt;
-    public void HandleCollectibleCollected(CollectibleSO collectibleSO, int count)
+    private void Awake()
+    {
+        Player.Instance.OnCollectibleAmountChanged += Player_OnCollectibleAmountChanged;
+    }
+
+    private void Player_OnCollectibleAmountChanged(CollectibleSO collectibleSO, int count)
     {
         int index = collectibleSOArray.GetIndex(collectibleSO);
         TextMeshProUGUI textUI = collectibleTextArray[index];

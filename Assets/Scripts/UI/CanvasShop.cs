@@ -25,7 +25,14 @@ public class CanvasShop : UICanvas
     {
         buyButton.onClick.AddListener(() =>
         {
-            Debug.Log("Bought " + selectedShopItem.GetShopItemSO().itemName);
+            if (Player.Instance.CanAfford(selectedShopItem.GetShopItemSO()))
+            {
+                Player.Instance.Purchase(selectedShopItem.GetShopItemSO());
+            }
+            else
+            {
+                buyButton.transform.DOShakePosition(0.4f);
+            }
         });
     }
     private void OnEnable()
@@ -59,7 +66,7 @@ public class CanvasShop : UICanvas
                     .SetEase(Ease.OutSine)
                     .OnComplete(() =>
                     {
-                        StartCoroutine(TypeDialogue("Goodjob, need some gears?"));
+                        StartCoroutine(TypeDialogue("Need some gears?"));
                     });
             });
 

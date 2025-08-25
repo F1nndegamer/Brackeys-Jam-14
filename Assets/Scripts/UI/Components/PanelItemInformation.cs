@@ -2,13 +2,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 public class PanelItemInformation : Singleton<PanelItemInformation>
 {
     [SerializeField] private TextMeshProUGUI itemNameText;
     [SerializeField] private TextMeshProUGUI itemDescriptionText;
     [SerializeField] private Image itemImage;
-
+    [SerializeField] private CollectibleCost collectibleCostPrefab;
+    [SerializeField] private Transform collectibleCostParent;
     [Header("Animation Settings")]
     [SerializeField] private float fadeDuration = 0.5f;
     [SerializeField] private float moveDuration = 0.5f;
@@ -18,6 +21,7 @@ public class PanelItemInformation : Singleton<PanelItemInformation>
     private RectTransform rectTransform;
     private ShopItemSO currentShopItemSO;
     private Vector2 originalAnchoredPos; // cache starting pos
+    private List<CollectibleCost> collectibleCostList = new();
 
     private void Awake()
     {
@@ -49,7 +53,13 @@ public class PanelItemInformation : Singleton<PanelItemInformation>
         currentShopItemSO = shopItemSO;
         gameObject.SetActive(true);
         SetShopItemSO(shopItemSO);
-
+        ClearCollectibleCost();
+        foreach (CollectibleRequirement collectibleRequirement in shopItemSO.cost)
+        {
+            CollectibleCost collectibleCost = Instantiate(collectibleCostPrefab, collectibleCostParent);
+            collectibleCostList.Add(collectibleCost);
+            collectibleCost.Initialize(collectibleRequirement.collectible.sprite, collectibleRequirement.amount);
+        }
         // Kill old tweens (avoid stacking)
         rectTransform.DOKill();
         canvasGroup.DOKill();
@@ -70,7 +80,14 @@ public class PanelItemInformation : Singleton<PanelItemInformation>
         itemDescriptionText.text = shopItemSO.description;
         itemImage.sprite = shopItemSO.sprite;
     }
-
+    private void ClearCollectibleCost()
+    {
+        foreach (var collectibleCost in collectibleCostList)
+        {
+            Destroy(collectibleCost.gameObject);
+        }
+        collectibleCostList.Clear();
+    }
     public void Hide()
     {
         if (UIManager.Instance.GetCanvas<CanvasShop>().IsAnyShopItemSelected()) return;

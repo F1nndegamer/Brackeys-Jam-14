@@ -15,3 +15,6 @@ MonoBehaviour:
   itemName: Bag
   description: Bigger bag for raccoon
   sprite: {fileID: -6009198046271197863, guid: 22b9e72cb13eba7468d5c8b86c5f39c4, type: 3}
+  cost:
+  - collectible: {fileID: 11400000, guid: 758ab29ebd88e8040b9396d79140aaf6, type: 2}
+    amount: 1
