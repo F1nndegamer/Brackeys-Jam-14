@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 3570855041754137440}
   - component: {fileID: 3443807764585577393}
   - component: {fileID: 3628044800834749102}
+  - component: {fileID: -6814220557164310888}
+  - component: {fileID: -3979746382600449378}
   m_Layer: 0
   m_Name: Dog
   m_TagString: Untagged
@@ -112,6 +114,43 @@ MonoBehaviour:
   Occluders:
     serializedVersion: 2
     m_Bits: 768
+--- !u!114 &-6814220557164310888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5612854864216524749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a8c58ede9e67940878ea85c0a75657, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pathfinder2D
+  Occluders:
+    serializedVersion: 2
+    m_Bits: 512
+  PathBuffer: 0.2
+--- !u!114 &-3979746382600449378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5612854864216524749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04e58e3e629ac9947857b0de160be494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PathMover2D
+  RepathInterval: 0.4
+  ReachThreshold: 0.1
+  Occluders:
+    serializedVersion: 2
+    m_Bits: 512
+  RotationSpeed: 120
+  UseSmoothDamp: 0
+  WallBuffer: 0.2
+  SkinWidth: 0.02
 --- !u!1 &6314581138774136864
 GameObject:
   m_ObjectHideFlags: 0

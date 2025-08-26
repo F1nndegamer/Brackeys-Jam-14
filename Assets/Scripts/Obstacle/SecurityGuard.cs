@@ -57,6 +57,10 @@ public class SecurityGuard : MonoBehaviour, IDetector
         _mover.MoveTo(target, Speed);
         if (_mover.Reached(target)) onReach?.Invoke();
     }
+    public void SetWaypoint(Transform[] selected)
+    {
+        Waypoints = selected ?? System.Array.Empty<Transform>();
+    }
     public void OnSuspiciousNoise(Vector2 where)
     {
         _lastKnown = where;

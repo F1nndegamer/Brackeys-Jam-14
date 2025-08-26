@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Furniture
   - Wall
+  - Waypoint
   layers:
   - Default
   - TransparentFX

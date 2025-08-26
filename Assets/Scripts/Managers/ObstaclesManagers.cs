@@ -6,7 +6,14 @@ public class ObstaclesManagers : MonoBehaviour
     public static ObstaclesManagers Instance;
     public bool GlobalAlarm;
 
-    void Awake() => Instance = this;
+    Grid2D grid;
+
+    void Awake()
+    {
+        Instance = this;
+        grid = GetComponent<Grid2D>();
+        StartCoroutine(grid.RebuildNextFrame(grid));
+    }
 
     public void OnDetection(IDetector src, IDetectable target, float strength = 1f)
     {

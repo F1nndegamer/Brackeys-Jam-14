@@ -123,13 +123,15 @@ GameObject:
   - component: {fileID: 7377550337036262285}
   - component: {fileID: 6043182531780218322}
   - component: {fileID: 7177101775889305479}
+  - component: {fileID: 8800389570720708381}
+  - component: {fileID: 5158618893096803920}
   m_Layer: 0
   m_Name: SecGuy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6372749214907705200
 Transform:
   m_ObjectHideFlags: 0
@@ -140,7 +142,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.26, y: 2.87, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5753095633803869877}
@@ -217,11 +219,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SecurityGuard
   DetectionRange: 4
+  StartDetectionRange: 7
   FOV: 70
   Speed: 2
-  Waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
+  Waypoints: []
   Occluders:
     serializedVersion: 2
     m_Bits: 768
@@ -239,3 +240,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GizmoFOV
   Range: 4
   FOV: 70
+--- !u!114 &8800389570720708381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8436302522158961266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a8c58ede9e67940878ea85c0a75657, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pathfinder2D
+  Occluders:
+    serializedVersion: 2
+    m_Bits: 512
+  PathBuffer: 0.2
+--- !u!114 &5158618893096803920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8436302522158961266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04e58e3e629ac9947857b0de160be494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PathMover2D
+  RepathInterval: 0.4
+  ReachThreshold: 0.1
+  Occluders:
+    serializedVersion: 2
+    m_Bits: 512
+  RotationSpeed: 120
+  UseSmoothDamp: 1
+  WallBuffer: 0.05
+  SkinWidth: 0.02

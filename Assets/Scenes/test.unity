@@ -129,11 +129,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1873820368861296622, guid: 97eff3adf33359e479b372d889ac6a0b, type: 3}
   m_PrefabInstance: {fileID: 6820262761783088666}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &286787731 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8436302522158961266, guid: 72f3f45815dcd5941aa246d11dc41029, type: 3}
-  m_PrefabInstance: {fileID: 5470467851401239926}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &495362093
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,37 +682,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6372749214907705200, guid: 72f3f45815dcd5941aa246d11dc41029, type: 3}
   m_PrefabInstance: {fileID: 5470467851401239926}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &990591765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 286787731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04e58e3e629ac9947857b0de160be494, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PathMover2D
-  RepathInterval: 0.4
-  ReachThreshold: 0.1
-  Occluders:
-    serializedVersion: 2
-    m_Bits: 512
-  RotationSpeed: 120
-  UseSmoothDamp: 1
---- !u!114 &990591766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 286787731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8a8c58ede9e67940878ea85c0a75657, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Pathfinder2D
 --- !u!1 &1024017044
 GameObject:
   m_ObjectHideFlags: 0
@@ -1405,18 +1369,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1084215537}
     m_Modifications:
-    - target: {fileID: 6043182531780218322, guid: 72f3f45815dcd5941aa246d11dc41029, type: 3}
-      propertyPath: Waypoints.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6043182531780218322, guid: 72f3f45815dcd5941aa246d11dc41029, type: 3}
-      propertyPath: 'Waypoints.Array.data[0]'
-      value: 
-      objectReference: {fileID: 1676875814}
-    - target: {fileID: 6043182531780218322, guid: 72f3f45815dcd5941aa246d11dc41029, type: 3}
-      propertyPath: 'Waypoints.Array.data[1]'
-      value: 
-      objectReference: {fileID: 2008794466}
     - target: {fileID: 6372749214907705200, guid: 72f3f45815dcd5941aa246d11dc41029, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.26
@@ -1461,20 +1413,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SecGuy
       objectReference: {fileID: 0}
-    - target: {fileID: 8436302522158961266, guid: 72f3f45815dcd5941aa246d11dc41029, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8436302522158961266, guid: 72f3f45815dcd5941aa246d11dc41029, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 990591766}
-    - targetCorrespondingSourceObject: {fileID: 8436302522158961266, guid: 72f3f45815dcd5941aa246d11dc41029, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 990591765}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72f3f45815dcd5941aa246d11dc41029, type: 3}
 --- !u!1001 &6820262761783088666
 PrefabInstance:

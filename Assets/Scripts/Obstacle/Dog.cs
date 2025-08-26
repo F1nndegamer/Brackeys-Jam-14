@@ -42,7 +42,10 @@ public class Dog : MonoBehaviour, IDetector
         transform.position = Vector2.MoveTowards(transform.position, target, Speed * Time.deltaTime);
         if (Vector2.Distance(transform.position, target) < 0.1f) onReach?.Invoke();
     }
-
+    public void SetWaypoint(Transform[] selected)
+    {
+        Waypoints = selected ?? System.Array.Empty<Transform>();
+    }
     public void HearNoise(Vector2 where)
     {
         _lastNoise = where;
