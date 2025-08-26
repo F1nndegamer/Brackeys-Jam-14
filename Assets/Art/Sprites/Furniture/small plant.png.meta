@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7a9bc8b9d08bd8d4b9305ba96888ad34
+guid: 4bc1edcbde9c33b4591147e4eb641e08
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1480917699468073914
-    second: dog_0
+      213: 2651853065406761059
+    second: small plant_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,12 +113,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: dog_0
+      name: small plant_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 3
         y: 4
-        width: 48
+        width: 26
         height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: abb126a2dc64d8410800000000000000
-      internalID: 1480917699468073914
+      spriteID: 368c91810564dc420800000000000000
+      internalID: 2651853065406761059
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      dog_0: 1480917699468073914
+      small plant_0: 2651853065406761059
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

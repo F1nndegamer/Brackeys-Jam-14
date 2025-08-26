@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7a9bc8b9d08bd8d4b9305ba96888ad34
+guid: d52424d2f715e4c40a7030a136757c23
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1480917699468073914
-    second: dog_0
+      213: -1440011264468981181
+    second: teddy bear_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: dog_0
+      name: teddy bear_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 4
-        width: 48
-        height: 24
+        x: 4
+        y: 5
+        width: 24
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: abb126a2dc64d8410800000000000000
-      internalID: 1480917699468073914
+      spriteID: 34ae3cc626d040ce0800000000000000
+      internalID: -1440011264468981181
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      dog_0: 1480917699468073914
+      teddy bear_0: -1440011264468981181
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
