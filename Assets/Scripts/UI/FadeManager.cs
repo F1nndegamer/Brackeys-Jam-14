@@ -10,7 +10,7 @@ public class FadeManager : MonoBehaviour
     }
     void Start()
     {
-        FadeOut();
+        //FadeOut();
     }
     public void FadeIn()
     {
