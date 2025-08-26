@@ -26,9 +26,12 @@ public class GridRoomGenerator : MonoBehaviour
     public int collectibleCount = 10;
     private List<RoomInstance> rooms = new List<RoomInstance>();
     public List<GameObject> CollectiblesPrefabs;
+    public GameObject BiscuitPrefab;
+    public static GridRoomGenerator Instance;
 
     void Awake()
     {
+        Instance = this;
         Rooms = Resources.LoadAll<GameObject>("Chamber");
     }
 
@@ -202,15 +205,18 @@ public class GridRoomGenerator : MonoBehaviour
             }
         }
     }
-    void InstantiateCollectibles()
+    public void InstantiateCollectibles(bool isBiscuit = false)
     {
         if (CollectiblesPrefabs.Count == 0 || rooms.Count == 0) return;
-
+        int Collectibles = collectibleCount;
         int attempts = 0;
         int placed = 0;
         LayerMask obstacleMask = LayerMask.GetMask("Furniture", "Wall");
-
-        while (placed < collectibleCount && attempts < collectibleCount * 20)
+        if (isBiscuit)
+        {
+            Collectibles = 1;
+        }
+        while (placed < Collectibles && attempts < Collectibles * 20)
         {
             attempts++;
             RoomInstance r = rooms[Random.Range(0, rooms.Count)];
@@ -223,6 +229,12 @@ public class GridRoomGenerator : MonoBehaviour
             Vector2 checkSize = new Vector2(cellSize - margin * 2, cellSize - margin * 2);
             Collider2D hit = Physics2D.OverlapBox(pos, checkSize, 0f, obstacleMask);
             if (hit != null) continue;
+            if (isBiscuit)
+            {
+                Instantiate(BiscuitPrefab, pos, Quaternion.identity, transform);
+                placed++;
+                break;
+            }
             GameObject prefab = CollectiblesPrefabs[Random.Range(0, CollectiblesPrefabs.Count)];
             Instantiate(prefab, pos, Quaternion.identity, transform);
 

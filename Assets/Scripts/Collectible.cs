@@ -15,7 +15,7 @@ public class Collectible : MonoBehaviour
         isCollected = true;
 
         Debug.Log($"Collected {collectibleSO.collectibleName}!");
-
+        AllCollectibles.Instance.totalCollectibles--;
         Collider2D col = GetComponent<Collider2D>();
         if (col != null) col.enabled = false;
 
