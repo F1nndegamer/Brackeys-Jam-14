@@ -2485,6 +2485,11 @@ MonoBehaviour:
   roomCount: 5
   gridSize: 10
   Difficulty: 0
+  collectibleCount: 10
+  CollectiblesPrefabs:
+  - {fileID: 1549293532350082630, guid: d2ab85a74419f5a4d958525ede491f72, type: 3}
+  - {fileID: 1549293532350082630, guid: 41e835eda5482ed46ab5f64916a4607b, type: 3}
+  - {fileID: 1549293532350082630, guid: f274e0bc21327e74a8747f277b2a7a3a, type: 3}
 --- !u!1 &802563612
 GameObject:
   m_ObjectHideFlags: 0

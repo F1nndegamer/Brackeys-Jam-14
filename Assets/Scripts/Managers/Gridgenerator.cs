@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.GameCenter;
 
@@ -22,8 +23,9 @@ public class GridRoomGenerator : MonoBehaviour
     public int roomCount = 5;
     public int gridSize = 10;
     public int Difficulty = 1;
-
+    public int collectibleCount = 10;
     private List<RoomInstance> rooms = new List<RoomInstance>();
+    public List<GameObject> CollectiblesPrefabs;
 
     void Awake()
     {
@@ -48,6 +50,7 @@ public class GridRoomGenerator : MonoBehaviour
         FillRoomMap();
         InstantiateFloors();
         InstantiateWallsWithDoors();
+        InstantiateCollectibles();
     }
     void ClearExisting()
     {
@@ -199,6 +202,36 @@ public class GridRoomGenerator : MonoBehaviour
             }
         }
     }
+    void InstantiateCollectibles()
+    {
+        if (CollectiblesPrefabs.Count == 0 || rooms.Count == 0) return;
+
+        int attempts = 0;
+        int placed = 0;
+        LayerMask obstacleMask = LayerMask.GetMask("Furniture", "Wall");
+
+        while (placed < collectibleCount && attempts < collectibleCount * 20)
+        {
+            attempts++;
+            RoomInstance r = rooms[Random.Range(0, rooms.Count)];
+            RectInt rect = r.rect;
+            int x = Random.Range(rect.xMin, rect.xMax);
+            int y = Random.Range(rect.yMin, rect.yMax);
+            Vector3 pos = new Vector3(x * cellSize + cellSize / 2f, y * cellSize + cellSize / 2f, 0f);
+
+            float margin = 0.1f * cellSize;
+            Vector2 checkSize = new Vector2(cellSize - margin * 2, cellSize - margin * 2);
+            Collider2D hit = Physics2D.OverlapBox(pos, checkSize, 0f, obstacleMask);
+            if (hit != null) continue;
+            GameObject prefab = CollectiblesPrefabs[Random.Range(0, CollectiblesPrefabs.Count)];
+            Instantiate(prefab, pos, Quaternion.identity, transform);
+
+            placed++;
+        }
+    }
+
+
+
 
     void InstantiateWallsWithDoors()
     {

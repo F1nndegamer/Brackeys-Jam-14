@@ -117,7 +117,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1549293532350082630, guid: 9b5b74d51a84fa642bf8f779d68a4040, type: 3}
       propertyPath: m_Name
-      value: Piggy Bank
+      value: Cookie
       objectReference: {fileID: 0}
     - target: {fileID: 3574986459489879658, guid: 9b5b74d51a84fa642bf8f779d68a4040, type: 3}
       propertyPath: m_LocalScale.x
@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3574986459489879658, guid: 9b5b74d51a84fa642bf8f779d68a4040, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3574986459489879658, guid: 9b5b74d51a84fa642bf8f779d68a4040, type: 3}
       propertyPath: m_LocalRotation.w
