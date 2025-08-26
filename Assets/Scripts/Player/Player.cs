@@ -40,8 +40,6 @@ public class Player : Singleton<Player>
 
     private void TryUseSmokeBomb()
     {
-        print("Smoke Bomb");
-
         if (!isSmokeBombUnlocked) return;
         if (noOfSmokeBombUseLeft <= 0) return;
 
