@@ -211,6 +211,7 @@ public class GridRoomGenerator : MonoBehaviour
         int Collectibles = collectibleCount;
         int attempts = 0;
         int placed = 0;
+        AllCollectibles.Instance.totalCollectibles = Collectibles;
         LayerMask obstacleMask = LayerMask.GetMask("Furniture", "Wall");
         if (isBiscuit)
         {

@@ -2490,6 +2490,7 @@ MonoBehaviour:
   - {fileID: 1549293532350082630, guid: d2ab85a74419f5a4d958525ede491f72, type: 3}
   - {fileID: 1549293532350082630, guid: 41e835eda5482ed46ab5f64916a4607b, type: 3}
   - {fileID: 1549293532350082630, guid: f274e0bc21327e74a8747f277b2a7a3a, type: 3}
+  BiscuitPrefab: {fileID: 1549293532350082630, guid: 9b5b74d51a84fa642bf8f779d68a4040, type: 3}
 --- !u!1 &802563612
 GameObject:
   m_ObjectHideFlags: 0
@@ -2523,6 +2524,7 @@ Transform:
   - {fileID: 1569305327}
   - {fileID: 591653322}
   - {fileID: 1325771002}
+  - {fileID: 1960541410}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &811926415
@@ -5536,6 +5538,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1882343372}
   m_CullTransparentMesh: 1
+--- !u!1 &1960541409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1960541410}
+  - component: {fileID: 1960541411}
+  m_Layer: 0
+  m_Name: CollectiblesManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1960541410
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960541409}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 802563613}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1960541411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960541409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a943a00d97523b41a9e95bc07c88e50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AllCollectibles
+  totalCollectibles: 0
 --- !u!1 &2048518819
 GameObject:
   m_ObjectHideFlags: 0
