@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8780105512056095487}
   - component: {fileID: 2564589466855934810}
   - component: {fileID: 8528404019210880011}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bed_0 (1)
   m_TagString: Furniture
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 4700301116456338907}
   - component: {fileID: 6422342400928149443}
   - component: {fileID: 7960885844147896630}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: couch (1)
   m_TagString: Furniture
   m_Icon: {fileID: 0}
@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 985556624430558838}
   - component: {fileID: 652424066185667489}
   - component: {fileID: 2366939715705350164}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: small plant_0 (1)
   m_TagString: Furniture
   m_Icon: {fileID: 0}
@@ -412,7 +412,7 @@ GameObject:
   - component: {fileID: 2036717786280336342}
   - component: {fileID: 5853135057041080291}
   - component: {fileID: 6591755389302635686}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: small plant_0
   m_TagString: Furniture
   m_Icon: {fileID: 0}
@@ -539,7 +539,7 @@ GameObject:
   - component: {fileID: 2887087527267045983}
   - component: {fileID: 2402236853619154955}
   - component: {fileID: 8726597876782324638}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bed_0
   m_TagString: Furniture
   m_Icon: {fileID: 0}
@@ -802,7 +802,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4048428843397388311}
   - component: {fileID: 2255730029768851954}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Rug (64x32)_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
