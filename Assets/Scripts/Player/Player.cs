@@ -7,6 +7,7 @@ using static UnityEditor.Progress;
 public class Player : Singleton<Player>
 {
     public event Action<CollectibleSO, int> OnCollectibleAmountChanged;
+    public event Action<ItemType, int> OnConsumableUsed;
 
     [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float runSpeed = 8f;
@@ -15,6 +16,7 @@ public class Player : Singleton<Player>
     [SerializeField] List<Sprite> playerSprites;
     [SerializeField] private float interactRadius = 1.5f;
     [SerializeField] private LayerMask collectibleLayer; // assign in inspector
+    [SerializeField] private ParticleSystem smokeBombFX;
     [SerializeField] private int Strikes = 5;
     public float MultiplierChangeRate = 0.2f;
     private Rigidbody2D rb;
@@ -24,6 +26,8 @@ public class Player : Singleton<Player>
     private Animator anim;
     private float footstepTimer = 0;
     private float footstepTimerMax = 0.25f;
+    private bool isSmokeBombUnlocked;
+    private int noOfSmokeBombUseLeft;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,7 +35,21 @@ public class Player : Singleton<Player>
         isRunning = false;
         anim = GetComponent<Animator>();
         GameInput.Instance.OnInteract += TryCollect;
+        GameInput.Instance.OnSmokeBomb += TryUseSmokeBomb;
     }
+
+    private void TryUseSmokeBomb()
+    {
+        print("Smoke Bomb");
+
+        if (!isSmokeBombUnlocked) return;
+        if (noOfSmokeBombUseLeft <= 0) return;
+
+        noOfSmokeBombUseLeft--;
+        OnConsumableUsed?.Invoke(ItemType.SmokeBomb, noOfSmokeBombUseLeft);
+        Destroy(Instantiate(smokeBombFX, transform.position, Quaternion.identity), 3f);
+    }
+
     public void OnDetected()
     {
         Strikes--;
@@ -160,6 +178,12 @@ public class Player : Singleton<Player>
             collectibleCounts[requirement.collectible] -= requirement.amount;
             OnCollectibleAmountChanged?.Invoke(requirement.collectible, collectibleCounts[requirement.collectible]);
         }
+        if (shopItemSO.itemType == ItemType.SmokeBomb)
+        {
+            UIManager.Instance.GetCanvas<CanvasGameplay>().UnlockConsumable(shopItemSO.itemType);
+            isSmokeBombUnlocked = true;
+            noOfSmokeBombUseLeft = 1;
+        }
 
         Debug.Log($"Bought {shopItemSO.itemName}!");
     }
@@ -190,5 +214,9 @@ public class Player : Singleton<Player>
     public int GetCollectibleCount(CollectibleSO collectibleSO)
     {
         return collectibleCounts.ContainsKey(collectibleSO) ? collectibleCounts[collectibleSO] : 0;
+    }
+    private void ResetConsumable()
+    {
+        noOfSmokeBombUseLeft = 1;
     }
 }

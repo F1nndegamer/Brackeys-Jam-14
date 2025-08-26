@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class GameInput : Singleton<GameInput>
 {
     public event Action OnInteract;
+    public event Action OnSmokeBomb;
 
     private InputSystem_Actions inputSystem;
 
@@ -14,6 +15,12 @@ public class GameInput : Singleton<GameInput>
         inputSystem.Player.Enable();
 
         inputSystem.Player.Interact.performed += Interact_performed;
+        inputSystem.Player.SmokeBomb.performed += SmokeBomb_performed; ;
+    }
+
+    private void SmokeBomb_performed(InputAction.CallbackContext obj)
+    {
+        OnSmokeBomb?.Invoke();
     }
 
     private void Interact_performed(InputAction.CallbackContext obj)
