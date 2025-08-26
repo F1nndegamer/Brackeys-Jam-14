@@ -224,7 +224,7 @@ public class GridRoomGenerator : MonoBehaviour
             RectInt rect = r.rect;
             int x = Random.Range(rect.xMin, rect.xMax);
             int y = Random.Range(rect.yMin, rect.yMax);
-            Vector3 pos = new Vector3(x * cellSize + cellSize / 2f, y * cellSize + cellSize / 2f, 0f);
+            Vector3 pos = new Vector3(x * cellSize + cellSize / 2f, y * cellSize + cellSize / 2f, -0.1f);
 
             float margin = 0.1f * cellSize;
             Vector2 checkSize = new Vector2(cellSize - margin * 2, cellSize - margin * 2);
