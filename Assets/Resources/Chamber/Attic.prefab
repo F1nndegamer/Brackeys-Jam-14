@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3215732542556658652}
   - component: {fileID: 3021551425367026254}
   - component: {fileID: -1204852079437032832}
+  - component: {fileID: -8894944076108545734}
   m_Layer: 0
   m_Name: Attic
   m_TagString: Untagged
@@ -40,7 +41,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2744825686845756685}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -106,3 +107,17 @@ MonoBehaviour:
   Difficultymin: 0
   Difficultymax: 0
   size: {x: 5, y: 5}
+--- !u!114 &-8894944076108545734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2744825686845756685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bbb68caac25a5f47b463ed7431e088c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TileSpawner
+  tilePrefab: {fileID: 7359024895428389900, guid: 72b3744e861a5a145aa80e1f5c671247, type: 3}
+  tileSize: 1
