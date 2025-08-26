@@ -1725,9 +1725,9 @@ MonoBehaviour:
   m_AnimationTriggers:
     m_NormalTrigger: NotHover
     m_HighlightedTrigger: IsHover
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
+    m_PressedTrigger: NotHover
+    m_SelectedTrigger: NotHover
+    m_DisabledTrigger: NotHover
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1370069672}
   m_OnClick:
@@ -2029,9 +2029,9 @@ MonoBehaviour:
   m_AnimationTriggers:
     m_NormalTrigger: NotHover
     m_HighlightedTrigger: IsHover
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
+    m_PressedTrigger: NotHover
+    m_SelectedTrigger: NotHover
+    m_DisabledTrigger: NotHover
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1370069672}
   m_OnClick:
@@ -2609,9 +2609,9 @@ MonoBehaviour:
   m_AnimationTriggers:
     m_NormalTrigger: NotHover
     m_HighlightedTrigger: IsHover
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
+    m_PressedTrigger: NotHover
+    m_SelectedTrigger: NotHover
+    m_DisabledTrigger: NotHover
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1370069672}
   m_OnClick:
