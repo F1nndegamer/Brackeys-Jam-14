@@ -12,4 +12,8 @@ public class CollectibleSOArray : ScriptableObject
         }
         return -1;
     }
+    public CollectibleSO GetRandomCollectible()
+    {
+        return collectibleSOArray[Random.Range(0, collectibleSOArray.Length)];
+    }
 }
