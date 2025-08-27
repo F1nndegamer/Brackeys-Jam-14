@@ -677,9 +677,9 @@ GameObject:
   - component: {fileID: 1705549353282489489}
   - component: {fileID: -166873149378898749}
   - component: {fileID: 3933229588526200002}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bedroom
-  m_TagString: Untagged
+  m_TagString: Furniture
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -804,7 +804,7 @@ GameObject:
   - component: {fileID: 2255730029768851954}
   m_Layer: 11
   m_Name: Rug (64x32)_0
-  m_TagString: Untagged
+  m_TagString: Furniture
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
