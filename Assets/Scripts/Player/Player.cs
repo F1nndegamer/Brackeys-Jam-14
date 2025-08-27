@@ -206,6 +206,7 @@ public class Player : Singleton<Player>
             collectibleCounts[collectibleSO] = 0;
 
         collectibleCounts[collectibleSO]++;
+        ObjectiveManager.Instance.CheckCurrentObjective(collectibleSO);
         OnCollectibleAmountChanged?.Invoke(collectibleSO, collectibleCounts[collectibleSO]);
         Debug.Log($"Player now has {collectibleCounts[collectibleSO]} of {collectibleSO}");
     }

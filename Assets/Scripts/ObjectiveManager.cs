@@ -17,4 +17,12 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
     {
         return currentObjective;
     }
+    public void CheckCurrentObjective(CollectibleSO collectibleSO)
+    {
+        if (collectibleSO == currentObjective)
+        {
+            UIManager.Instance.GetCanvas<CanvasGameplay>().FinishObjective();
+            RandomizeObjective();
+        }
+    }
 }

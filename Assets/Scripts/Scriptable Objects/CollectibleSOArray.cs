@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CollectibleSOArray", menuName = "Scriptable Objects/CollectibleSOArray")]
 public class CollectibleSOArray : ScriptableObject
 {
+    [Header("BISCUIT must have last index")]
     public CollectibleSO[] collectibleSOArray;
     public int GetIndex(CollectibleSO collectibleSO)
     {
@@ -14,6 +15,6 @@ public class CollectibleSOArray : ScriptableObject
     }
     public CollectibleSO GetRandomCollectible()
     {
-        return collectibleSOArray[Random.Range(0, collectibleSOArray.Length)];
+        return collectibleSOArray[Random.Range(0, collectibleSOArray.Length - 1)]; // Minus 1 to exclude BISCUIT
     }
 }

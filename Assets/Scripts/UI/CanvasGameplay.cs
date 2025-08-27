@@ -82,7 +82,12 @@ public class CanvasGameplay : UICanvas
             }
         }
     }
-
+    public void FinishObjective()
+    {
+        objectRect.localScale = Vector3.zero;
+        objectRect.DOScale(1f, 0.2f).SetEase(Ease.OutBack);
+        objectiveText.text = "Objective grabbed\nYou can escape now";
+    }
     private void ShowDialogue(int index)
     {
         dialogueText.text = "";
