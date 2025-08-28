@@ -1,5 +1,119 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3971263330139870703
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5995671132717098752}
+  - component: {fileID: 2769951721889209254}
+  - component: {fileID: 4056046613036649033}
+  - component: {fileID: 4209426274743690020}
+  m_Layer: 8
+  m_Name: Visual
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5995671132717098752
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3971263330139870703}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.7064895, w: 0.70772356}
+  m_LocalPosition: {x: 8.5, y: 10.160002, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1858376731092964246}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.1}
+--- !u!33 &2769951721889209254
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3971263330139870703}
+  m_Mesh: {fileID: 0}
+--- !u!23 &4056046613036649033
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3971263330139870703}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 4294967295
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 52c37fc9f3318924c89ceaa12455111c, type: 2}
+  - {fileID: 2100000, guid: 0986b6a980da70a4d827ee382ecc1af1, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4209426274743690020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3971263330139870703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b1ad2c30c623ef47a5ee9e67b514352, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FOVMesh2D
+  pivot: {fileID: 1858376731092964246}
+  FOV: 360
+  ViewRadius: 2
+  RayCount: 180
+  Occluders:
+    serializedVersion: 2
+    m_Bits: 768
+  ClipWithOccluders: 1
+  RebuildInterval: 0.05
+  IdleColor: {r: 0, g: 1, b: 0, a: 0.5019608}
+  DetectedColor: {r: 1, g: 0, b: 0, a: 0.49019608}
 --- !u!1 &8030988730834758233
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,7 +144,8 @@ Transform:
   m_LocalPosition: {x: -2.6, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5995671132717098752}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4054446124790973625
@@ -45,20 +160,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c07d5b3bf77ec4a42b93b9e4cadf8374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MotionDetector
-  DetectionRange: 5
+  DetectionRange: 3
+  StartDetectionRange: 3
   Occluders:
     serializedVersion: 2
     m_Bits: 512
-  DetectableLayers:
-    serializedVersion: 2
-    m_Bits: 8
   MovementThreshold: 0.0001
   DetectionDuration: 1
   DetectionCooldown: 0.5
-  IdleColor: {r: 0, g: 1, b: 0, a: 1}
-  DetectedColor: {r: 1, g: 0, b: 0, a: 1}
-  BeamWidth: 0.1
-  g: 0
 --- !u!120 &8703443160875896449
 LineRenderer:
   serializedVersion: 2
