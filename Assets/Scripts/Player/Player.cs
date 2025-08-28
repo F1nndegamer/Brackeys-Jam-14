@@ -192,6 +192,8 @@ public class Player : Singleton<Player>
                 noOfSmokeBombUseLeft = 1;
                 break;
             case ItemType.CardboardBox:
+                UIManager.Instance.GetCanvas<CanvasGameplay>().UnlockConsumable(shopItemSO.itemType);
+
                 break;
         }
         Debug.Log($"Bought {shopItemSO.itemName}!");
