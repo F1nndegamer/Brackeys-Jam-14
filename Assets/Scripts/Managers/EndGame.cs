@@ -30,5 +30,6 @@ public class EndGame : MonoBehaviour
             yield return null;
         }
         isFading = false;
+        shopManager.Instance.shopCanvas.SetActive(true);
     }
 }

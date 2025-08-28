@@ -13,26 +13,37 @@ public class CanvasGameplay : UICanvas
     [SerializeField] private TextMeshProUGUI dialogueText;
     private string[] introDialogue = new string[]
     {
-        "One two one two. Do you copy? Name’s Rascal — your partner in crime tonight.",
-        "Listen carefully, kid. This street’s full of houses, but we’ll only hit one at a time…",
-        "Your job? Slip inside, nab whatever’s marked as tonight’s prize, and get out clean.",
+        "One two one two. Do you copy? Name's Rascal, your partner in crime tonight.",
+        "Listen carefully, kid. This street's full of houses, but weï¿½ll only hit one at a time.",
+        "Your job? Slip inside, nab whatever's marked as tonightï¿½s prize, and get out clean.",
         "However, if you're feeling it, you can stay as long as you want and grab as much stuffs as you'd like",
     };
     [SerializeField] private TextMeshProUGUI objectiveText;
     [SerializeField] private RectTransform objectRect;
 
-    [SerializeField] private GameObject[] consumableCounterArray;
-    [SerializeField] private TextMeshProUGUI[] consumableCountTextArray;
+    [SerializeField] private GameObject smokeBombCounter;
+    [SerializeField] private TextMeshProUGUI smokeBombCountText;
+    [SerializeField] private GameObject cardboardBoxCounter;
+    [SerializeField] private TextMeshProUGUI cardboardBoxCountText;
 
     private int currentDialogueIndex = 0;
     private Tween typingTween;
     private bool isTyping = false;
+    private const string IntroPlayedKey = "IntroDialoguePlayed";
 
     private void Awake()
     {
         Player.Instance.OnCollectibleAmountChanged += Player_OnCollectibleAmountChanged;
         Player.Instance.OnConsumableUsed += Player_OnConsumableUsed;
-
+        bool hasPlayedIntro = PlayerPrefs.GetInt(IntroPlayedKey, 0) == 1;
+        if (hasPlayedIntro)
+        {
+            dialogueCanvasGroup.alpha = 0;
+            objectRect.localScale = Vector3.zero;
+            objectRect.DOScale(1f, 0.2f).SetEase(Ease.OutBack);
+            objectiveText.text = $"This house's objective:\nA {ObjectiveManager.Instance.GetCurrentObjective().collectibleName}";
+            return;
+        }
         dialogueCanvasGroup.alpha = 0;
         dialogueCanvasGroup.DOFade(1, 0.4f).SetEase(Ease.OutQuad);
 
@@ -45,7 +56,6 @@ public class CanvasGameplay : UICanvas
             .OnComplete(() => ShowDialogue(currentDialogueIndex));
         objectRect.localScale = Vector3.zero;
     }
-
 
     private void Update()
     {
@@ -68,6 +78,9 @@ public class CanvasGameplay : UICanvas
                 }
                 else
                 {
+
+                    PlayerPrefs.SetInt(IntroPlayedKey, 1);
+                    PlayerPrefs.Save();
                     raccoonImageRect.DOAnchorPos(raccoonImageRect.anchoredPosition + new Vector2(-800f, 0f), 0.6f).SetEase(Ease.InBack)
                         .OnComplete(() =>
                         {
@@ -113,8 +126,22 @@ public class CanvasGameplay : UICanvas
 
     private void Player_OnConsumableUsed(ItemType itemType, int count)
     {
-        TextMeshProUGUI textUI = consumableCountTextArray[(int)itemType - 1];
-        GameObject counter = consumableCounterArray[(int)itemType - 1];
+        TextMeshProUGUI textUI = null;
+        GameObject counter = null;
+
+        switch (itemType) 
+        {
+            case ItemType.SmokeBomb:
+                textUI = smokeBombCountText;
+                counter = smokeBombCounter;
+
+                break;
+            case ItemType.CardboardBox:
+                textUI = cardboardBoxCountText;
+                counter = cardboardBoxCounter;
+                break;
+        }
+
         textUI.text = count.ToString();
 
         RectTransform rect = counter.GetComponent<RectTransform>();
@@ -138,7 +165,18 @@ public class CanvasGameplay : UICanvas
 
     public void UnlockConsumable(ItemType itemType)
     {
-        GameObject counter = consumableCounterArray[(int)itemType - 1];
+        GameObject counter = null;
+
+        switch (itemType)
+        {
+            case ItemType.SmokeBomb:
+                counter = smokeBombCounter;
+
+                break;
+            case ItemType.CardboardBox:
+                counter = cardboardBoxCounter;
+                break;
+        }
         RectTransform rect = counter.GetComponent<RectTransform>();
 
         Vector2 originalPos = rect.anchoredPosition;

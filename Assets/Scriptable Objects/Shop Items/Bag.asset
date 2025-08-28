@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b40d3ae8fac4c354fa080ed5c5520703, type: 3}
   m_Name: Bag
   m_EditorClassIdentifier: Assembly-CSharp::ShopItemSO
+  itemType: 1
+  stat: 0
   itemName: Bag
   description: Bigger bag for raccoon
-  sprite: {fileID: -6009198046271197863, guid: 22b9e72cb13eba7468d5c8b86c5f39c4, type: 3}
+  sprite: {fileID: 21300000, guid: 5cb96f123bd98e742badd7a4faa64293, type: 3}
   cost:
   - collectible: {fileID: 11400000, guid: 758ab29ebd88e8040b9396d79140aaf6, type: 2}
     amount: 1

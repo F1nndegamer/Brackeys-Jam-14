@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static UnityEditor.Progress;
@@ -28,6 +29,7 @@ public class Player : Singleton<Player>
     private float footstepTimerMax = 0.25f;
     private bool isSmokeBombUnlocked;
     private int noOfSmokeBombUseLeft;
+    private float speedBoost = 0;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -36,6 +38,7 @@ public class Player : Singleton<Player>
         anim = GetComponent<Animator>();
         GameInput.Instance.OnInteract += TryCollect;
         GameInput.Instance.OnSmokeBomb += TryUseSmokeBomb;
+        GetComponent<PlayerDetectable>().IsHidden = false;
     }
 
     private void TryUseSmokeBomb()
@@ -108,7 +111,7 @@ public class Player : Singleton<Player>
         sprite.sprite = playerSprites[0];
         if (GameInput.Instance.GetCrouchHeld())
         {
-            currentSpeed = crouchSpeed;
+            currentSpeed = crouchSpeed + speedBoost;
             if (playerSprites.Count > 2) sprite.sprite = playerSprites[2];
             multipier -= MultiplierChangeRate;
             isRunning = false;
@@ -116,6 +119,7 @@ public class Player : Singleton<Player>
             {
                 anim.SetBool("Walking", false);
                 anim.SetBool("Running", false);
+                GetComponent<PlayerDetectable>().IsHidden = true;
             }
         }
 
@@ -129,6 +133,7 @@ public class Player : Singleton<Player>
             {
                 anim.SetBool("Walking", false);
                 anim.SetBool("Running", true);
+                GetComponent<PlayerDetectable>().IsHidden = false;
             }
         }
         else
@@ -138,6 +143,7 @@ public class Player : Singleton<Player>
                 anim.SetBool("Walking", true);
                 anim.SetBool("Running", false);
                 isRunning = false;
+                GetComponent<PlayerDetectable>().IsHidden = false;
             }
         }
         RangeMultiplier = multipier;
@@ -176,13 +182,25 @@ public class Player : Singleton<Player>
             collectibleCounts[requirement.collectible] -= requirement.amount;
             OnCollectibleAmountChanged?.Invoke(requirement.collectible, collectibleCounts[requirement.collectible]);
         }
-        if (shopItemSO.itemType == ItemType.SmokeBomb)
+        switch (shopItemSO.itemType)
         {
-            UIManager.Instance.GetCanvas<CanvasGameplay>().UnlockConsumable(shopItemSO.itemType);
-            isSmokeBombUnlocked = true;
-            noOfSmokeBombUseLeft = 1;
-        }
+            case ItemType.Shoes:
+                speedBoost = shopItemSO.stat;
+                break;
+            case ItemType.Bag:
+                break;
+            case ItemType.Bicep:
+                break;
+            case ItemType.SmokeBomb:
+                UIManager.Instance.GetCanvas<CanvasGameplay>().UnlockConsumable(shopItemSO.itemType);
+                isSmokeBombUnlocked = true;
+                noOfSmokeBombUseLeft = 1;
+                break;
+            case ItemType.CardboardBox:
+                UIManager.Instance.GetCanvas<CanvasGameplay>().UnlockConsumable(shopItemSO.itemType);
 
+                break;
+        }
         Debug.Log($"Bought {shopItemSO.itemName}!");
     }
     private void TryCollect()

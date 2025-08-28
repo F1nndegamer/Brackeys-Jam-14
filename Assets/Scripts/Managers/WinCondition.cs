@@ -5,6 +5,7 @@ public class WinCondition : MonoBehaviour
 {
     public static WinCondition Instance;
     public List<GameObject> Walls;
+    public float DifficultyMultiplier = 1;
     public bool hasWon;
     void Awake()
     {
@@ -23,6 +24,10 @@ public class WinCondition : MonoBehaviour
     {
         EndGame eg = FindFirstObjectByType<EndGame>();
         eg.Fade();
+        float Difficulty = PlayerPrefs.GetInt("Difficulty", 0);
+        Difficulty += DifficultyMultiplier;
+        PlayerPrefs.SetInt("Difficulty", (int)Difficulty);
+        PlayerPrefs.Save();
         print("excecuting fade");
     }
     void OnTriggerEnter2D(Collider2D collision)

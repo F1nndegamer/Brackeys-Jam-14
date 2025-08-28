@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b40d3ae8fac4c354fa080ed5c5520703, type: 3}
   m_Name: Shoes
   m_EditorClassIdentifier: Assembly-CSharp::ShopItemSO
+  itemType: 0
+  stat: 1
   itemName: Shoes
   description: Raccoon run faster
-  sprite: {fileID: 21300000, guid: 7ac9632d5b351894a8a101e678904c49, type: 3}
+  sprite: {fileID: 21300000, guid: ab07f964b22393249b343cbff85fc357, type: 3}
   cost:
   - collectible: {fileID: 11400000, guid: 758ab29ebd88e8040b9396d79140aaf6, type: 2}
     amount: 2
