@@ -18,11 +18,12 @@ public class CanvasShop : UICanvas
     [SerializeField] private float slideDuration = 0.8f;
     [SerializeField] private float rotateDuration = 0.4f;
     [SerializeField] private float rotateAmount = 1f;
-
+    public static CanvasShop Instance;
     private Vector3 imageStartPos;
     private ShopItem selectedShopItem;
     private void Awake()
     {
+        Instance = this;
         buyButton.onClick.AddListener(() =>
         {
             if (Player.Instance.CanAfford(selectedShopItem.GetShopItemSO()))
@@ -34,6 +35,7 @@ public class CanvasShop : UICanvas
                 buyButton.transform.DOShakePosition(0.4f);
             }
         });
+        gameObject.SetActive(false);
     }
     private void OnEnable()
     {
