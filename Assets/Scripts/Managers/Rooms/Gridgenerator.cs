@@ -22,7 +22,7 @@ public class GridRoomGenerator : MonoBehaviour
     public GameObject[] Rooms;
     public int roomCount = 5;
     public int gridSize = 10;
-    public int Difficulty = 1;
+    public float Difficulty = 1;
     public int collectibleCount = 10;
     private List<RoomInstance> rooms = new List<RoomInstance>();
     public List<GameObject> CollectiblesPrefabs;
@@ -33,6 +33,7 @@ public class GridRoomGenerator : MonoBehaviour
     {
         Instance = this;
         Rooms = Resources.LoadAll<GameObject>("Chamber");
+        Difficulty = PlayerPrefs.GetInt("Difficulty", 1);
     }
 
     void Start()
