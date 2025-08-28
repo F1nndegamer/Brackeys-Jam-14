@@ -14,6 +14,9 @@ public class FOVMesh2D : MonoBehaviour
     public bool ClipWithOccluders = true;
     [Header("Perf")]
     public float RebuildInterval = 0.05f;
+    [Header("Visual")]
+    public Color IdleColor = Color.green;
+    public Color DetectedColor = Color.red;
 
     Mesh _mesh;
     MeshRenderer _renderer;
@@ -29,6 +32,7 @@ public class FOVMesh2D : MonoBehaviour
         if (pivot == null) pivot = transform.parent != null ? transform.parent : transform;
         transform.localPosition = new Vector3(0,0,-1);
         transform.localRotation = Quaternion.identity;
+        ViewRadius = GetComponentInParent<IDetector>().DetectionRange;
     }
 
     void LateUpdate()
@@ -85,11 +89,12 @@ public class FOVMesh2D : MonoBehaviour
         _mesh.RecalculateBounds();
         if (_detector != null && _detector.CanSee(FindFirstObjectByType<PlayerDetectable>()))
         {
-            _renderer.material.color = Color.red;
+
+            _renderer.material.color = DetectedColor;
         }
         else
         {
-            _renderer.material.color = Color.green;
+            _renderer.material.color = IdleColor;
         }
     }
 }

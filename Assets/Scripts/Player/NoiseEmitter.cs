@@ -4,7 +4,6 @@ public class NoiseEmitter : MonoBehaviour
 {
     public float Radius = 5f;
     public float StartRadius = 5f;
-    public bool isRunning;
     void Update()
     {
         Radius = StartRadius * Player.Instance.RangeMultiplier;

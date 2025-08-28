@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static UnityEditor.Progress;
@@ -37,6 +38,7 @@ public class Player : Singleton<Player>
         anim = GetComponent<Animator>();
         GameInput.Instance.OnInteract += TryCollect;
         GameInput.Instance.OnSmokeBomb += TryUseSmokeBomb;
+        GetComponent<PlayerDetectable>().IsHidden = false;
     }
 
     private void TryUseSmokeBomb()
@@ -117,6 +119,7 @@ public class Player : Singleton<Player>
             {
                 anim.SetBool("Walking", false);
                 anim.SetBool("Running", false);
+                GetComponent<PlayerDetectable>().IsHidden = true;
             }
         }
 
@@ -130,6 +133,7 @@ public class Player : Singleton<Player>
             {
                 anim.SetBool("Walking", false);
                 anim.SetBool("Running", true);
+                GetComponent<PlayerDetectable>().IsHidden = false;
             }
         }
         else
@@ -139,6 +143,7 @@ public class Player : Singleton<Player>
                 anim.SetBool("Walking", true);
                 anim.SetBool("Running", false);
                 isRunning = false;
+                GetComponent<PlayerDetectable>().IsHidden = false;
             }
         }
         RangeMultiplier = multipier;

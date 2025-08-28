@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class PlayerDetectable : MonoBehaviour, IDetectable
 {
-    public bool IsHidden { get; private set; }
+    public bool IsHidden { get; set; }
     public Vector2 GetPosition() => transform.position;
     public void SetHidden(bool hidden) => IsHidden = hidden;
 }
