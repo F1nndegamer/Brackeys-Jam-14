@@ -16,12 +16,16 @@ public class FOVMesh2D : MonoBehaviour
     public float RebuildInterval = 0.05f;
 
     Mesh _mesh;
+    MeshRenderer _renderer;
+    IDetector _detector;
     float _t;
 
     void Awake()
     {
         _mesh = new Mesh { name = "FOV Mesh" };
         GetComponent<MeshFilter>().sharedMesh = _mesh;
+        _renderer = GetComponent<MeshRenderer>();
+        _detector = GetComponentInParent<IDetector>();
         if (pivot == null) pivot = transform.parent != null ? transform.parent : transform;
         transform.localPosition = new Vector3(0,0,-1);
         transform.localRotation = Quaternion.identity;
@@ -79,5 +83,13 @@ public class FOVMesh2D : MonoBehaviour
         _mesh.vertices = verts;
         _mesh.triangles = tris;
         _mesh.RecalculateBounds();
+        if (_detector != null && _detector.CanSee(FindFirstObjectByType<PlayerDetectable>()))
+        {
+            _renderer.material.color = Color.red;
+        }
+        else
+        {
+            _renderer.material.color = Color.green;
+        }
     }
 }
