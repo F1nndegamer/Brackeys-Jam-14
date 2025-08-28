@@ -8,13 +8,17 @@ public class CollectibleRequirement
 }
 public enum ItemType
 {
-    StatBoost = 0,
-    SmokeBomb = 1,
+    Shoes = 0,
+    Bag = 1,
+    Bicep = 2,
+    SmokeBomb = 3,
+    CardboardBox = 4,
 }
 [CreateAssetMenu(fileName = "ShopItemSO", menuName = "Scriptable Objects/ShopItemSO")]
 public class ShopItemSO : ScriptableObject
 {
     public ItemType itemType;
+    public float stat;
     public string itemName;
     public string description;
     public Sprite sprite;
