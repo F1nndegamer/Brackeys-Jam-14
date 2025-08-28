@@ -424,7 +424,6 @@ public class GridRoomGenerator : MonoBehaviour
             Collider2D[] hits = Physics2D.OverlapBoxAll(doorPos, new Vector2(width, height), 0f);
             foreach (Collider2D c in hits)
             {
-                Debug.Log(c.gameObject.name);
                 if (c.CompareTag("Furniture"))
                 {
                     Destroy(c.gameObject);

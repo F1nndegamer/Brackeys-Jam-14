@@ -5,6 +5,7 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
     [SerializeField] private CollectibleSOArray collectibleSOArray;
 
     private CollectibleSO currentObjective;
+    private bool ObjectiveCompleted;
     void Awake()
     {
         RandomizeObjective();
@@ -20,13 +21,14 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
     public CollectibleSO GetCurrentObjective()
     {
         return currentObjective;
-        
+
     }
     public void CheckCurrentObjective(CollectibleSO collectibleSO)
     {
-        if (collectibleSO == currentObjective)
+        if (collectibleSO == currentObjective && !ObjectiveCompleted)
         {
             UIManager.Instance.GetCanvas<CanvasGameplay>().FinishObjective();
+            WinCondition.Instance.WinGame();
             RandomizeObjective();
         }
     }
