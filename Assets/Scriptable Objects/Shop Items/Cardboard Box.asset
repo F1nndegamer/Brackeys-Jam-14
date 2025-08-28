@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b40d3ae8fac4c354fa080ed5c5520703, type: 3}
-  m_Name: Smoke Bomb
+  m_Name: Cardboard Box
   m_EditorClassIdentifier: Assembly-CSharp::ShopItemSO
-  itemType: 1
-  itemName: Smoke Bomb
-  description: Unlocks Smoke Bomb
-  sprite: {fileID: 21300000, guid: 10d258519a972b94c8783d1233a17388, type: 3}
-  cost: []
+  itemType: 0
+  itemName: Cardboard Box
+  description: Raccoon run faster
+  sprite: {fileID: 21300000, guid: a260aa915aed04842a1fa0bd1c57b5e0, type: 3}
+  cost:
+  - collectible: {fileID: 11400000, guid: 758ab29ebd88e8040b9396d79140aaf6, type: 2}
+    amount: 2

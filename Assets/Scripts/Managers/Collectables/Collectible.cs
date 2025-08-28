@@ -1,6 +1,5 @@
 using UnityEngine;
 using DG.Tweening;
-using System;
 
 public class Collectible : MonoBehaviour
 {
@@ -8,27 +7,44 @@ public class Collectible : MonoBehaviour
     [SerializeField] public CollectibleSO collectibleSO;
 
     private bool isCollected = false;
+    private Transform collector;
+    private float followTimer = 0f;
+    private bool startMoving;
 
-    public void Collect(Transform collector)
+    public void Collect(Transform collectorTransform)
     {
         if (isCollected) return;
         isCollected = true;
+        collector = collectorTransform;
 
         Debug.Log($"Collected {collectibleSO.collectibleName}!");
         AllCollectibles.Instance.totalCollectibles--;
         Collider2D col = GetComponent<Collider2D>();
         if (col != null) col.enabled = false;
 
-        Sequence seq = DOTween.Sequence();
-        seq.Append(transform.DOScale(1.2f, 0.2f).SetEase(Ease.OutBack))
-           .Append(transform.DOScale(0.5f, 0.3f).SetEase(Ease.InBack));
+        transform.DOScale(0.5f, collectAnimDuration).SetEase(Ease.InBack);
 
-        seq.Join(transform.DOMove(collector.position, collectAnimDuration).SetEase(Ease.InQuad));
-
-        seq.OnComplete(() =>
+        followTimer = 0f;
+        Invoke(nameof(SetStartMoving), 0.5f);
+    }
+    private void SetStartMoving()
+    {
+        startMoving = true;
+    }
+    private void Update()
+    {
+        if (isCollected && collector != null && startMoving)
         {
-            Destroy(gameObject);
-            Player.Instance.HandleCollectibleCollected(collectibleSO);
-        });
+            followTimer += Time.deltaTime;
+
+            // Smooth follow over time
+            transform.position = Vector3.Lerp(transform.position, collector.position, followTimer);
+
+            if (Vector3.Distance(transform.position, collector.position) <= 0.1f)
+            {
+                Destroy(gameObject);
+                Player.Instance.HandleCollectibleCollected(collectibleSO);
+            }
+        }
     }
 }
