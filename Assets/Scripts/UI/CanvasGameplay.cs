@@ -38,6 +38,7 @@ public class CanvasGameplay : UICanvas
         {
             dialogueCanvasGroup.alpha = 0;
             objectRect.localScale = Vector3.zero;
+            objectRect.DOScale(1f, 0.2f).SetEase(Ease.OutBack);
             objectiveText.text = $"This house's objective:\nA {ObjectiveManager.Instance.GetCurrentObjective().collectibleName}";
             return;
         }
