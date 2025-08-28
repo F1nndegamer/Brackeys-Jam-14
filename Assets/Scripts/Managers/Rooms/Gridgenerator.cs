@@ -66,8 +66,22 @@ public class GridRoomGenerator : MonoBehaviour
     void GenerateRoomsTouching()
     {
         int attempts = 0;
-        RoomInstance first = CreateRandomRoomInstance();
+        RoomInstance first = CreateStartRoom();
         rooms.Add(first);
+
+        RoomInstance CreateStartRoom()
+        {
+            GameObject startPrefab = Resources.Load<GameObject>("Chamber/StartRoom");
+            var size = startPrefab.GetComponent<RoomHold>().size;
+
+            int x = 0;
+            int y = gridHeight / 2 - size.y / 2;
+
+            RectInt r = new RectInt(x, y, size.x, size.y);
+            return new RoomInstance(r, startPrefab);
+        }
+
+
 
         while (rooms.Count < maxRooms && attempts < placeAttempts)
         {
@@ -110,7 +124,7 @@ public class GridRoomGenerator : MonoBehaviour
         foreach (GameObject room in Rooms)
         {
             var data = room.GetComponent<RoomHold>();
-            if (data.Difficultymin <= Difficulty && data.Difficultymax >= Difficulty)
+            if (data.Difficultymin <= Difficulty && data.Difficultymax >= Difficulty && room.name != "StartRoom")
             {
                 possibleRooms.Add(room);
             }
@@ -205,6 +219,7 @@ public class GridRoomGenerator : MonoBehaviour
             }
         }
     }
+
     public void InstantiateCollectibles(bool isBiscuit = false)
     {
         if (CollectiblesPrefabs.Count == 0 || rooms.Count == 0) return;
@@ -220,7 +235,12 @@ public class GridRoomGenerator : MonoBehaviour
         while (placed < Collectibles && attempts < Collectibles * 20)
         {
             attempts++;
-            RoomInstance r = rooms[Random.Range(0, rooms.Count)];
+            RoomInstance r;
+            do
+            {
+                r = rooms[Random.Range(0, rooms.Count)];
+            } while (r.prefab.name == "StartRoom");
+
             RectInt rect = r.rect;
             int x = Random.Range(rect.xMin, rect.xMax);
             int y = Random.Range(rect.yMin, rect.yMax);
@@ -230,21 +250,40 @@ public class GridRoomGenerator : MonoBehaviour
             Vector2 checkSize = new Vector2(cellSize - margin * 2, cellSize - margin * 2);
             Collider2D hit = Physics2D.OverlapBox(pos, checkSize, 0f, obstacleMask);
             if (hit != null) continue;
+
             if (isBiscuit)
             {
                 Instantiate(BiscuitPrefab, pos, Quaternion.identity, transform);
                 placed++;
                 break;
             }
-            GameObject prefab = CollectiblesPrefabs[Random.Range(0, CollectiblesPrefabs.Count)];
-            Instantiate(prefab, pos, Quaternion.identity, transform);
+            GameObject collectibleprefab = null;
+            if (placed == 0)
+            {
+                foreach (var col in CollectiblesPrefabs)
+                {
+                    var data = col.GetComponent<Collectible>();
+                    if (data.collectibleSO == ObjectiveManager.Instance.GetCurrentObjective())
+                    {
+                        collectibleprefab = col;
 
+                    }
+                }
+            }
+            GameObject prefab = null;
+            if (collectibleprefab != null)
+            {
+                prefab = collectibleprefab;
+
+            }
+            else
+            {
+                prefab = CollectiblesPrefabs[Random.Range(0, CollectiblesPrefabs.Count)];
+            }
+            Instantiate(prefab, pos, Quaternion.identity, transform);
             placed++;
         }
     }
-
-
-
 
     void InstantiateWallsWithDoors()
     {
@@ -331,6 +370,10 @@ public class GridRoomGenerator : MonoBehaviour
             }
             else if (nx == cx - 1 && ny == cy)
             {
+                RoomInstance rInstance = rooms[myId - 1];
+                if (rInstance.prefab.name == "StartRoom")
+                    return;
+
                 wallPos = new Vector3((cx - 0.5f) * cellSize, cy * cellSize, 0f);
                 horizontal = false;
                 borderKey = (nx, ny, 0);
@@ -381,7 +424,6 @@ public class GridRoomGenerator : MonoBehaviour
             Collider2D[] hits = Physics2D.OverlapBoxAll(doorPos, new Vector2(width, height), 0f);
             foreach (Collider2D c in hits)
             {
-                Debug.Log(c.gameObject.name);
                 if (c.CompareTag("Furniture"))
                 {
                     Destroy(c.gameObject);

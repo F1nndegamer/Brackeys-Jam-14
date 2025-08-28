@@ -5,7 +5,7 @@ using System;
 public class Collectible : MonoBehaviour
 {
     [SerializeField] private float collectAnimDuration = 0.5f;
-    [SerializeField] private CollectibleSO collectibleSO;
+    [SerializeField] public CollectibleSO collectibleSO;
 
     private bool isCollected = false;
 
