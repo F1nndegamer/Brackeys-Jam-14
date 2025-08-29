@@ -18,6 +18,11 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
     {
         currentObjective = collectibleSOArray.GetRandomCollectible();
     }
+    public void Reset()
+    {
+        ObjectiveCompleted = false;
+        RandomizeObjective();
+    }
     public CollectibleSO GetCurrentObjective()
     {
         return currentObjective;

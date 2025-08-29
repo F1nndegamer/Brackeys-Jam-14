@@ -30,8 +30,10 @@ public class Player : Singleton<Player>
     private bool isSmokeBombUnlocked;
     private int noOfSmokeBombUseLeft;
     private float speedBoost = 0;
+    Vector2 spawnPos;
     private void Awake()
     {
+        spawnPos = transform.position;
         rb = GetComponent<Rigidbody2D>();
         sprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
         isRunning = false;
@@ -50,7 +52,12 @@ public class Player : Singleton<Player>
         OnConsumableUsed?.Invoke(ItemType.SmokeBomb, noOfSmokeBombUseLeft);
         Destroy(Instantiate(smokeBombFX, transform.position, Quaternion.identity), 3f);
     }
-
+    public void Respawn()
+    {
+        transform.position = new Vector3(spawnPos.x, spawnPos.y, -2f);
+        ResetConsumable();
+        isRunning = false;
+    }
     public void OnDetected()
     {
         Strikes--;
@@ -82,7 +89,7 @@ public class Player : Singleton<Player>
                     footstepTimerMax = 0.15f;
                     SoundManager.Instance.PlayFootstepWalkSound(transform.position, volume);
                 }
-                else 
+                else
                 {
                     footstepTimerMax = 0.25f;
                     SoundManager.Instance.PlayFootstepWalkSound(transform.position, volume);
