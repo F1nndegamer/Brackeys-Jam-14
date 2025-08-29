@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-using Unity.Mathematics.Geometry;
 
 public class Grid2D : MonoBehaviour
 {
@@ -17,6 +16,7 @@ public class Grid2D : MonoBehaviour
     int gridSizeX, gridSizeY;
     Vector2 bottomLeft;
     Stack<GameObject> _waypoints;
+    List<GameObject> _createdObject = new List<GameObject>();
 
 
     public void CreateGrid()
@@ -106,7 +106,7 @@ public class Grid2D : MonoBehaviour
             Quaternion rot = a != null ? a.rotation : Quaternion.identity;
 
             GameObject spawned = Instantiate(prefab, pos, rot);
-
+            _createdObject.Add(spawned);
             if (spawned.TryGetComponent<SecurityGuard>(out var guard))
             {
                 if (b != null)
@@ -146,6 +146,15 @@ public class Grid2D : MonoBehaviour
         public Node(bool w, Vector2 pos, int x, int y) { walkable = w; worldPosition = pos; gridX = x; gridY = y; }
     }
 
+    public void Clean()
+    {
+        foreach (var item in _waypoints)
+        {
+            Destroy(item);
+            
+        }
+        _waypoints.Clear();
+    }
     public IEnumerator RebuildNextFrame(Grid2D g)
     {
         yield return null;              

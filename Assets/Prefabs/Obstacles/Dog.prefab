@@ -111,7 +111,7 @@ MonoBehaviour:
   Waypoints: []
   Occluders:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 2816
 --- !u!114 &-6814220557164310888
 MonoBehaviour:
   m_ObjectHideFlags: 0

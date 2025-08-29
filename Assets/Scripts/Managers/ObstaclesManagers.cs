@@ -42,4 +42,8 @@ public class ObstaclesManagers : MonoBehaviour
     {
         StartCoroutine(grid.RebuildNextFrame(grid));
     }
+    public void Cleaner()
+    {
+        grid.Clean();
+    }
 }
