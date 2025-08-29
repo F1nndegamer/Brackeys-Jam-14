@@ -40,6 +40,6 @@ public class ObstaclesManagers : MonoBehaviour
     }
     public void ReCrateGrid()
     {
-        StartCoroutine(grid.RebuildNextFrame(grid))
+        StartCoroutine(grid.RebuildNextFrame(grid));
     }
 }
