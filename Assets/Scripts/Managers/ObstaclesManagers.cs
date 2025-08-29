@@ -38,4 +38,8 @@ public class ObstaclesManagers : MonoBehaviour
         StopAllCoroutines();
         GlobalAlarm = false;
     }
+    public void ReCrateGrid()
+    {
+        StartCoroutine(grid.RebuildNextFrame(grid))
+    }
 }
