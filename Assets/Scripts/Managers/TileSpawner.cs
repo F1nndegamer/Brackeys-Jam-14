@@ -18,6 +18,6 @@ public class TileSpawner : MonoBehaviour
             1f / parentScale.y,
             1f / parentScale.z
         );
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1f);
+        tile.transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y, +1f);
     }
 }
