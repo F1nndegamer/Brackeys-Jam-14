@@ -61,8 +61,7 @@ public class Player : Singleton<Player>
     public void OnDetected()
     {
         Strikes--;
-        // something like this UIManager.Instance.GetCanvas<CanvasGameplay>().UpdateStrikes(Strikes);
-        //Debug for now
+        UIManager.Instance.GetCanvas<CanvasGameplay>().UpdateStrikes(Strikes);
         Debug.Log($"Player detected! Strikes left: {Strikes}");
         if (Strikes <= 0)
         {
