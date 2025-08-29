@@ -106,8 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7c2642d54d9784a975f1d267c6def6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Dog
-  DetectionRange: 2
-  Speed: 2.2
+  DetectionRange: 1.2
+  Speed: 1.8
   Waypoints: []
   Occluders:
     serializedVersion: 2
