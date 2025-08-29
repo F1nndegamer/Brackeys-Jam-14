@@ -33,7 +33,6 @@ public class GridRoomGenerator : MonoBehaviour
     {
         Instance = this;
         Rooms = Resources.LoadAll<GameObject>("Chamber");
-        Difficulty = PlayerPrefs.GetInt("Difficulty", 0);
     }
 
     void Start()

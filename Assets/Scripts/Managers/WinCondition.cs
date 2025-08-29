@@ -10,6 +10,11 @@ public class WinCondition : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        GridRoomGenerator.Instance.Difficulty = PlayerPrefs.GetInt("Difficulty", 0);
+    }
+    void Start()
+    {
+
     }
     public void WinGame()
     {
