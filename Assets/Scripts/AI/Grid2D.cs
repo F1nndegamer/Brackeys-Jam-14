@@ -55,7 +55,6 @@ public class Grid2D : MonoBehaviour
                 if (dx == 0 && dy == 0) continue;
                 int x = n.gridX + dx, y = n.gridY + dy;
                 if (x < 0 || x >= gridSizeX || y < 0 || y >= gridSizeY) continue;
-                // köþe kesmeyi engelle:
                 if (dx != 0 && dy != 0)
                 {
                     if (!grid[n.gridX + dx, n.gridY].walkable) continue;
