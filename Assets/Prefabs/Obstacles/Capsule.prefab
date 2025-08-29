@@ -112,8 +112,8 @@ MonoBehaviour:
     m_Bits: 768
   ClipWithOccluders: 1
   RebuildInterval: 0.05
-  IdleColor: {r: 0, g: 1, b: 0, a: 0.5019608}
-  DetectedColor: {r: 1, g: 0, b: 0, a: 0.49019608}
+  IdleColor: {r: 0, g: 1, b: 0, a: 0.4745098}
+  DetectedColor: {r: 1, g: 0, b: 0, a: 0.4745098}
 --- !u!1 &8030988730834758233
 GameObject:
   m_ObjectHideFlags: 0

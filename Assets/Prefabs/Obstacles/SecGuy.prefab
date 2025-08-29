@@ -111,6 +111,8 @@ MonoBehaviour:
     m_Bits: 768
   ClipWithOccluders: 1
   RebuildInterval: 0.05
+  IdleColor: {r: 0, g: 1, b: 0, a: 0.4745098}
+  DetectedColor: {r: 1, g: 0, b: 0, a: 0.4745098}
 --- !u!1 &8436302522158961266
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,7 +256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Pathfinder2D
   Occluders:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 2560
   PathBuffer: 0.2
 --- !u!114 &5158618893096803920
 MonoBehaviour:
@@ -272,7 +274,7 @@ MonoBehaviour:
   ReachThreshold: 0.1
   Occluders:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 2560
   RotationSpeed: 120
   UseSmoothDamp: 1
   WallBuffer: 0.05
