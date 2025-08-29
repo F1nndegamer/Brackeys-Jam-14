@@ -56,7 +56,10 @@ public class CanvasGameplay : UICanvas
             .OnComplete(() => ShowDialogue(currentDialogueIndex));
         objectRect.localScale = Vector3.zero;
     }
-
+    public void Reset()
+    {
+        objectiveText.text = $"This house's objective:\nA {ObjectiveManager.Instance.GetCurrentObjective().collectibleName}";
+    }
     private void Update()
     {
         if (dialogueCanvasGroup.alpha > 0 && Input.GetMouseButtonDown(0))
@@ -129,7 +132,7 @@ public class CanvasGameplay : UICanvas
         TextMeshProUGUI textUI = null;
         GameObject counter = null;
 
-        switch (itemType) 
+        switch (itemType)
         {
             case ItemType.SmokeBomb:
                 textUI = smokeBombCountText;

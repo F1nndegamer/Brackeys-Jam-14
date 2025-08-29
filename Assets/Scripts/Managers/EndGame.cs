@@ -6,6 +6,7 @@ public class EndGame : MonoBehaviour
     Image im;
     [SerializeField] private float alphaMultiplier = 0.5f;
     bool isFading;
+    bool isUnfading;
     void Awake()
     {
         im = GetComponent<Image>();
@@ -19,6 +20,11 @@ public class EndGame : MonoBehaviour
         isFading = true;
         StartCoroutine(FadeCoroutine());
     }
+    public void Unfade()
+    {
+        isUnfading = true;
+        StartCoroutine(UnfadeCoroutine());
+    }
     public IEnumerator FadeCoroutine()
     {
         Debug.Log("Fading");
@@ -31,5 +37,17 @@ public class EndGame : MonoBehaviour
         }
         isFading = false;
         shopManager.Instance.shopCanvas.SetActive(true);
+    }
+    public IEnumerator UnfadeCoroutine()
+    {
+        Debug.Log("Unfading");
+        Color c = im.color;
+        while (im.color.a > 0)
+        {
+            c.a -= alphaMultiplier * Time.deltaTime;
+            im.color = c;
+            yield return null;
+        }
+        isUnfading = false;
     }
 }
