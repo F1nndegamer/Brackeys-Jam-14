@@ -212,11 +212,7 @@ public class GridRoomGenerator : MonoBehaviour
 
             GameObject roomObj = Instantiate(rInstance.prefab, pos, Quaternion.identity, parent);
 
-            RoomHold data = roomObj.GetComponent<RoomHold>();
-            if (data != null)
-            {
-                roomObj.transform.localScale = new Vector3(r.width * cellSize, r.height * cellSize, 1f);
-            }
+            
         }
     }
 
