@@ -32,7 +32,6 @@ public class FOVMesh2D : MonoBehaviour
         if (pivot == null) pivot = transform.parent != null ? transform.parent : transform;
         transform.localPosition = new Vector3(0,0,-1);
         transform.localRotation = Quaternion.identity;
-        ViewRadius = GetComponentInParent<IDetector>().DetectionRange;
     }
 
     void LateUpdate()
@@ -40,6 +39,7 @@ public class FOVMesh2D : MonoBehaviour
         _t += Time.deltaTime;
         if (_t < RebuildInterval) return;
         _t = 0f;
+        ViewRadius = GetComponentInParent<IDetector>().DetectionRange;
         RebuildMesh();
     }
 
@@ -97,4 +97,44 @@ public class FOVMesh2D : MonoBehaviour
             _renderer.material.color = IdleColor;
         }
     }
+
+
+
+
+
+    class Phone
+    {
+        public string Brand { get; set; }
+        public string Model { get; set; }
+        public int SIM { get; set; }
+        public bool IsOpen { get; set; }
+        public int NumberOfPhone { get; set; }
+        public int MaxNumberOfPhone { get; set; }
+        
+        public Phone(string brand, string model, int SIM) 
+        {
+            this.Brand = brand;
+            this.Model = model;
+            this.SIM = SIM;
+            IsOpen = false;
+            NumberOfPhone = 0;
+            MaxNumberOfPhone = 0;
+        }
+        public Phone(string brand, string model, int SIM, int MaxNumberOfPhone) 
+        {
+            this.Brand = brand;
+            this.Model = model;
+            this.SIM = SIM;
+            IsOpen = false;
+            NumberOfPhone = 0;
+            this.MaxNumberOfPhone = MaxNumberOfPhone;
+        }
+    }
+
+
+
+
+
+
+
 }

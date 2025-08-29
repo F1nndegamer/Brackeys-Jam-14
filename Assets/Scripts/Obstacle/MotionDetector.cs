@@ -20,7 +20,6 @@ public class MotionDetector : MonoBehaviour, IDetector
 
     float IDetector.DetectionRange => DetectionRange;
 
-    // Public property to check if currently detecting (for your custom visuals)
     public bool IsDetecting => _isDetecting;
 
     void Update()
@@ -30,19 +29,17 @@ public class MotionDetector : MonoBehaviour, IDetector
 
     public void RaiseAlarm(IDetectable target)
     {
-        // Follow the same pattern as your other detectors
         ObstaclesManagers.Instance.OnDetection(this, target, 1f);
     }
 
     void UpdateDetection()
     {
-        // Check if we should stop detecting (timeout)
+        DetectionRange = StartDetectionRange * Player.Instance.RangeMultiplier;
         if (_isDetecting && Time.time - _lastDetectionTime > DetectionDuration)
         {
             _isDetecting = false;
         }
 
-        // Get player (following the same pattern as your other detectors)
         var player = FindFirstObjectByType<PlayerDetectable>();
         if (player == null || player.IsHidden)
         {
@@ -55,7 +52,6 @@ public class MotionDetector : MonoBehaviour, IDetector
         Vector2 playerPos = player.GetPosition();
         float distance = Vector2.Distance(origin, playerPos);
 
-        // Must be within range
         if (distance > DetectionRange)
         {
             _currentTarget = null;
@@ -63,7 +59,6 @@ public class MotionDetector : MonoBehaviour, IDetector
             return;
         }
 
-        // Check for occlusion in the direction of the player
         if (!Vision2D.HasLineOfSight(origin, playerPos, Occluders))
         {
             _currentTarget = null;
@@ -71,7 +66,6 @@ public class MotionDetector : MonoBehaviour, IDetector
             return;
         }
 
-        // Player is within range and visible, check for motion
         CheckForMotion(player);
     }
 
@@ -79,25 +73,21 @@ public class MotionDetector : MonoBehaviour, IDetector
     {
         Vector2 currentPosition = target.GetPosition();
 
-        // If this is a new target or we don't have a last position, just record it
         if (_currentTarget != target || !_hasLastPosition)
         {
             _currentTarget = target;
             _lastTargetPosition = currentPosition;
             _hasLastPosition = true;
-            return; // Don't trigger on first detection
+            return;
         }
 
-        // Check cooldown first
         if (Time.time - _lastDetectionTime < DetectionCooldown)
         {
             return; // Still in cooldown, don't check for motion
         }
 
-        // Calculate movement
         float distanceMoved = Vector2.Distance(_lastTargetPosition, currentPosition);
 
-        // Only trigger if significant movement detected
         if (distanceMoved > MovementThreshold)
         {
             _isDetecting = true;
@@ -106,33 +96,18 @@ public class MotionDetector : MonoBehaviour, IDetector
             RaiseAlarm(target);
         }
 
-        // Always update last known position
         _lastTargetPosition = currentPosition;
     }
 
 
-    public bool CanSee(IDetectable target)
-    {
-        if (target == null || target.IsHidden) return false;
+    public bool CanSee(IDetectable target) => _isDetecting;
 
-        Vector2 origin = transform.position;
-        Vector2 targetPos = target.GetPosition();
-        float distance = Vector2.Distance(origin, targetPos);
-
-        if (distance > DetectionRange) return false;
-
-        // Check line of sight in any direction (360 degrees)
-        return Vision2D.HasLineOfSight(origin, targetPos, Occluders);
-    }
-
-    // Optional: Gizmos for debugging in Scene view
     void OnDrawGizmos()
     {
         Color gizmoColor = _isDetecting ? Color.red : Color.green;
         Gizmos.color = gizmoColor;
         Vector3 origin = transform.position;
 
-        // Draw circular detection area
         Gizmos.DrawSphere(origin, DetectionRange);
     }
 }
