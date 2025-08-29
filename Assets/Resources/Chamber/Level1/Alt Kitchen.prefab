@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 451862729738508070}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.247, y: 0.009, z: -0.1}
-  m_LocalScale: {x: 0.45, y: 0.45, z: 0.45}
+  m_LocalPosition: {x: -0.235, y: 0.00381, z: -0.1}
+  m_LocalScale: {x: 0.40678197, y: 0.40678197, z: 0.40678197}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1907417566952702052}
@@ -972,7 +972,7 @@ GameObject:
   - component: {fileID: -166873149378898749}
   - component: {fileID: 3933229588526200002}
   m_Layer: 11
-  m_Name: Dining 1
+  m_Name: Alt Kitchen
   m_TagString: Furniture
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1530,7 +1530,7 @@ Transform:
   m_GameObject: {fileID: 7201752859954439640}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.253, y: -0.005, z: -0.1}
+  m_LocalPosition: {x: 0.247, y: -0.005, z: -0.1}
   m_LocalScale: {x: 0.18371569, y: 0.17696005, z: 0.15218835}
   m_ConstrainProportionsScale: 0
   m_Children: []
