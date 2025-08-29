@@ -221,9 +221,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SecurityGuard
   DetectionRange: 4
-  StartDetectionRange: 7
+  StartDetectionRange: 5
   FOV: 70
-  Speed: 2
+  Speed: 1.7
   Waypoints: []
   Occluders:
     serializedVersion: 2

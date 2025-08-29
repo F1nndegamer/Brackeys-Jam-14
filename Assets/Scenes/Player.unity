@@ -7061,7 +7061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35aeabdd8f52e924285096ecdbc84b5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GizmoNoise
-  Radius: 2
+  Radius: 3
   isRunning: 0
 --- !u!114 &1803071077
 MonoBehaviour:
@@ -7076,7 +7076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NoiseEmitter
   Radius: 2
-  StartRadius: 5
+  StartRadius: 3
 --- !u!114 &1803071078
 MonoBehaviour:
   m_ObjectHideFlags: 0
