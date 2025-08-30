@@ -17,7 +17,7 @@ public class Player : Singleton<Player>
     [SerializeField] List<Sprite> playerSprites;
     [SerializeField] private float interactRadius = 1.5f;
     [SerializeField] private LayerMask collectibleLayer; // assign in inspector
-    [SerializeField] private ParticleSystem smokeBombFX;
+    [SerializeField] private GameObject smokeBombFX;
     public int Strikes = 5;
     public float MultiplierChangeRate = 0.2f;
     private Rigidbody2D rb;
