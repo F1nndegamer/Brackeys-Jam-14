@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using UnityEngine;
 
@@ -25,6 +26,10 @@ public class Dog : MonoBehaviour, IDetector
 
     void Update()
     {
+        if (Waypoints.Length == 0)
+        {
+            Destroy(gameObject);
+        }
         _timer += Time.deltaTime;
         var player = FindFirstObjectByType<PlayerDetectable>();
         float volume = 1f;

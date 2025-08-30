@@ -21,12 +21,16 @@ public class SecurityGuard : MonoBehaviour, IDetector
     {
         _mover = GetComponent<PathMover2D>();
         if (_mover == null) _mover = gameObject.AddComponent<PathMover2D>();
-        _mover.Occluders = Occluders; 
+        _mover.Occluders = Occluders;
     }
     float IDetector.DetectionRange => DetectionRange;
 
     void Update()
     {
+        if (Waypoints.Length == 0)
+        {
+            Destroy(gameObject);
+        }
         float volume = 1f;
         _timer += Time.deltaTime;
         DetectionRange = StartDetectionRange * Player.Instance.RangeMultiplier;
