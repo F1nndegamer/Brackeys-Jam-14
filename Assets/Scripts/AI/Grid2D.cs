@@ -32,7 +32,7 @@ public class Grid2D : MonoBehaviour
             for (int y = 0; y < gridSizeY; y++)
             {
                 Vector2 p = bottomLeft + new Vector2(x + 0.5f, y + 0.5f) * nodeDiameter;
-                bool walkable = !Physics2D.OverlapCircle( p,NodeRadius * 0.95f + Clearance, Occluders);
+                bool walkable = !Physics2D.OverlapCircle(p, NodeRadius * 0.95f + Clearance, Occluders);
                 grid[x, y] = new Node(walkable, p, x, y);
             }
         }
@@ -148,19 +148,30 @@ public class Grid2D : MonoBehaviour
 
     public void Clean()
     {
-        foreach (var item in _waypoints)
+        foreach (var obj in _createdObject)
         {
-            Destroy(item);
-            
+            if (obj != null)
+                Destroy(obj);
         }
-        _waypoints.Clear();
+        _createdObject.Clear();
+
+        if (_waypoints != null)
+        {
+            foreach (var wp in _waypoints)
+            {
+                if (wp != null)
+                    Destroy(wp);
+            }
+            _waypoints.Clear();
+        }
     }
+
     public IEnumerator RebuildNextFrame(Grid2D g)
     {
-        yield return null;              
-        yield return new WaitForFixedUpdate(); 
+        yield return null;
+        yield return new WaitForFixedUpdate();
         g.CreateGrid();
-        yield return null;                 
+        yield return null;
         yield return new WaitForFixedUpdate();
         FindWaypoints();
         yield return null;

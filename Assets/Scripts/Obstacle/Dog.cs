@@ -1,5 +1,4 @@
 using System.Linq;
-using System.Threading;
 using UnityEngine;
 
 public class Dog : MonoBehaviour, IDetector
@@ -17,6 +16,7 @@ public class Dog : MonoBehaviour, IDetector
     float _timer = 0;
 
     float IDetector.DetectionRange => DetectionRange;
+
     private void Awake()
     {
         _mover = GetComponent<PathMover2D>();
@@ -26,52 +26,81 @@ public class Dog : MonoBehaviour, IDetector
 
     void Update()
     {
-        if (Waypoints.Length == 0)
+        if (Waypoints == null || Waypoints.Length == 0)
         {
             Destroy(gameObject);
+            return;
         }
+
         _timer += Time.deltaTime;
+
         var player = FindFirstObjectByType<PlayerDetectable>();
-        float volume = 1f;
-        if (player != null && !player.IsHidden)
+
+        if (player != null && !player.Equals(null) && !player.IsHidden)
         {
             bool canSee = Vision2D.HasLineOfSight(transform.position, player.GetPosition(), Occluders) &&
                           Vector2.Distance(transform.position, player.GetPosition()) <= DetectionRange;
+
             if (canSee) { _state = State.Chase; }
         }
+
+        float volume = 1f;
+
         switch (_state)
         {
-            case State.Patrol: 
-                MoveTo(Waypoints[_wp].position, () => { _wp = (_wp + 1) % Waypoints.Length; });
+            case State.Patrol:
+                if (ValidWaypoint())
+                {
+                    MoveTo(Waypoints[_wp].position, () => { _wp = (_wp + 1) % Waypoints.Length; });
+                }
+
                 if (_timer >= 1f)
                 {
-                    SoundManager.Instance.PlayIdleSoundDog(transform.position, volume);
+                    SoundManager.Instance?.PlayIdleSoundDog(transform.position, volume);
                     _timer = 0;
                 }
                 break;
-            case State.Investigate: 
+
+            case State.Investigate:
                 MoveTo(_lastNoise, () => _state = State.Patrol);
+
                 if (_timer >= 1f)
                 {
-                    SoundManager.Instance.PlayChaseSoundDog(transform.position, volume);
+                    SoundManager.Instance?.PlayChaseSoundDog(transform.position, volume);
                     _timer = 0;
                 }
                 break;
+
             case State.Chase:
-                if (player == null) { _state = State.Return; break; }
+                if (player == null || player.Equals(null))
+                {
+                    _state = State.Return;
+                    break;
+                }
+
                 MoveTo(player.GetPosition(), () => RaiseAlarm(player));
+
                 if (_timer >= 1f)
                 {
-                    SoundManager.Instance.PlayChaseSoundDog(transform.position, volume);
+                    SoundManager.Instance?.PlayChaseSoundDog(transform.position, volume);
                     _timer = 0f;
                 }
+
                 if (Vector2.Distance(transform.position, player.GetPosition()) > DetectionRange * 1.2f)
-                    _state = State.Return;
-                break;
-            case State.Return: MoveTo(Waypoints[_wp].position, () => _state = State.Patrol);
-                if (_timer >= 1)
                 {
-                    SoundManager.Instance.PlayIdleSoundDog(transform.position, volume);
+                    _state = State.Return;
+                }
+                break;
+
+            case State.Return:
+                if (ValidWaypoint())
+                {
+                    MoveTo(Waypoints[_wp].position, () => _state = State.Patrol);
+                }
+
+                if (_timer >= 1f)
+                {
+                    SoundManager.Instance?.PlayIdleSoundDog(transform.position, volume);
                     _timer = 0f;
                 }
                 break;
@@ -80,19 +109,37 @@ public class Dog : MonoBehaviour, IDetector
 
     void MoveTo(Vector2 target, System.Action onReach)
     {
+        if (_mover == null || _mover.Equals(null)) return;
+
         _mover.MoveTo(target, Speed);
         if (_mover.Reached(target)) onReach?.Invoke();
     }
+
     public void SetWaypoint(Transform[] selected)
     {
         Waypoints = selected ?? System.Array.Empty<Transform>();
     }
+
     public void HearNoise(Vector2 where)
     {
         _lastNoise = where;
         if (_state == State.Patrol) _state = State.Investigate;
     }
 
-    public bool CanSee(IDetectable t) => Vector2.Distance(transform.position, t.GetPosition()) <= DetectionRange;
-    public void RaiseAlarm(IDetectable tgt) => ObstaclesManagers.Instance.OnDetection(this, tgt, 1f);
+    public bool CanSee(IDetectable t)
+    {
+        if (t == null || t.Equals(null)) return false;
+        return Vector2.Distance(transform.position, t.GetPosition()) <= DetectionRange;
+    }
+
+    public void RaiseAlarm(IDetectable tgt)
+    {
+        if (tgt == null || tgt.Equals(null)) return;
+        ObstaclesManagers.Instance?.OnDetection(this, tgt, 1f);
+    }
+
+    bool ValidWaypoint()
+    {
+        return _wp < Waypoints.Length && Waypoints[_wp] != null && !Waypoints[_wp].Equals(null);
+    }
 }
