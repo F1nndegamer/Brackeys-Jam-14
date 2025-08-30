@@ -23,8 +23,8 @@ public class Player : Singleton<Player>
     private Rigidbody2D rb;
     private bool isRunning;
     private SpriteRenderer sprite;
-    private Dictionary<CollectibleSO, int> collectibleCounts = new();
-    private Dictionary<CollectibleSO, int> tempCollectibles = new();
+    public Dictionary<CollectibleSO, int> collectibleCounts = new();
+    public Dictionary<CollectibleSO, int> tempCollectibles = new();
     private Animator anim;
     private float footstepTimer = 0;
     private float footstepTimerMax = 0.25f;
@@ -36,6 +36,7 @@ public class Player : Singleton<Player>
     private int collectibleCountForWeight;
     private float collectibleWeight = 0.1f;
     Vector2 spawnPos;
+    
     private void Awake()
     {
         spawnPos = transform.position;
@@ -85,6 +86,7 @@ public class Player : Singleton<Player>
     }
     private void Update()
     {
+        
         footstepTimer += Time.deltaTime;
         if (footstepTimer >= footstepTimerMax)
         {
@@ -230,9 +232,19 @@ public class Player : Singleton<Player>
         Debug.Log($"Bought {shopItemSO.itemName}!");
         CanvasShop.Instance.TextDialogue($"Bought {shopItemSO.itemName}!");
     }
+
+    private void UpdateCollectibleWeight(CollectibleSO collectibleSO)
+    {
+        if (!tempCollectibles.ContainsKey(collectibleSO))
+            tempCollectibles[collectibleSO] = 0;
+
+        tempCollectibles[collectibleSO]++;
+        collectibleCountForWeight = 0;
+        foreach (var kvp in tempCollectibles)
+            collectibleCountForWeight += kvp.Value;
+    }
     private void TryCollect()
     {
-        // Cast a circle around player
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, interactRadius, collectibleLayer);
 
         foreach (Collider2D hit in hits)
@@ -241,24 +253,34 @@ public class Player : Singleton<Player>
             if (collectible != null)
             {
                 collectible.Collect(transform);
-                collectibleCountForWeight++;
-
-                // Add to temp list
-                if (!tempCollectibles.ContainsKey(collectible.collectibleSO))
-                    tempCollectibles[collectible.collectibleSO] = 0;
-
-                tempCollectibles[collectible.collectibleSO]++;
-                OnCollectibleAmountChanged?.Invoke(collectible.collectibleSO, GetTotalCollectibleCount(collectible.collectibleSO));
-
-                break; // only collect one at a time
+                break;
             }
         }
     }
     public void ClearTempCollectibles()
     {
+        Debug.Log("cleared!");
+
+        List<CollectibleSO> tempKeys = new List<CollectibleSO>(tempCollectibles.Keys);
+
+        collectibleCountForWeight = 0;
+
         tempCollectibles.Clear();
-        collectibleCountForWeight = 0; // reset weight for collected items in this life
+        foreach (var kvp in collectibleCounts)
+        {
+            OnCollectibleAmountChanged?.Invoke(kvp.Key, kvp.Value);
+        }
+        foreach (var key in tempKeys)
+        {
+            if (!collectibleCounts.ContainsKey(key))
+            {
+                OnCollectibleAmountChanged?.Invoke(key, 0);
+            }
+        }
     }
+
+
+
 
     public void CommitTempCollectibles()
     {
