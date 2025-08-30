@@ -742,7 +742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a218c9cc5d8e1d942beecd5909fd5164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomHold
-  Difficultymin: 0
+  Difficultymin: 3
   Difficultymax: 10
   size: {x: 5, y: 5}
 --- !u!114 &-5572804529722422364

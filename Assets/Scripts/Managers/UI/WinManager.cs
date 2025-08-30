@@ -7,7 +7,6 @@ public class WinManager : MonoBehaviour
     {
         UIManager.Instance.CloseImmediate<CanvasShop>();
         ObjectiveManager.Instance.Reset();
-        
         ObstaclesManagers.Instance.Cleaner();
         GridRoomGenerator.Instance.GenerateRooms();
         ObstaclesManagers.Instance.ReCrateGrid();
