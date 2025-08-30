@@ -6,6 +6,7 @@ public class GameInput : Singleton<GameInput>
 {
     public event Action OnInteract;
     public event Action OnSmokeBomb;
+    public event Action OnCardboardBox;
 
     private InputSystem_Actions inputSystem;
 
@@ -15,7 +16,13 @@ public class GameInput : Singleton<GameInput>
         inputSystem.Player.Enable();
 
         inputSystem.Player.Interact.performed += Interact_performed;
-        inputSystem.Player.SmokeBomb.performed += SmokeBomb_performed; ;
+        inputSystem.Player.SmokeBomb.performed += SmokeBomb_performed;
+        inputSystem.Player.CardboardBox.performed += CardboardBox_performed;
+    }
+
+    private void CardboardBox_performed(InputAction.CallbackContext obj)
+    {
+        OnCardboardBox?.Invoke();
     }
 
     private void SmokeBomb_performed(InputAction.CallbackContext obj)

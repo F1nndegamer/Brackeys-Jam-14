@@ -29,7 +29,11 @@ public class Player : Singleton<Player>
     private float footstepTimerMax = 0.25f;
     private bool isSmokeBombUnlocked;
     private int noOfSmokeBombUseLeft;
+    private bool isCardboardBoxUnlocked;
+    private int noOfCardboardBoxUseLeft;
     private float speedBoost = 0;
+    private int collectibleCountForWeight;
+    private float collectibleWeight = 0.1f;
     Vector2 spawnPos;
     private void Awake()
     {
@@ -40,6 +44,7 @@ public class Player : Singleton<Player>
         anim = GetComponent<Animator>();
         GameInput.Instance.OnInteract += TryCollect;
         GameInput.Instance.OnSmokeBomb += TryUseSmokeBomb;
+        GameInput.Instance.OnCardboardBox += TryUseCardboardBox;
         GetComponent<PlayerDetectable>().IsHidden = false;
     }
 
@@ -51,6 +56,14 @@ public class Player : Singleton<Player>
         noOfSmokeBombUseLeft--;
         OnConsumableUsed?.Invoke(ItemType.SmokeBomb, noOfSmokeBombUseLeft);
         Destroy(Instantiate(smokeBombFX, transform.position, Quaternion.identity), 3f);
+    }
+    private void TryUseCardboardBox()
+    {
+        if (!isCardboardBoxUnlocked) return;
+        if (noOfCardboardBoxUseLeft <= 0) return;
+        noOfCardboardBoxUseLeft--;
+        OnConsumableUsed?.Invoke(ItemType.CardboardBox, noOfCardboardBoxUseLeft);
+        anim.SetBool("CardboardBox", true);
     }
     public void Respawn()
     {
@@ -78,6 +91,8 @@ public class Player : Singleton<Player>
             if (GameInput.Instance.GetMovementVector().sqrMagnitude > 0.1f)
             {
                 float volume = 1f;
+                anim.SetBool("CardboardBox", false);
+                Debug.Log("Moving");
                 if (GameInput.Instance.GetCrouchHeld())
                 {
                     footstepTimerMax = 0.35f;
@@ -113,11 +128,11 @@ public class Player : Singleton<Player>
         if (inputVector.sqrMagnitude > 1f)
             inputVector = inputVector.normalized;
 
-        float currentSpeed = walkSpeed;
+        float currentSpeed = walkSpeed + speedBoost - collectibleCountForWeight * collectibleWeight;
         sprite.sprite = playerSprites[0];
         if (GameInput.Instance.GetCrouchHeld())
         {
-            currentSpeed = crouchSpeed + speedBoost;
+            currentSpeed = crouchSpeed + speedBoost - collectibleCountForWeight * collectibleWeight;
             if (playerSprites.Count > 2) sprite.sprite = playerSprites[2];
             multipier -= MultiplierChangeRate;
             isRunning = false;
@@ -131,7 +146,7 @@ public class Player : Singleton<Player>
 
         else if (GameInput.Instance.GetRunHeld())
         {
-            currentSpeed = runSpeed;
+            currentSpeed = runSpeed + speedBoost - collectibleCountForWeight * collectibleWeight;
             if (playerSprites.Count > 1) sprite.sprite = playerSprites[1];
             multipier += MultiplierChangeRate;
             isRunning = true;
@@ -196,6 +211,7 @@ public class Player : Singleton<Player>
             case ItemType.Bag:
                 break;
             case ItemType.Bicep:
+                collectibleWeight = shopItemSO.stat;
                 break;
             case ItemType.SmokeBomb:
                 UIManager.Instance.GetCanvas<CanvasGameplay>().UnlockConsumable(shopItemSO.itemType);
@@ -204,7 +220,8 @@ public class Player : Singleton<Player>
                 break;
             case ItemType.CardboardBox:
                 UIManager.Instance.GetCanvas<CanvasGameplay>().UnlockConsumable(shopItemSO.itemType);
-
+                isCardboardBoxUnlocked = true;
+                noOfCardboardBoxUseLeft = 1;
                 break;
         }
         Debug.Log($"Bought {shopItemSO.itemName}!");
@@ -220,6 +237,7 @@ public class Player : Singleton<Player>
             if (collectible != null)
             {
                 collectible.Collect(transform);
+                collectibleCountForWeight++;
                 break; // only collect one at a time
             }
         }

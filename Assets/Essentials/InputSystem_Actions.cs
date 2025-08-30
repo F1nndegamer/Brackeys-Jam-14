@@ -181,6 +181,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CardboardBox"",
+                    ""type"": ""Button"",
+                    ""id"": ""e1d849f3-53e2-4d66-b67f-b638e1d7c7bf"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -588,6 +597,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""SmokeBomb"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""21fdf664-dd91-4ef1-a80b-818d6da05e1f"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""CardboardBox"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1185,6 +1205,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Next = m_Player.FindAction("Next", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_SmokeBomb = m_Player.FindAction("SmokeBomb", throwIfNotFound: true);
+        m_Player_CardboardBox = m_Player.FindAction("CardboardBox", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1288,6 +1309,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Next;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_SmokeBomb;
+    private readonly InputAction m_Player_CardboardBox;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1339,6 +1361,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/SmokeBomb".
         /// </summary>
         public InputAction @SmokeBomb => m_Wrapper.m_Player_SmokeBomb;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/CardboardBox".
+        /// </summary>
+        public InputAction @CardboardBox => m_Wrapper.m_Player_CardboardBox;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1395,6 +1421,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @SmokeBomb.started += instance.OnSmokeBomb;
             @SmokeBomb.performed += instance.OnSmokeBomb;
             @SmokeBomb.canceled += instance.OnSmokeBomb;
+            @CardboardBox.started += instance.OnCardboardBox;
+            @CardboardBox.performed += instance.OnCardboardBox;
+            @CardboardBox.canceled += instance.OnCardboardBox;
         }
 
         /// <summary>
@@ -1436,6 +1465,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @SmokeBomb.started -= instance.OnSmokeBomb;
             @SmokeBomb.performed -= instance.OnSmokeBomb;
             @SmokeBomb.canceled -= instance.OnSmokeBomb;
+            @CardboardBox.started -= instance.OnCardboardBox;
+            @CardboardBox.performed -= instance.OnCardboardBox;
+            @CardboardBox.canceled -= instance.OnCardboardBox;
         }
 
         /// <summary>
@@ -1806,6 +1838,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSmokeBomb(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "CardboardBox" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCardboardBox(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
