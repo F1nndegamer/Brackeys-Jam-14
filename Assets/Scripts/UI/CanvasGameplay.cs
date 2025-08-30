@@ -70,6 +70,7 @@ public class CanvasGameplay : UICanvas
         for (int i = 0; i < HeartParent.transform.childCount; i++)
         {
             HeartParent.transform.GetChild(i).gameObject.SetActive(true);
+            Player.Instance.Strikes = 5;
         }
     }
 
