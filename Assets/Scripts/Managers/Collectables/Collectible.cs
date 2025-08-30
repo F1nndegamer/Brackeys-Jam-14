@@ -16,7 +16,7 @@ public class Collectible : MonoBehaviour
         if (isCollected) return;
         isCollected = true;
         collector = collectorTransform;
-
+        SoundManager.Instance.PlayCoinSFX(transform.position);
         Debug.Log($"Collected {collectibleSO.collectibleName}!");
         AllCollectibles.Instance.totalCollectibles--;
         Collider2D col = GetComponent<Collider2D>();

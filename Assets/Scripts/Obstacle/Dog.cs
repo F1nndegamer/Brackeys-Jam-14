@@ -44,7 +44,6 @@ public class Dog : MonoBehaviour, IDetector
             if (canSee) { _state = State.Chase; }
         }
 
-        float volume = 1f;
 
         switch (_state)
         {
@@ -56,7 +55,7 @@ public class Dog : MonoBehaviour, IDetector
 
                 if (_timer >= 1f)
                 {
-                    SoundManager.Instance?.PlayIdleSoundDog(transform.position, volume);
+                    SoundManager.Instance?.PlayIdleSoundDog(transform.position);
                     _timer = 0;
                 }
                 break;
@@ -66,7 +65,7 @@ public class Dog : MonoBehaviour, IDetector
 
                 if (_timer >= 1f)
                 {
-                    SoundManager.Instance?.PlayChaseSoundDog(transform.position, volume);
+                    SoundManager.Instance?.PlayChaseSoundDog(transform.position);
                     _timer = 0;
                 }
                 break;
@@ -82,7 +81,7 @@ public class Dog : MonoBehaviour, IDetector
 
                 if (_timer >= 1f)
                 {
-                    SoundManager.Instance?.PlayChaseSoundDog(transform.position, volume);
+                    SoundManager.Instance?.PlayChaseSoundDog(transform.position);
                     _timer = 0f;
                 }
 
@@ -100,7 +99,7 @@ public class Dog : MonoBehaviour, IDetector
 
                 if (_timer >= 1f)
                 {
-                    SoundManager.Instance?.PlayIdleSoundDog(transform.position, volume);
+                    SoundManager.Instance?.PlayIdleSoundDog(transform.position);
                     _timer = 0f;
                 }
                 break;

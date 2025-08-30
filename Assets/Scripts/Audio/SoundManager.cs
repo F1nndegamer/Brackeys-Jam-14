@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class SoundManager : Singleton<SoundManager>
 {
@@ -8,6 +9,8 @@ public class SoundManager : Singleton<SoundManager>
 
     [SerializeField] private AudioClipRefsSO audioClipRefsSO;
     [SerializeField] private AudioClipForObstacles obstaclesDog;
+    [SerializeField] private AudioClip CoinPickup;
+    [SerializeField] private AudioClip TakeDamage;
     [SerializeField] private AudioClipForObstacles obstaclesGuard;
 
     private float volume = 1f;
@@ -34,7 +37,7 @@ public class SoundManager : Singleton<SoundManager>
     {
         PlaySound(audioClipRefsSO.footstepCrouch, position, volume);
     }
-    public void PlayIdleSoundDog(Vector3 position, float volume)
+    public void PlayIdleSoundDog(Vector3 position)
     {
         PlaySound(obstaclesDog.idle, position, volume);
     }
@@ -42,9 +45,17 @@ public class SoundManager : Singleton<SoundManager>
     {
         PlaySound(obstaclesGuard.idle, position, volume);
     }
-    public void PlayChaseSoundDog(Vector3 position, float volume)
+    public void PlayChaseSoundDog(Vector3 position)
     {
         PlaySound(obstaclesDog.chase, position, volume);
+    }
+    public void PlayCoinSFX(Vector3 position)
+    {
+        PlaySound(CoinPickup, position, volume);
+    }
+    public void PlayDamageSFX(Vector3 position)
+    {
+        PlaySound(TakeDamage, position, volume);
     }
     public void PlayChaseSoundGuard(Vector3 position, float volume)
     {

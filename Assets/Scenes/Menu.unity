@@ -965,7 +965,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The Great Rac-scam
+  m_text: Robby racoon
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 296e19cc9928b9f4dbf338bd60a6eb60, type: 2}
   m_sharedMaterial: {fileID: 5850317427218025585, guid: 296e19cc9928b9f4dbf338bd60a6eb60, type: 2}

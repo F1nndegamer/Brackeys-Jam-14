@@ -1177,6 +1177,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   audioClipRefsSO: {fileID: 11400000, guid: 2c79f71cd23c9134da0afad0831e5859, type: 2}
   obstaclesDog: {fileID: 11400000, guid: 96e530dcfc87b694e86074f0269ccf2a, type: 2}
+  CoinPickup: {fileID: 8300000, guid: b49570579f54c8d478a7b29bfaaeff28, type: 3}
+  TakeDamage: {fileID: 8300000, guid: ec7a69487d5c6524e835ec5cb67659eb, type: 3}
   obstaclesGuard: {fileID: 11400000, guid: b5903238d30848f4398681a666572760, type: 2}
 --- !u!1 &319707715
 GameObject:

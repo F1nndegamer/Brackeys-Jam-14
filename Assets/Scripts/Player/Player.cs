@@ -75,6 +75,7 @@ public class Player : Singleton<Player>
     public void OnDetected()
     {
         Strikes--;
+        SoundManager.Instance.PlayDamageSFX(transform.position);
         UIManager.Instance.GetCanvas<CanvasGameplay>().UpdateStrikes(Strikes);
         Debug.Log($"Player detected! Strikes left: {Strikes}");
         if (Strikes <= 0)
