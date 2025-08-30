@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b40d3ae8fac4c354fa080ed5c5520703, type: 3}
-  m_Name: Bicep
+  m_Name: Bag 2
   m_EditorClassIdentifier: Assembly-CSharp::ShopItemSO
-  itemType: 2
+  itemType: 1
   stat: 0
-  itemName: Biceps
-  description: Bag weight affects you less
-  sprite: {fileID: 21300000, guid: 1b89f5b5b77d45e428bfdb087a9c9a60, type: 3}
+  itemName: Bag
+  description: Even more items spawn
+  sprite: {fileID: 21300000, guid: 3fdd47f3f23063c479626cb70cba1ac3, type: 3}
   cost:
   - collectible: {fileID: 11400000, guid: 758ab29ebd88e8040b9396d79140aaf6, type: 2}
-    amount: 2
+    amount: 1
+  - collectible: {fileID: 11400000, guid: a130fe1dd0bfec945a79ffc4aaaf964e, type: 2}
+    amount: 1
