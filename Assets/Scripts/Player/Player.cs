@@ -23,6 +23,7 @@ public class Player : Singleton<Player>
     private bool isRunning;
     private SpriteRenderer sprite;
     private Dictionary<CollectibleSO, int> collectibleCounts = new();
+    private Dictionary<CollectibleSO, int> tempCollectibles = new();
     private Animator anim;
     private float footstepTimer = 0;
     private float footstepTimerMax = 0.25f;
@@ -77,7 +78,7 @@ public class Player : Singleton<Player>
         Debug.Log($"Player detected! Strikes left: {Strikes}");
         if (Strikes <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            WinManager.Instance.Die();
         }
     }
     private void Update()
@@ -237,19 +238,53 @@ public class Player : Singleton<Player>
             {
                 collectible.Collect(transform);
                 collectibleCountForWeight++;
+
+                // Add to temp list
+                if (!tempCollectibles.ContainsKey(collectible.collectibleSO))
+                    tempCollectibles[collectible.collectibleSO] = 0;
+
+                tempCollectibles[collectible.collectibleSO]++;
+                OnCollectibleAmountChanged?.Invoke(collectible.collectibleSO, GetTotalCollectibleCount(collectible.collectibleSO));
+
                 break; // only collect one at a time
             }
         }
     }
+    public void ClearTempCollectibles()
+    {
+        tempCollectibles.Clear();
+        collectibleCountForWeight = 0; // reset weight for collected items in this life
+    }
+
+    public void CommitTempCollectibles()
+    {
+        foreach (var kvp in tempCollectibles)
+        {
+            if (!collectibleCounts.ContainsKey(kvp.Key))
+                collectibleCounts[kvp.Key] = 0;
+
+            collectibleCounts[kvp.Key] += kvp.Value;
+        }
+        tempCollectibles.Clear();
+    }
     public void HandleCollectibleCollected(CollectibleSO collectibleSO)
     {
-        if (!collectibleCounts.ContainsKey(collectibleSO))
-            collectibleCounts[collectibleSO] = 0;
+        if (!tempCollectibles.ContainsKey(collectibleSO))
+            tempCollectibles[collectibleSO] = 0;
 
-        collectibleCounts[collectibleSO]++;
+        tempCollectibles[collectibleSO]++;
         ObjectiveManager.Instance.CheckCurrentObjective(collectibleSO);
-        OnCollectibleAmountChanged?.Invoke(collectibleSO, collectibleCounts[collectibleSO]);
-        Debug.Log($"Player now has {collectibleCounts[collectibleSO]} of {collectibleSO}");
+        OnCollectibleAmountChanged?.Invoke(collectibleSO, GetTotalCollectibleCount(collectibleSO));
+        Debug.Log($"Player now has {GetTotalCollectibleCount(collectibleSO)} of {collectibleSO}");
+    }
+    public int GetTotalCollectibleCount(CollectibleSO collectibleSO)
+    {
+        int total = 0;
+        if (collectibleCounts.ContainsKey(collectibleSO))
+            total += collectibleCounts[collectibleSO];
+        if (tempCollectibles.ContainsKey(collectibleSO))
+            total += tempCollectibles[collectibleSO];
+        return total;
     }
     public int GetCollectibleCount(CollectibleSO collectibleSO)
     {

@@ -29,6 +29,7 @@ public class WinCondition : MonoBehaviour
     {
         EndGame eg = FindFirstObjectByType<EndGame>();
         eg.Fade();
+        Player.Instance.CommitTempCollectibles();
         float Difficulty = PlayerPrefs.GetInt("Difficulty", 0);
         Difficulty += DifficultyMultiplier;
         PlayerPrefs.SetInt("Difficulty", (int)Difficulty);

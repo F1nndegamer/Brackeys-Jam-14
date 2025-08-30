@@ -2,7 +2,11 @@ using UnityEngine;
 
 public class WinManager : MonoBehaviour
 {
-
+    public static WinManager Instance;
+    void Awake()
+    {
+        Instance = this;
+    }
     public void RestartLevel()
     {
         UIManager.Instance.CloseImmediate<CanvasShop>();
@@ -17,5 +21,10 @@ public class WinManager : MonoBehaviour
         cg.Reset();
         EndGame eg = FindFirstObjectByType<EndGame>();
         eg.Unfade();
+    }
+    public void Die()
+    {
+        Player.Instance.ClearTempCollectibles();
+        RestartLevel();
     }
 }
