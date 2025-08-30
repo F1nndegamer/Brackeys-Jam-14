@@ -120,7 +120,7 @@ public class CanvasGameplay : UICanvas
     {
         objectRect.localScale = Vector3.zero;
         objectRect.DOScale(1f, 0.2f).SetEase(Ease.OutBack);
-        objectiveText.text = "Objective grabbed\nYou can escape now";
+        objectiveText.text = "Objective grabbed\nYou can escape now\nOr search for the biscuit...";
     }
     private void ShowDialogue(int index)
     {
