@@ -10,6 +10,7 @@ public class WinManager : MonoBehaviour
     public void RestartLevel()
     {
         UIManager.Instance.CloseImmediate<CanvasShop>();
+        MusicManager.Instance.PlayMusic(GameState.Normal);
         ObjectiveManager.Instance.Reset();
         ObstaclesManagers.Instance.Cleaner();
         GridRoomGenerator.Instance.GenerateRooms();

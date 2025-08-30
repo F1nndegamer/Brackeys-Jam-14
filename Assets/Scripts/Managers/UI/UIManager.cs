@@ -8,6 +8,7 @@ public class UIManager : Singleton<UIManager>
 
     private void Awake()
     {
+        MusicManager.Instance.PlayMusic(GameState.Normal);
         UICanvas[] uiCanvases = FindObjectsByType<UICanvas>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         for (int i = 0; i < uiCanvases.Length; i++)
         {

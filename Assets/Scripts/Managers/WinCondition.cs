@@ -28,6 +28,7 @@ public class WinCondition : MonoBehaviour
     void ExitRoom()
     {
         EndGame eg = FindFirstObjectByType<EndGame>();
+        MusicManager.Instance.PlayMusic(GameState.Shop);
         eg.Fade();
         Player.Instance.CommitTempCollectibles();
         float Difficulty = PlayerPrefs.GetInt("Difficulty", 0);
