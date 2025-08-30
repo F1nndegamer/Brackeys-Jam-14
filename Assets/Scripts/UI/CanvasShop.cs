@@ -29,6 +29,7 @@ public class CanvasShop : UICanvas
     private void Awake()
     {
         Instance = this;
+        buyButton.onClick.RemoveAllListeners();
         buyButton.onClick.AddListener(() =>
         {
             if (Player.Instance.CanAfford(selectedShopItem.GetShopItemSO()))
@@ -43,6 +44,7 @@ public class CanvasShop : UICanvas
         });
         gameObject.SetActive(false);
     }
+
     private void OnEnable()
     {
         shadyShopImageTransform.DOKill();
