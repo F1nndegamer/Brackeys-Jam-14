@@ -1502,7 +1502,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 345718563}
+  - component: {fileID: 345718566}
   - component: {fileID: 345718564}
+  - component: {fileID: 345718565}
   m_Layer: 0
   m_Name: MusicManager
   m_TagString: Untagged
@@ -1622,6 +1624,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &345718565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345718562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c44f50947c1d744696e1aedf6ff3021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+--- !u!114 &345718566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345718562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51186d7c73f436249ae0ae98a584c99c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuMusicManager
+  volumeSlider: {fileID: 0}
 --- !u!1 &355866673
 GameObject:
   m_ObjectHideFlags: 0
