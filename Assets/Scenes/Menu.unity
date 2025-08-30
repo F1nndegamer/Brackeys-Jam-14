@@ -781,6 +781,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   audioClipRefsSO: {fileID: 0}
   obstaclesDog: {fileID: 0}
+  CoinPickup: {fileID: 0}
+  TakeDamage: {fileID: 0}
   obstaclesGuard: {fileID: 0}
 --- !u!4 &456561721
 Transform:
@@ -965,7 +967,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Robby racoon
+  m_text: Robby raccoon
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 296e19cc9928b9f4dbf338bd60a6eb60, type: 2}
   m_sharedMaterial: {fileID: 5850317427218025585, guid: 296e19cc9928b9f4dbf338bd60a6eb60, type: 2}
