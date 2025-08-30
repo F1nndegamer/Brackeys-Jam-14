@@ -190,6 +190,7 @@ public class Player : Singleton<Player>
                 collectibleCounts[requirement.collectible] < requirement.amount)
             {
                 Debug.Log($"Cannot Afford {shopItemSO.itemName}");
+                CanvasShop.Instance.TextDialogue($"Cannot Afford {shopItemSO.itemName}");
                 return false;
             }
         }
@@ -226,6 +227,7 @@ public class Player : Singleton<Player>
                 break;
         }
         Debug.Log($"Bought {shopItemSO.itemName}!");
+        CanvasShop.Instance.TextDialogue($"Bought {shopItemSO.itemName}!");
     }
     private void TryCollect()
     {

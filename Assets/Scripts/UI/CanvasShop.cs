@@ -89,6 +89,10 @@ public class CanvasShop : UICanvas
             yield return new WaitForSeconds(0.04f);
         }
     }
+    public void TextDialogue(string newText)
+    {
+        StartCoroutine(TypeDialogue(newText));
+    }
     public void SetSelectedShopItem(ShopItem shopItem)
     {
         selectedShopItem = shopItem;
