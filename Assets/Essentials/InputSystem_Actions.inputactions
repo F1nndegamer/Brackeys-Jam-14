@@ -505,6 +505,17 @@
                 },
                 {
                     "name": "",
+                    "id": "c70c6865-7edc-4be0-aa4e-1b907f4c7762",
+                    "path": "<Keyboard>/leftAlt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a0e92d06-d078-44d4-8e0d-73c57c68ca1a",
                     "path": "<Keyboard>/q",
                     "interactions": "",
