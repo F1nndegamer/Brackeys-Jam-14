@@ -8416,6 +8416,7 @@ MonoBehaviour:
   walkSpeed: 2
   runSpeed: 3
   crouchSpeed: 1
+  minSpeed: 0.2
   RangeMultiplier: 1
   playerSprites:
   - {fileID: 21300000, guid: 9ea37d1f981827342bba47fe82cb6fc5, type: 3}
