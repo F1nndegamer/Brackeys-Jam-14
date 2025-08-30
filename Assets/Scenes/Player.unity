@@ -7510,9 +7510,9 @@ MonoBehaviour:
   - {fileID: 8436302522158961266, guid: 72f3f45815dcd5941aa246d11dc41029, type: 3}
   - {fileID: 5612854864216524749, guid: 939f6a16e67edef42a17a572f89182e6, type: 3}
   WorldSize: {x: 25, y: 25}
-  NodeRadius: 0.1
+  NodeRadius: 0.05
   DrawGizmos: 1
-  Clearance: 0.05
+  Clearance: 0
 --- !u!1 &1571724490
 GameObject:
   m_ObjectHideFlags: 0

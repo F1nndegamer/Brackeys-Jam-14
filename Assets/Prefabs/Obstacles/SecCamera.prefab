@@ -108,7 +108,7 @@ MonoBehaviour:
   RayCount: 50
   Occluders:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 2816
   ClipWithOccluders: 1
   RebuildInterval: 0.05
   IdleColor: {r: 0, g: 1, b: 0, a: 0.4745098}
@@ -224,7 +224,7 @@ MonoBehaviour:
   FOV: 60
   Occluders:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 2816
   pivot: {fileID: 1873820368861296622}
 --- !u!114 &8808360089971117510
 MonoBehaviour:
