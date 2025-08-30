@@ -68,7 +68,7 @@ public class CanvasShop : UICanvas
                     .SetEase(Ease.OutSine)
                     .OnComplete(() =>
                     {
-                        StartCoroutine(TypeDialogue("Need some gears?"));
+                        StartCoroutine(TypeDialogue("Need some gear?"));
                     });
             });
 
