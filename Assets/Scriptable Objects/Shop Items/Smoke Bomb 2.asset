@@ -17,6 +17,7 @@ MonoBehaviour:
   itemName: Smoke Bomb
   description: Unlocks Another Smoke Bomb
   sprite: {fileID: 21300000, guid: 7dbfbfc93f5c00f4391c3d90ca23b1d3, type: 3}
+  purchasedSprite: {fileID: 5744904054898057027, guid: 99a8127dda40bb240abde078c3a1cba9, type: 3}
   cost:
   - collectible: {fileID: 11400000, guid: fc0445d49797a7a418a060102e88eb33, type: 2}
     amount: 2

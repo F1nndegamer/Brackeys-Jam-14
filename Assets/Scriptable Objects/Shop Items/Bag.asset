@@ -17,6 +17,7 @@ MonoBehaviour:
   itemName: Bag
   description: More items spawn
   sprite: {fileID: 21300000, guid: 5cb96f123bd98e742badd7a4faa64293, type: 3}
+  purchasedSprite: {fileID: 5744904054898057027, guid: 99a8127dda40bb240abde078c3a1cba9, type: 3}
   cost:
   - collectible: {fileID: 11400000, guid: 758ab29ebd88e8040b9396d79140aaf6, type: 2}
     amount: 3
