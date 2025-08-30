@@ -183,7 +183,7 @@ public class CanvasGameplay : UICanvas
         textUI.transform.DOPunchScale(Vector3.one * 0.3f, 0.3f, 5, 0.8f);
     }
 
-    public void UnlockConsumable(ItemType itemType)
+    public void UnlockConsumable(ItemType itemType, int count)
     {
         GameObject counter = null;
 
@@ -191,7 +191,7 @@ public class CanvasGameplay : UICanvas
         {
             case ItemType.SmokeBomb:
                 counter = smokeBombCounter;
-
+                smokeBombCountText.text = count.ToString();
                 break;
             case ItemType.CardboardBox:
                 counter = cardboardBoxCounter;
