@@ -11,8 +11,15 @@ public class Dog : MonoBehaviour, IDetector
     State _state;
     int _wp;
     Vector2 _lastNoise;
+    PathMover2D _mover;
 
     float IDetector.DetectionRange => DetectionRange;
+    private void Awake()
+    {
+        _mover = GetComponent<PathMover2D>();
+        if (_mover == null) _mover = gameObject.AddComponent<PathMover2D>();
+        _mover.Occluders = Occluders;
+    }
 
     void Update()
     {
@@ -39,8 +46,8 @@ public class Dog : MonoBehaviour, IDetector
 
     void MoveTo(Vector2 target, System.Action onReach)
     {
-        transform.position = Vector2.MoveTowards(transform.position, target, Speed * Time.deltaTime);
-        if (Vector2.Distance(transform.position, target) < 0.1f) onReach?.Invoke();
+        _mover.MoveTo(target, Speed);
+        if (_mover.Reached(target)) onReach?.Invoke();
     }
     public void SetWaypoint(Transform[] selected)
     {

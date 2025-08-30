@@ -25,11 +25,12 @@ public class CanvasGameplay : UICanvas
     [SerializeField] private TextMeshProUGUI smokeBombCountText;
     [SerializeField] private GameObject cardboardBoxCounter;
     [SerializeField] private TextMeshProUGUI cardboardBoxCountText;
-
+    [SerializeField] private GameObject HeartParent;
     private int currentDialogueIndex = 0;
     private Tween typingTween;
     private bool isTyping = false;
     private const string IntroPlayedKey = "IntroDialoguePlayed";
+    
 
     private void Awake()
     {
@@ -55,6 +56,13 @@ public class CanvasGameplay : UICanvas
             .SetEase(Ease.OutBack)
             .OnComplete(() => ShowDialogue(currentDialogueIndex));
         objectRect.localScale = Vector3.zero;
+    }
+    public void UpdateStrikes(int strikes)
+    {
+        for (int i = 0; i < HeartParent.transform.childCount; i++)
+        {
+            HeartParent.transform.GetChild(i).gameObject.SetActive(i < strikes);
+        }
     }
     public void Reset()
     {

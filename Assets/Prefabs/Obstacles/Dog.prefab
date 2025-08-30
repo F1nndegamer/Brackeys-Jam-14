@@ -82,8 +82,8 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 1480917699468073914, guid: 7a9bc8b9d08bd8d4b9305ba96888ad34, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -106,14 +106,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7c2642d54d9784a975f1d267c6def6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Dog
-  DetectionRange: 2
-  Speed: 2.2
-  Waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
+  DetectionRange: 1.2
+  Speed: 1.8
+  Waypoints: []
   Occluders:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 2816
 --- !u!114 &-6814220557164310888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Pathfinder2D
   Occluders:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 2560
   PathBuffer: 0.2
 --- !u!114 &-3979746382600449378
 MonoBehaviour:
@@ -146,10 +144,10 @@ MonoBehaviour:
   ReachThreshold: 0.1
   Occluders:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 2560
   RotationSpeed: 120
-  UseSmoothDamp: 0
-  WallBuffer: 0.2
+  UseSmoothDamp: 1
+  WallBuffer: 0.02
   SkinWidth: 0.02
 --- !u!1 &6314581138774136864
 GameObject:
@@ -262,3 +260,5 @@ MonoBehaviour:
     m_Bits: 768
   ClipWithOccluders: 1
   RebuildInterval: 0.05
+  IdleColor: {r: 0, g: 1, b: 0, a: 0.4745098}
+  DetectedColor: {r: 1, g: 0, b: 0, a: 0.4745098}
