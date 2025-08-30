@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomHold
   Difficultymin: 0
-  Difficultymax: 10
+  Difficultymax: 0
   size: {x: 5, y: 5}
 --- !u!114 &-8894944076108545734
 MonoBehaviour:
