@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -35,8 +36,9 @@ public class Player : Singleton<Player>
     private float speedBoost = 0;
     private int collectibleCountForWeight;
     private float collectibleWeight = 0.1f;
+    private bool isinBox;
     Vector2 spawnPos;
-    
+
     private void Awake()
     {
         spawnPos = transform.position;
@@ -65,6 +67,8 @@ public class Player : Singleton<Player>
         if (noOfCardboardBoxUseLeft <= 0) return;
         noOfCardboardBoxUseLeft--;
         OnConsumableUsed?.Invoke(ItemType.CardboardBox, noOfCardboardBoxUseLeft);
+        isinBox = true;
+        GetComponent<PlayerDetectable>().IsHidden = true;
         anim.SetBool("CardboardBox", true);
     }
     public void Respawn()
@@ -75,6 +79,7 @@ public class Player : Singleton<Player>
     }
     public void OnDetected()
     {
+        if (isinBox) return;
         Strikes--;
         SoundManager.Instance.PlayDamageSFX(transform.position);
         UIManager.Instance.GetCanvas<CanvasGameplay>().UpdateStrikes(Strikes);
@@ -86,7 +91,7 @@ public class Player : Singleton<Player>
     }
     private void Update()
     {
-        
+
         footstepTimer += Time.deltaTime;
         if (footstepTimer >= footstepTimerMax)
         {
@@ -95,7 +100,11 @@ public class Player : Singleton<Player>
             if (GameInput.Instance.GetMovementVector().sqrMagnitude > 0.1f)
             {
                 float volume = 1f;
-                anim.SetBool("CardboardBox", false);
+                if (anim.GetBool("CardboardBox") == true)
+                {
+                    anim.SetBool("CardboardBox", false);
+                    GetComponent<PlayerDetectable>().IsHidden = false;
+                }
                 Debug.Log("Moving");
                 if (GameInput.Instance.GetCrouchHeld())
                 {
