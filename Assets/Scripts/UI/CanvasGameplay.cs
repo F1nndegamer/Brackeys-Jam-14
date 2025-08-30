@@ -30,7 +30,7 @@ public class CanvasGameplay : UICanvas
     private Tween typingTween;
     private bool isTyping = false;
     private const string IntroPlayedKey = "IntroDialoguePlayed";
-    
+
 
     private void Awake()
     {
@@ -64,6 +64,15 @@ public class CanvasGameplay : UICanvas
             HeartParent.transform.GetChild(i).gameObject.SetActive(i < strikes);
         }
     }
+    public void ResetStrikes()
+    {
+
+        for (int i = 0; i < HeartParent.transform.childCount; i++)
+        {
+            HeartParent.transform.GetChild(i).gameObject.SetActive(true);
+        }
+    }
+
     public void Reset()
     {
         objectiveText.text = $"This house's objective:\nA {ObjectiveManager.Instance.GetCurrentObjective().collectibleName}";
