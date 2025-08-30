@@ -213,12 +213,12 @@ public class Player : Singleton<Player>
                 collectibleWeight = shopItemSO.stat;
                 break;
             case ItemType.SmokeBomb:
-                UIManager.Instance.GetCanvas<CanvasGameplay>().UnlockConsumable(shopItemSO.itemType);
+                UIManager.Instance.GetCanvas<CanvasGameplay>().UnlockConsumable(shopItemSO.itemType, (int)shopItemSO.stat);
                 isSmokeBombUnlocked = true;
-                noOfSmokeBombUseLeft = 1;
+                noOfSmokeBombUseLeft = (int)shopItemSO.stat;
                 break;
             case ItemType.CardboardBox:
-                UIManager.Instance.GetCanvas<CanvasGameplay>().UnlockConsumable(shopItemSO.itemType);
+                UIManager.Instance.GetCanvas<CanvasGameplay>().UnlockConsumable(shopItemSO.itemType, (int)shopItemSO.stat);
                 isCardboardBoxUnlocked = true;
                 noOfCardboardBoxUseLeft = 1;
                 break;
