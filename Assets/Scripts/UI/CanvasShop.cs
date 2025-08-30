@@ -18,6 +18,11 @@ public class CanvasShop : UICanvas
     [SerializeField] private float slideDuration = 0.8f;
     [SerializeField] private float rotateDuration = 0.4f;
     [SerializeField] private float rotateAmount = 1f;
+
+    [Header("Collection")]
+    [SerializeField] private TextMeshProUGUI[] collectibleTextArray;
+    [SerializeField] private CollectibleSOArray collectibleSOArray;
+
     public static CanvasShop Instance;
     private Vector3 imageStartPos;
     private ShopItem selectedShopItem;
@@ -43,6 +48,10 @@ public class CanvasShop : UICanvas
         shadyShopImageTransform.DOKill();
         shadyShopTextTransform.DOKill();
         dialogueText.DOKill();
+        foreach (var item in collectibleTextArray)
+        {
+            item.DOKill();
+        }
         shopItemContainerTransform.DOKill();
         buyButton.transform.DOKill();
 
@@ -78,6 +87,7 @@ public class CanvasShop : UICanvas
 
         buyButton.GetComponent<RectTransform>().DOAnchorPos(buyButtonTargetPos, 0.7f)
             .SetEase(Ease.OutBack);
+        UpdateCollecion();
     }
 
 
@@ -106,5 +116,16 @@ public class CanvasShop : UICanvas
     public bool IsAnyShopItemSelected()
     {
         return selectedShopItem != null;
+    }
+    public void UpdateCollecion()
+    {
+        int i = 0;
+        foreach (var item in collectibleSOArray.collectibleSOArray)
+        { 
+            int count = Player.Instance.GetCollectibleCount(item);
+            collectibleTextArray[i].text = count.ToString();
+            i++;
+            if (i == 4) return;
+        }
     }
 }

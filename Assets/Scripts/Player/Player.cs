@@ -231,6 +231,7 @@ public class Player : Singleton<Player>
         }
         Debug.Log($"Bought {shopItemSO.itemName}!");
         CanvasShop.Instance.TextDialogue($"Bought {shopItemSO.itemName}!");
+        CanvasShop.Instance.UpdateCollecion();
     }
 
     private void UpdateCollectibleWeight(CollectibleSO collectibleSO)
