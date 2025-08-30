@@ -44,7 +44,7 @@ public class MusicManager : MonoBehaviour
         audioSource.volume = PlayerPrefs.GetFloat(PLAYER_PREFS_SOUND_VOLUME, 1f);
     }
 
-    void Update()
+    void Start()
     {
         string currentScene = SceneManager.GetActiveScene().name;
         if (currentScene == "Menu")
