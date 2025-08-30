@@ -19,6 +19,6 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 5cb96f123bd98e742badd7a4faa64293, type: 3}
   cost:
   - collectible: {fileID: 11400000, guid: 758ab29ebd88e8040b9396d79140aaf6, type: 2}
-    amount: 1
-  - collectible: {fileID: 11400000, guid: a130fe1dd0bfec945a79ffc4aaaf964e, type: 2}
-    amount: 1
+    amount: 3
+  - collectible: {fileID: 11400000, guid: 1320b33702c0aaf4ebe5673e486df32e, type: 2}
+    amount: 2

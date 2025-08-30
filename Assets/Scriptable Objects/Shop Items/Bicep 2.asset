@@ -18,5 +18,7 @@ MonoBehaviour:
   description: Bag weight affects you less
   sprite: {fileID: 21300000, guid: 009d4d72039ed2e44aaf3718195f8105, type: 3}
   cost:
-  - collectible: {fileID: 11400000, guid: 758ab29ebd88e8040b9396d79140aaf6, type: 2}
-    amount: 2
+  - collectible: {fileID: 11400000, guid: fc0445d49797a7a418a060102e88eb33, type: 2}
+    amount: 3
+  - collectible: {fileID: 11400000, guid: 1320b33702c0aaf4ebe5673e486df32e, type: 2}
+    amount: 3
