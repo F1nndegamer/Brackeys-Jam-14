@@ -29,6 +29,7 @@ public class CanvasShop : UICanvas
             if (Player.Instance.CanAfford(selectedShopItem.GetShopItemSO()))
             {
                 Player.Instance.Purchase(selectedShopItem.GetShopItemSO());
+                selectedShopItem.UpdateSpriteAfterPurchase();
             }
             else
             {

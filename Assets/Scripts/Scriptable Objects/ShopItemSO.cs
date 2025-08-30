@@ -22,5 +22,6 @@ public class ShopItemSO : ScriptableObject
     public string itemName;
     public string description;
     public Sprite sprite;
+    public Sprite purchasedSprite;
     public CollectibleRequirement[] cost;
 }

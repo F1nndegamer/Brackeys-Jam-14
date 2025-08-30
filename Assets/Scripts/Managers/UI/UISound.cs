@@ -37,6 +37,7 @@ public class UIButtonSounds : MonoBehaviour
 
     void PlayHoverSound()
     {
+        Debug.Log("hover");
         audioSource.PlayOneShot(hoverSound);
     }
 }
