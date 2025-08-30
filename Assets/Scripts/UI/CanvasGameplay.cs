@@ -14,8 +14,8 @@ public class CanvasGameplay : UICanvas
     private string[] introDialogue = new string[]
     {
         "One two one two. Do you copy? Name's Rascal, your partner in crime tonight.",
-        "Listen carefully, kid. This street's full of houses, but we�ll only hit one at a time.",
-        "Your job? Slip inside, nab whatever's marked as tonight�s prize, and get out clean.",
+        "Listen carefully, kid. This street's full of houses, but we'll only hit one at a time.",
+        "Your job? Slip inside, nab whatever's marked as tonight's prize, and get out clean.",
         "However, if you're feeling it, you can stay as long as you want and grab as much stuffs as you'd like",
     };
     [SerializeField] private TextMeshProUGUI objectiveText;
