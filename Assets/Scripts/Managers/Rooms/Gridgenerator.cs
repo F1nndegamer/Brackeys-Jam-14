@@ -119,33 +119,31 @@ public class GridRoomGenerator : MonoBehaviour
 
     RoomInstance CreateRandomRoomInstance()
     {
-        List<(GameObject prefab, float weight)> weightedRooms = new List<(GameObject, float)>();
+        List<GameObject> candidates = new List<GameObject>();
+
         foreach (GameObject room in Rooms)
         {
             if (room.name == "StartRoom") continue;
 
             var data = room.GetComponent<RoomHold>();
-            float center = (data.Difficultymin + data.Difficultymax) / 2;
-            float distance = Mathf.Abs(Difficulty - center);
-            float weight = 1f / (1f + distance);
-            weightedRooms.Add((room, weight));
-        }
-        float totalWeight = weightedRooms.Sum(r => r.weight);
-        float pick = UnityEngine.Random.Range(0, totalWeight);
-        float cumulative = 0f;
-        foreach (var (prefab, weight) in weightedRooms)
-        {
-            cumulative += weight;
-            if (pick <= cumulative)
+
+            float easyWeight = 1f / (1f + Mathf.Abs(Difficulty - data.Difficultymin)) + 0.3f;
+            float hardWeight = 1f / (1f + Mathf.Abs(Difficulty - data.Difficultymax));
+
+            float weight = (data.Difficultymax == 0) ? easyWeight : hardWeight;
+            int addCount = Mathf.Max(1, Mathf.RoundToInt(weight * 10));
+            for (int i = 0; i < addCount; i++)
             {
-                var size = prefab.GetComponent<RoomHold>().size;
-                RectInt r = new RectInt(0, 0, size.x, size.y);
-                return new RoomInstance(r, prefab);
+                candidates.Add(room);
             }
         }
-        var fallback = weightedRooms[0].prefab;
-        var fallbacksize = fallback.GetComponent<RoomHold>().size;
-        return new RoomInstance(new RectInt(0, 0, fallbacksize.x, fallbacksize.y), fallback);
+
+        if (candidates.Count == 0)
+            return null;
+
+        var pick = candidates[Random.Range(0, candidates.Count)];
+        var size = pick.GetComponent<RoomHold>().size;
+        return new RoomInstance(new RectInt(0, 0, size.x, size.y), pick);
     }
 
     RectInt CreateRandomRoomPosition()
@@ -223,7 +221,7 @@ public class GridRoomGenerator : MonoBehaviour
 
             GameObject roomObj = Instantiate(rInstance.prefab, pos, Quaternion.identity, parent);
 
-            
+
         }
     }
 
