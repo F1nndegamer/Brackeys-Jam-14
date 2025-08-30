@@ -278,4 +278,4 @@ MonoBehaviour:
   RotationSpeed: 120
   UseSmoothDamp: 1
   WallBuffer: 0.01
-  SkinWidth: 0.01
+  SkinWidth: 0.2
