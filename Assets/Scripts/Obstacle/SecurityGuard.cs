@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class SecurityGuard : MonoBehaviour, IDetector
 {
@@ -14,6 +15,7 @@ public class SecurityGuard : MonoBehaviour, IDetector
     int _wp;
     Vector2 _lastKnown;
     PathMover2D _mover;
+    float _timer = 0;
 
     void Awake()
     {
@@ -25,6 +27,8 @@ public class SecurityGuard : MonoBehaviour, IDetector
 
     void Update()
     {
+        float volume = 1f;
+        _timer += Time.deltaTime;
         DetectionRange = StartDetectionRange * Player.Instance.RangeMultiplier;
         var player = FindFirstObjectByType<PlayerDetectable>();
         if (player != null && !player.IsHidden)
@@ -42,9 +46,20 @@ public class SecurityGuard : MonoBehaviour, IDetector
                 if (player == null) { _state = State.Return; break; }
                 _lastKnown = player.GetPosition();
                 MoveTo(_lastKnown, () => RaiseAlarm(player));
+                if (_timer >= 0.7f)
+                {
+                    SoundManager.Instance.PlayIdleSoundGuard(transform.position, volume);
+                    SoundManager.Instance.PlayChaseSoundGuard(transform.position, volume);
+                    _timer = 0f;
+                }
                 if (!WithinSight(player)) _state = State.Investigate;
                 break;
             case State.Return: MoveTo(Waypoints[_wp].position, () => _state = State.Patrol); break;
+        }
+        if (_timer >= 0.7f)
+        {
+            SoundManager.Instance.PlayIdleSoundGuard(transform.position, volume);
+            _timer = 0;
         }
     }
 

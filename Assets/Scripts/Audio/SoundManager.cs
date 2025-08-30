@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundManager : Singleton<SoundManager>
@@ -9,7 +7,8 @@ public class SoundManager : Singleton<SoundManager>
     private const string PLAYER_PREFS_SOUND_EFFECTS_VOLUME = "SoundEffectsVolume";
 
     [SerializeField] private AudioClipRefsSO audioClipRefsSO;
-
+    [SerializeField] private AudioClipForObstacles obstaclesDog;
+    [SerializeField] private AudioClipForObstacles obstaclesGuard;
 
     private float volume = 1f;
 
@@ -34,6 +33,22 @@ public class SoundManager : Singleton<SoundManager>
     public void PlayFootstepCrouchSound(Vector3 position, float volume)
     {
         PlaySound(audioClipRefsSO.footstepCrouch, position, volume);
+    }
+    public void PlayIdleSoundDog(Vector3 position, float volume)
+    {
+        PlaySound(obstaclesDog.idle, position, volume);
+    }
+    public void PlayIdleSoundGuard(Vector3 position, float volume)
+    {
+        PlaySound(obstaclesGuard.idle, position, volume);
+    }
+    public void PlayChaseSoundDog(Vector3 position, float volume)
+    {
+        PlaySound(obstaclesDog.chase, position, volume);
+    }
+    public void PlayChaseSoundGuard(Vector3 position, float volume)
+    {
+        PlaySound(obstaclesGuard.chase, position, volume);
     }
     public void ChangeVolume()
     {

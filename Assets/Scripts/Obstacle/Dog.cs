@@ -1,3 +1,4 @@
+using System.Threading;
 using UnityEngine;
 
 public class Dog : MonoBehaviour, IDetector
@@ -12,6 +13,7 @@ public class Dog : MonoBehaviour, IDetector
     int _wp;
     Vector2 _lastNoise;
     PathMover2D _mover;
+    float _timer = 0;
 
     float IDetector.DetectionRange => DetectionRange;
     private void Awake()
@@ -23,7 +25,9 @@ public class Dog : MonoBehaviour, IDetector
 
     void Update()
     {
+        _timer += Time.deltaTime;
         var player = FindFirstObjectByType<PlayerDetectable>();
+        float volume = 1f;
         if (player != null && !player.IsHidden)
         {
             bool canSee = Vision2D.HasLineOfSight(transform.position, player.GetPosition(), Occluders) &&
@@ -32,15 +36,40 @@ public class Dog : MonoBehaviour, IDetector
         }
         switch (_state)
         {
-            case State.Patrol: MoveTo(Waypoints[_wp].position, () => { _wp = (_wp + 1) % Waypoints.Length; }); break;
-            case State.Investigate: MoveTo(_lastNoise, () => _state = State.Patrol); break;
+            case State.Patrol: 
+                MoveTo(Waypoints[_wp].position, () => { _wp = (_wp + 1) % Waypoints.Length; });
+                if (_timer >= 1f)
+                {
+                    SoundManager.Instance.PlayIdleSoundDog(transform.position, volume);
+                    _timer = 0;
+                }
+                break;
+            case State.Investigate: 
+                MoveTo(_lastNoise, () => _state = State.Patrol);
+                if (_timer >= 1f)
+                {
+                    SoundManager.Instance.PlayChaseSoundDog(transform.position, volume);
+                    _timer = 0;
+                }
+                break;
             case State.Chase:
                 if (player == null) { _state = State.Return; break; }
                 MoveTo(player.GetPosition(), () => RaiseAlarm(player));
+                if (_timer >= 1f)
+                {
+                    SoundManager.Instance.PlayChaseSoundDog(transform.position, volume);
+                    _timer = 0f;
+                }
                 if (Vector2.Distance(transform.position, player.GetPosition()) > DetectionRange * 1.2f)
                     _state = State.Return;
                 break;
-            case State.Return: MoveTo(Waypoints[_wp].position, () => _state = State.Patrol); break;
+            case State.Return: MoveTo(Waypoints[_wp].position, () => _state = State.Patrol);
+                if (_timer >= 1)
+                {
+                    SoundManager.Instance.PlayIdleSoundDog(transform.position, volume);
+                    _timer = 0f;
+                }
+                break;
         }
     }
 

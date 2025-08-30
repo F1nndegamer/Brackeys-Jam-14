@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3adefdaa47ea4347ab3ccd746a89123, type: 3}
+  m_Name: AudioClipForObstacles(Guard)
+  m_EditorClassIdentifier: Assembly-CSharp::AudioClipForObstacles
+  idle:
+  - {fileID: 8300000, guid: a4933f5017abf7e4a8cfe27c6b837717, type: 3}
+  - {fileID: 8300000, guid: 91a9feb956fb11a44a93792e9c771bc1, type: 3}
+  - {fileID: 8300000, guid: 73ade56f0bb19ea41a4b66b6bac55cd5, type: 3}
+  - {fileID: 8300000, guid: 9178bf6dabe85934b9cba1eaea39f99d, type: 3}
+  - {fileID: 8300000, guid: c70b5c501e3179b478059273961a703a, type: 3}
+  chase:
+  - {fileID: 8300000, guid: 313c820f2f3147549983a3e672945c56, type: 3}
