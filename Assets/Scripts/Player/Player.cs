@@ -12,6 +12,7 @@ public class Player : Singleton<Player>
     [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float runSpeed = 8f;
     [SerializeField] private float crouchSpeed = 2.5f;
+    [SerializeField] private float minSpeed = 2.5f;
     [HideInInspector] public float RangeMultiplier = 1f;
     [SerializeField] List<Sprite> playerSprites;
     [SerializeField] private float interactRadius = 1.5f;
@@ -128,11 +129,11 @@ public class Player : Singleton<Player>
         if (inputVector.sqrMagnitude > 1f)
             inputVector = inputVector.normalized;
 
-        float currentSpeed = walkSpeed + speedBoost - collectibleCountForWeight * collectibleWeight;
+        float currentSpeed = walkSpeed + speedBoost - collectibleCountForWeight * collectibleWeight <= minSpeed ? minSpeed : walkSpeed + speedBoost - collectibleCountForWeight * collectibleWeight;
         sprite.sprite = playerSprites[0];
         if (GameInput.Instance.GetCrouchHeld())
         {
-            currentSpeed = crouchSpeed + speedBoost - collectibleCountForWeight * collectibleWeight;
+            currentSpeed = crouchSpeed + speedBoost - collectibleCountForWeight * collectibleWeight <= minSpeed ? minSpeed : crouchSpeed + speedBoost - collectibleCountForWeight * collectibleWeight;
             if (playerSprites.Count > 2) sprite.sprite = playerSprites[2];
             multipier -= MultiplierChangeRate;
             isRunning = false;
@@ -146,7 +147,7 @@ public class Player : Singleton<Player>
 
         else if (GameInput.Instance.GetRunHeld())
         {
-            currentSpeed = runSpeed + speedBoost - collectibleCountForWeight * collectibleWeight;
+            currentSpeed = runSpeed + speedBoost - collectibleCountForWeight * collectibleWeight <= minSpeed ? minSpeed : runSpeed + speedBoost - collectibleCountForWeight * collectibleWeight;
             if (playerSprites.Count > 1) sprite.sprite = playerSprites[1];
             multipier += MultiplierChangeRate;
             isRunning = true;
