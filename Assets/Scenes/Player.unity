@@ -13172,7 +13172,7 @@ MonoBehaviour:
   WorldSize: {x: 25, y: 25}
   NodeRadius: 0.05
   DrawGizmos: 1
-  Clearance: 0
+  Clearance: 0.015
 --- !u!1 &1571724490
 GameObject:
   m_ObjectHideFlags: 0

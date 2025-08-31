@@ -53,7 +53,7 @@ public class Dog : MonoBehaviour, IDetector
                     MoveTo(Waypoints[_wp].position, () => { _wp = (_wp + 1) % Waypoints.Length; });
                 }
 
-                if (_timer >= 1f)
+                if (_timer >= 0.9f)
                 {
                     SoundManager.Instance?.PlayIdleSoundDog(transform.position);
                     _timer = 0;
@@ -63,7 +63,7 @@ public class Dog : MonoBehaviour, IDetector
             case State.Investigate:
                 MoveTo(_lastNoise, () => _state = State.Patrol);
 
-                if (_timer >= 1f)
+                if (_timer >= 0.9f)
                 {
                     SoundManager.Instance?.PlayChaseSoundDog(transform.position);
                     _timer = 0;
@@ -79,7 +79,7 @@ public class Dog : MonoBehaviour, IDetector
 
                 MoveTo(player.GetPosition(), () => RaiseAlarm(player));
 
-                if (_timer >= 1f)
+                if (_timer >= 0.9f)
                 {
                     SoundManager.Instance?.PlayChaseSoundDog(transform.position);
                     _timer = 0f;
@@ -97,7 +97,7 @@ public class Dog : MonoBehaviour, IDetector
                     MoveTo(Waypoints[_wp].position, () => _state = State.Patrol);
                 }
 
-                if (_timer >= 1f)
+                if (_timer >= 0.9f)
                 {
                     SoundManager.Instance?.PlayIdleSoundDog(transform.position);
                     _timer = 0f;
