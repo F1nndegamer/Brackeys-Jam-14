@@ -40,10 +40,12 @@ public class GridRoomGenerator : MonoBehaviour
     }
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.G))
         {
             GenerateRooms();
         }
+        */
     }
     public void GenerateRooms()
     {
