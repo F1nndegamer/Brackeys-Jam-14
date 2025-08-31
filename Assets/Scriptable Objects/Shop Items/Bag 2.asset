@@ -20,6 +20,6 @@ MonoBehaviour:
   purchasedSprite: {fileID: 5744904054898057027, guid: 99a8127dda40bb240abde078c3a1cba9, type: 3}
   cost:
   - collectible: {fileID: 11400000, guid: 758ab29ebd88e8040b9396d79140aaf6, type: 2}
-    amount: 1
+    amount: 3
   - collectible: {fileID: 11400000, guid: 1320b33702c0aaf4ebe5673e486df32e, type: 2}
     amount: 2
