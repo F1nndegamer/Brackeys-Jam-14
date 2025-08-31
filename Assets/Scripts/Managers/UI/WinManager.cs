@@ -12,6 +12,7 @@ public class WinManager : MonoBehaviour
         UIManager.Instance.CloseImmediate<CanvasShop>();
         MusicManager.Instance.PlayMusic(GameState.Normal);
         ObjectiveManager.Instance.Reset();
+        AllCollectibles.Instance.BiscuitSpawned = false;
         ObstaclesManagers.Instance.Cleaner();
         GridRoomGenerator.Instance.GenerateRooms();
         ObstaclesManagers.Instance.ReCrateGrid();
