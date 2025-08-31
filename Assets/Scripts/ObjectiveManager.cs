@@ -33,6 +33,7 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
         if (collectibleSO == currentObjective && !ObjectiveCompleted)
         {
             UIManager.Instance.GetCanvas<CanvasGameplay>().FinishObjective();
+            ObjectiveCompleted = true;
             WinCondition.Instance.WinGame();
             RandomizeObjective();
         }
