@@ -196,6 +196,7 @@ public class CanvasGameplay : UICanvas
                 break;
             case ItemType.CardboardBox:
                 counter = cardboardBoxCounter;
+                cardboardBoxCountText.text = count.ToString();
                 break;
         }
         RectTransform rect = counter.GetComponent<RectTransform>();

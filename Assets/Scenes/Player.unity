@@ -664,6 +664,7 @@ GameObject:
   - component: {fileID: 63639676}
   - component: {fileID: 63639678}
   - component: {fileID: 63639677}
+  - component: {fileID: 63639679}
   m_Layer: 5
   m_Name: Image - Walkie Talkie
   m_TagString: Untagged
@@ -678,11 +679,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63639675}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 796840255}
   m_Father: {fileID: 1882343373}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
@@ -728,6 +730,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63639675}
   m_CullTransparentMesh: 1
+--- !u!1773428102 &63639679
+ParentConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63639675}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Weight: 1
+  m_TranslationAtRest: {x: -660, y: 0, z: 0}
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_TranslationOffsets:
+  - {x: 0, y: -340, z: 0}
+  m_RotationOffsets:
+  - {x: 0, y: 0, z: 0}
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 0
+  m_AffectTranslationZ: 0
+  m_AffectRotationX: 0
+  m_AffectRotationY: 0
+  m_AffectRotationZ: 0
+  m_Active: 1
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 949562028}
+    weight: 1
 --- !u!1 &114672091
 GameObject:
   m_ObjectHideFlags: 0
@@ -2163,6 +2192,7 @@ MonoBehaviour:
   shadyShopTextTransform: {fileID: 763243674}
   shopItemContainerTransform: {fileID: 311491750}
   buyButton: {fileID: 1823784955}
+  continueButtonRect: {fileID: 716826385}
   shopItemArray:
   - {fileID: 1621586244}
   - {fileID: 1275637421}
@@ -3429,7 +3459,6 @@ GameObject:
   m_Component:
   - component: {fileID: 796840255}
   - component: {fileID: 796840257}
-  - component: {fileID: 796840258}
   - component: {fileID: 796840259}
   m_Layer: 5
   m_Name: Image - Shop Keeper
@@ -3451,11 +3480,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1841416433}
-  m_Father: {fileID: 1882343373}
+  m_Father: {fileID: 63639676}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 250, y: -50}
+  m_AnchoredPosition: {x: 220, y: 0}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &796840257
@@ -3466,33 +3495,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 796840254}
   m_CullTransparentMesh: 1
---- !u!1773428102 &796840258
-ParentConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 796840254}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Weight: 1
-  m_TranslationAtRest: {x: -660, y: 0, z: 0}
-  m_RotationAtRest: {x: 0, y: 0, z: 0}
-  m_TranslationOffsets:
-  - {x: 0, y: -340, z: 0}
-  m_RotationOffsets:
-  - {x: 0, y: 0, z: 0}
-  m_AffectTranslationX: 1
-  m_AffectTranslationY: 0
-  m_AffectTranslationZ: 0
-  m_AffectRotationX: 0
-  m_AffectRotationY: 0
-  m_AffectRotationZ: 0
-  m_Active: 1
-  m_IsLocked: 1
-  m_Sources:
-  - sourceTransform: {fileID: 949562028}
-    weight: 1
 --- !u!114 &796840259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4566,8 +4568,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 296e19cc9928b9f4dbf338bd60a6eb60, type: 2}
+  m_sharedMaterial: {fileID: 5850317427218025585, guid: 296e19cc9928b9f4dbf338bd60a6eb60, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9764,7 +9766,6 @@ RectTransform:
   - {fileID: 1956648705}
   - {fileID: 949562028}
   - {fileID: 63639676}
-  - {fileID: 796840255}
   - {fileID: 311491750}
   - {fileID: 55439398}
   - {fileID: 1823784954}

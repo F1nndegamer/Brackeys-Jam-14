@@ -11,6 +11,7 @@ public class CanvasShop : UICanvas
     [SerializeField] private RectTransform shadyShopTextTransform;
     [SerializeField] private RectTransform shopItemContainerTransform;
     [SerializeField] private Button buyButton;
+    [SerializeField] private RectTransform continueButtonRect;
     [SerializeField] private ShopItem[] shopItemArray;
     [SerializeField] private TextMeshProUGUI dialogueText;
 
@@ -56,6 +57,7 @@ public class CanvasShop : UICanvas
         }
         shopItemContainerTransform.DOKill();
         buyButton.transform.DOKill();
+        continueButtonRect.DOKill();
 
         shadyShopImageTransform.localRotation = Quaternion.identity;
         shadyShopTextTransform.localRotation = Quaternion.identity;
@@ -63,11 +65,13 @@ public class CanvasShop : UICanvas
         Vector3 imageTargetPos = shadyShopImageTransform.anchoredPosition;
         Vector3 shopItemTargetPos = shopItemContainerTransform.anchoredPosition;
         Vector3 buyButtonTargetPos = buyButton.GetComponent<RectTransform>().anchoredPosition;
+        Vector3 continueButtonTargetPos = continueButtonRect.anchoredPosition;
 
         // start them off-screen
         shadyShopImageTransform.anchoredPosition = imageTargetPos + new Vector3(-600f, 0, 0);
         shopItemContainerTransform.anchoredPosition = shopItemTargetPos + new Vector3(0, 600f, 0);
         buyButton.GetComponent<RectTransform>().anchoredPosition = buyButtonTargetPos + new Vector3(0, -300f, 0);
+        continueButtonRect.anchoredPosition = continueButtonTargetPos + new Vector3(0, -300f, 0);
 
         shadyShopImageTransform.DOAnchorPos(imageTargetPos, slideDuration)
             .SetEase(Ease.OutBack)
@@ -87,8 +91,11 @@ public class CanvasShop : UICanvas
         shopItemContainerTransform.DOAnchorPos(shopItemTargetPos, 0.7f)
             .SetEase(Ease.OutBack);
 
-        buyButton.GetComponent<RectTransform>().DOAnchorPos(buyButtonTargetPos, 0.7f)
+        buyButton.GetComponent<RectTransform>().DOAnchorPos(buyButtonTargetPos, 0.6f)
             .SetEase(Ease.OutBack);
+        continueButtonRect.DOAnchorPos(continueButtonTargetPos, 0.8f)
+            .SetEase(Ease.OutBack);
+
         UpdateCollecion();
     }
 

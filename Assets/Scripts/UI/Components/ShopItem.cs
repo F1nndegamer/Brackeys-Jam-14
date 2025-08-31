@@ -74,13 +74,15 @@ public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void UpdateSpriteAfterPurchase()
     {
+        if (shopItemSO.itemType == ItemType.CardboardBox)
+        {
+            return;
+        }
         if (shopItemSO.purchasedSprite != null)
         {
             image.sprite = shopItemSO.purchasedSprite;
 
             image.transform.DOPunchScale(Vector3.one * 0.2f, 0.3f, 8, 1);
         }
-
-        GetComponent<Button>().interactable = false;
     }
 }

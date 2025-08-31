@@ -33,10 +33,12 @@ public class Player : Singleton<Player>
     private int noOfSmokeBombUseLeft;
     private bool isCardboardBoxUnlocked;
     private int noOfCardboardBoxUseLeft;
+    private int noOfCardboardBoxMax;
     private float speedBoost = 0;
     private int collectibleCountForWeight;
     private float collectibleWeight = 0.1f;
     private bool isinBox;
+    private bool hasInfiniteResource;
     Vector2 spawnPos;
 
     private void Awake()
@@ -91,8 +93,8 @@ public class Player : Singleton<Player>
     }
     private void Update()
     {
-
         footstepTimer += Time.deltaTime;
+
         if (footstepTimer >= footstepTimerMax)
         {
             footstepTimer = 0;
@@ -132,6 +134,11 @@ public class Player : Singleton<Player>
         {
             UIManager.Instance.GetCanvas<CanvasGameplay>().HideInteractPrompt();
         }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            hasInfiniteResource = true;
+        }
+
     }
     private void FixedUpdate()
     {
@@ -196,6 +203,8 @@ public class Player : Singleton<Player>
     }
     public bool CanAfford(ShopItemSO shopItemSO)
     {
+        if (hasInfiniteResource) return true;
+
         foreach (var requirement in shopItemSO.cost)
         {
             if (!collectibleCounts.ContainsKey(requirement.collectible) ||
@@ -211,11 +220,13 @@ public class Player : Singleton<Player>
     public void Purchase(ShopItemSO shopItemSO)
     {
         if (!CanAfford(shopItemSO)) return;
-
-        foreach (var requirement in shopItemSO.cost)
+        if (!hasInfiniteResource)
         {
-            collectibleCounts[requirement.collectible] -= requirement.amount;
-            OnCollectibleAmountChanged?.Invoke(requirement.collectible, collectibleCounts[requirement.collectible]);
+            foreach (var requirement in shopItemSO.cost)
+            {
+                collectibleCounts[requirement.collectible] -= requirement.amount;
+                OnCollectibleAmountChanged?.Invoke(requirement.collectible, collectibleCounts[requirement.collectible]);
+            }
         }
         switch (shopItemSO.itemType)
         {
@@ -233,12 +244,13 @@ public class Player : Singleton<Player>
                 noOfSmokeBombUseLeft = (int)shopItemSO.stat;
                 break;
             case ItemType.CardboardBox:
-                UIManager.Instance.GetCanvas<CanvasGameplay>().UnlockConsumable(shopItemSO.itemType, (int)shopItemSO.stat);
                 isCardboardBoxUnlocked = true;
-                noOfCardboardBoxUseLeft = 1;
+                noOfCardboardBoxMax++;
+                noOfCardboardBoxUseLeft = noOfCardboardBoxMax;
+                UIManager.Instance.GetCanvas<CanvasGameplay>().UnlockConsumable(shopItemSO.itemType, noOfCardboardBoxMax);
                 break;
         }
-        Debug.Log($"Bought {shopItemSO.itemName}!");
+
         CanvasShop.Instance.TextDialogue($"Bought {shopItemSO.itemName}!");
         CanvasShop.Instance.UpdateCollecion();
     }
