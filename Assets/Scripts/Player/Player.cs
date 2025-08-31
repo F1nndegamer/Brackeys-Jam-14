@@ -19,6 +19,7 @@ public class Player : Singleton<Player>
     [SerializeField] private float interactRadius = 1.5f;
     [SerializeField] private LayerMask collectibleLayer; // assign in inspector
     [SerializeField] private GameObject smokeBombFX;
+    [SerializeField] private ParticleSystem dustFX;
     public int Strikes = 5;
     public float MultiplierChangeRate = 0.2f;
     private Rigidbody2D rb;
@@ -108,19 +109,25 @@ public class Player : Singleton<Player>
                     anim.SetBool("CardboardBox", false);
                     GetComponent<PlayerDetectable>().IsHidden = false;
                 }
-                Debug.Log("Moving");
+                var emission = dustFX.emission;
+
+                // Set the rateOverDistance with a new MinMaxCurve
+                emission.rateOverDistance = new ParticleSystem.MinMaxCurve(4f);
                 if (GameInput.Instance.GetCrouchHeld())
                 {
+                    emission.rateOverDistance = new ParticleSystem.MinMaxCurve(4f);
                     footstepTimerMax = 0.35f;
                     SoundManager.Instance.PlayFootstepCrouchSound(transform.position, volume);
                 }
                 else if (GameInput.Instance.GetRunHeld())
                 {
+                    emission.rateOverDistance = new ParticleSystem.MinMaxCurve(20f);
                     footstepTimerMax = 0.15f;
                     SoundManager.Instance.PlayFootstepWalkSound(transform.position, volume);
                 }
                 else
                 {
+                    emission.rateOverDistance = new ParticleSystem.MinMaxCurve(8f);
                     footstepTimerMax = 0.25f;
                     SoundManager.Instance.PlayFootstepWalkSound(transform.position, volume);
                 }
