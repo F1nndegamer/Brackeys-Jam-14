@@ -31,6 +31,7 @@ public class Player : Singleton<Player>
     private float footstepTimerMax = 0.25f;
     private bool isSmokeBombUnlocked;
     private int noOfSmokeBombUseLeft;
+    private int noOfSmokeBombMax;
     private bool isCardboardBoxUnlocked;
     private int noOfCardboardBoxUseLeft;
     private int noOfCardboardBoxMax;
@@ -239,9 +240,10 @@ public class Player : Singleton<Player>
                 collectibleWeight = shopItemSO.stat;
                 break;
             case ItemType.SmokeBomb:
-                UIManager.Instance.GetCanvas<CanvasGameplay>().UnlockConsumable(shopItemSO.itemType, (int)shopItemSO.stat);
                 isSmokeBombUnlocked = true;
-                noOfSmokeBombUseLeft = (int)shopItemSO.stat;
+                noOfSmokeBombMax = (int)shopItemSO.stat;
+                noOfSmokeBombUseLeft = noOfSmokeBombMax;
+                UIManager.Instance.GetCanvas<CanvasGameplay>().UnlockConsumable(shopItemSO.itemType, (int)shopItemSO.stat);
                 break;
             case ItemType.CardboardBox:
                 isCardboardBoxUnlocked = true;
@@ -340,6 +342,7 @@ public class Player : Singleton<Player>
     }
     private void ResetConsumable()
     {
-        noOfSmokeBombUseLeft = 1;
+        noOfSmokeBombUseLeft = noOfSmokeBombMax;
+        noOfCardboardBoxUseLeft = noOfCardboardBoxMax;
     }
 }
