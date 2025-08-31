@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -244,6 +243,7 @@ public class Player : Singleton<Player>
                 speedBoost = shopItemSO.stat;
                 break;
             case ItemType.Bag:
+                GridRoomGenerator.Instance.collectibleCount += (int)shopItemSO.stat;
                 break;
             case ItemType.Bicep:
                 collectibleWeight = shopItemSO.stat;
