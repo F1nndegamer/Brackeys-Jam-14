@@ -29,3 +29,9 @@ Tools & Credits
 Engine: Unity
 Art: Krita, Aseprite
 Code: Visual Studio Code
+All Assets were made by us, in the time of the jam
+
+Coders: Finn, Khoa, Muzant9
+Artist: Knave Cave, Hakkanoodles
+Music: Floriano
+Motivation: Ramixang
