@@ -174,6 +174,7 @@ public class CanvasGameplay : UICanvas
 
     private void Player_OnCollectibleAmountChanged(CollectibleSO collectibleSO, int count)
     {
+        if (collectibleSO.collectibleName == "Biscuit") return;
         int index = collectibleSOArray.GetIndex(collectibleSO);
         TextMeshProUGUI textUI = collectibleTextArray[index];
 
