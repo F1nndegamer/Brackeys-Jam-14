@@ -1,3 +1,4 @@
+using System.Threading;
 using UnityEngine;
 
 public class SecurityGuard : MonoBehaviour, IDetector
@@ -58,6 +59,10 @@ public class SecurityGuard : MonoBehaviour, IDetector
                 {
                     MoveTo(Waypoints[_wp].position, () => { _wp = (_wp + 1) % Waypoints.Length; });
                 }
+                if (_timer >= 0.7f)
+                {
+                    SoundManager.Instance?.PlayIdleSoundGuard(transform.position, volume);
+                }
                 break;
 
             case State.Investigate:
@@ -70,13 +75,15 @@ public class SecurityGuard : MonoBehaviour, IDetector
                     _state = State.Return;
                     break;
                 }
-
+                if (_timer >= 0.7f)
+                {
+                    SoundManager.Instance?.PlayIdleSoundGuard(transform.position, volume);
+                }
                 _lastKnown = player.GetPosition();
                 MoveTo(_lastKnown, () => RaiseAlarm(player));
 
                 if (_timer >= 0.7f)
                 {
-                    SoundManager.Instance?.PlayIdleSoundGuard(transform.position, volume);
                     SoundManager.Instance?.PlayChaseSoundGuard(transform.position, volume);
                     _timer = 0f;
                 }
@@ -88,6 +95,7 @@ public class SecurityGuard : MonoBehaviour, IDetector
                 if (ValidWaypoint())
                 {
                     MoveTo(Waypoints[_wp].position, () => _state = State.Patrol);
+                    SoundManager.Instance?.PlayIdleSoundGuard(transform.position, volume);
                 }
                 break;
         }
