@@ -142,10 +142,12 @@ public class Player : Singleton<Player>
         {
             UIManager.Instance.GetCanvas<CanvasGameplay>().HideInteractPrompt();
         }
+        /*
         if (Input.GetKeyDown(KeyCode.M))
         {
             hasInfiniteResource = true;
         }
+        */
 
     }
     private void FixedUpdate()
